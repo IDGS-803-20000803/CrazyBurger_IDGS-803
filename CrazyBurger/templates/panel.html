@@ -5,9 +5,125 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doshboard</title>
-    <<link rel="stylesheet" href="../static/css/dash.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="../static/css/dash.css">
 </head>
 <body>
-    
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="../static/img/logo.png" alt="CarzyBurger">
+                    <h2>Carzy<span class="danger">Burger</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-symbols-sharp">close</span>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a href="#">
+                    <span class="material-symbols-sharp">dashboard</span>
+                    <h3>DashBoard</h3>
+                </a>
+                <a href="#" class="active">
+                    <span class="material-symbols-sharp">location_away</span>
+                    <h3>Clientes</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">badge</span>
+                    <h3>Empleados</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">home_repair_service</span>
+                    <h3>Puestos</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">real_estate_agent</span>
+                    <h3>Departamentos</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">supervisor_account</span>
+                    <h3>Proveedores</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">point_of_sale</span>
+                    <h3>Ventas</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">store</span>
+                    <h3>Compras</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">menu_book</span>
+                    <h3>Menu</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">restaurant</span>
+                    <h3>Recetas</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">lunch_dining</span>
+                    <h3>Ingredientes</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">food_bank</span>
+                    <h3>Inventario</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">apartment</span>
+                    <h3>Empresa</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">logout</span>
+                    <h3>Log Out</h3>
+                </a>
+            </div>
+        </aside>
+        <main>
+            <h1>DashBoard</h1>
+            <div class="date">
+                <input type="date">
+            </div>
+            <div class="insights">
+                <div class="sales">
+                    <span class="material-symbols-sharp">analytics</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Total Ventas</h3>
+                            <h1>$25,098</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx='38' cy='38' r='36'></circle>
+                            </svg>
+                            <div class="number">
+                                <p>81%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">Ultimas 24 horas</small>
+                </div>
+                <div class="expenses">
+                    <span class="material-symbols-sharp">bar_chart</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Total Egresos</h3>
+                            <h1>$25,098</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx='38' cy='38' r='36'></circle>
+                            </svg>
+                            <div class="number">
+                                <p>61%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">Ultimas 24 horas</small>
+                </div>
+                
+            </div>
+        </main>
+    </div>
 </body>
 </html>
