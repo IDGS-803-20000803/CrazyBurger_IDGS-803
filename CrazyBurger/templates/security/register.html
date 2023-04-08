@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block title %}LOGIN{% endblock %}
+{% block description %}INICIA SESION CON NOSOTROS{% endblock %}
+{% block content %}
+
+    <div class="box">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %} 
+        <div class="notification is-danger"> 
+            {{messages[0] }}
+            <a href="{{ url_for('auth.login') }}">Login</a>.
+        </div>
+        {% endif %}
+        {% endwith %}
+        <form class="register" method="POST" action="/security/register">
+            <h3 class="res_title">Registrarse </h3>
+            <h6 class="res_message">Registrate ahora y accede a nuestra aplicacion </h6>
+            
+            <label>
+                <input required="" placeholder="" type="text" name="name" class="input_res">
+                <span>Nombres</span>
+            </label>             
+            <label>
+                <input required="" placeholder="" type="text" name="apellidos" class="input_res">
+                <span>Apellidos</span>
+            </label>  
+            <label>
+                <input required="" placeholder="" type="email" name="email" class="input_res">
+                <span>Email</span>
+            </label>
+            <label>
+                <input required="" placeholder="" name="password" type="password" class="input_res">
+                <span>Password</span>
+            </label> 
+            <div class="flex">     
+            <label>
+                <input required="" placeholder="+52" name="celular" type="number" class="input_res">
+                <span>celular</span>
+            </label>
+            <label>
+                <input required=""  type="text" name ="codigoP" class="input_res">
+                <span>C.P</span>
+            </label>
+            </div>
+            <label>
+                <input required=""  type="text" name="calle" class="input_res">
+                <span>Calle</span>
+            </label>
+            <label>
+                <input required=""  type="text" name="colonia" class="input_res">
+                <span>Colonia</span>
+            </label>
+            <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+            <button class="submit">Registrarse</button>
+        
+        </form>
+        <img class="img-register" width="40%" height="40%" src="../../static/img/logo-trans.png">
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block title %}LOGIN{% endblock %}
+{% block description %}INICIA SESION CON NOSOTROS{% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="../../static/bootstrap/css/bootstrap.min.css"/>
+    <div class="box">
+        
+        <div class="form-box">
+            <form class="form" action="/security/login" method="POST">
+                {%with messages = get_flashed_messages()%}
+                {%if messages%}
+                {%for message in messages%}
+                <div class="alert alert-danger">
+                    {{message}}
+                 </div>
+                 {%endfor%}
+                {%endif%}
+                {%endwith%}
+                <span class="title">Login</span>
+                <span class="subtitle">Crea una cuenta gratis con tu email.</span>
+                <div class="form-container">
+                    <input type="email" name="email" class="input" placeholder="Correo" autofocus="">
+                    <input type="password" name="password"  class="input" placeholder="Password">
+                    <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+                </div>
+                <div class="remember">
+                    <input type="checkbox" name="remember" id="remember">
+                    <label for="remember"> RECUERDAME</label>
+                </div>
+                <button>Iniciar Sesion</button>
+                <div class="form-section">
+                    <p>¿Aun no tienes una cuenta? <a href="">Registrate aqui</a> </p>
+                </div>
+            </form>
+            </div>
+            <img src="../../static/img/logo-trans.png">
+    </div>
+{% endblock %}

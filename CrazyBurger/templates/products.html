@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}PRODUCTOS{% endblock %}
+{% block description %}DESCRUBE NUESTROS PRODUCTOS{% endblock %}
+{% block content %}
+<h1 class="productos">Descubre nuestra variedad de productos</h1>
+<div class="container__products">
+  <div class="card_products">
+    <div class="img-product">
+      <img src="../static/img/producto.png" alt="PRODUCTO">
+    </div>
+    <div class="card-body">
+      <h6 class="title-product">Titulo producto</h6>
+      <p class="text-product">
+        Descripcion del producto
+      </p>
+    </div>
+    <div class="card-footer">
+      <span class="text-price">$499.49</span>
+      <div class="card-button">
+        <button><a href="/shop_edit"><i class="fa-solid fa-bag-shopping"></i></a></button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

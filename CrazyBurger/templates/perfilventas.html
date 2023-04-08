@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}PERFIL COMPRAS{% endblock %}
+{% block description %}COMPRAS DEL USUARIO{% endblock %}
+{% block content %}
+<div class="container__compras">
+  <h1>Compras <span>USUARIO</span></h1>
+  <!--{% for compra in compras %}-->
+  <!--{% endfor %}-->
+  <div class="compras">
+    <ul>
+      <li class="title__compra">ID:<span>20001735</span></li>
+      <li class="title__compra">PRODUCTO:<span>Hamburguesa con papas</span></li>
+      <li class="title__compra">CANTIDAD:<span>1 Unidad</span></li>
+      <li class="title__compra">TOTAL PAGO:<span>$ 150.00</span></li>
+      <li class="title__compra">ESTATUS COMPRA:<span>Preparando</span></li>
+    </ul>
+    <input class="coments" type="text" name="coments" id="coments" placeholder="¿Que te parecio nuestro Servicio?">
+    <div class="btn__compras">
+      <button class="btn__inicio"><a href="/">Regresar al Inicio</a></button>
+      <button class="btn__nuevo"><a href="/products">Comprar de Nuevo</a></button>
+    </div>
+  </div>
+</div>
+{% endblock %}
