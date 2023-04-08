@@ -121,9 +121,56 @@
                     </div>
                     <small class="text-muted">Ultimas 24 horas</small>
                 </div>
-                
-            </div>
+            </div> 
+                <div class="recent-order">
+                    <h2>Pedidos Recientes</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                            <th>Producto</th>
+                            <th>Cliente</th>
+                            <th>Cantidad</th>
+                            <th>Fecha Pedido</th>
+                            <th>Estatus</th>
+                            <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Hamburguesa</td>
+                                <td>Karla</td>
+                                <td>4</td>
+                                <td>08/04/2023</td>
+                                <td class="warning">Pendiente</td>
+                                <td class="primary">Detalle</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#">Mostrar Todo</a>
+                </div>
+            
         </main>
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-symbols-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-symbols-sharp active">light_mode</span>
+                    <span class="material-symbols-sharp">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey <b>Daniel</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="../static/img/logo.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <script src="../static/js/index.js"></script>
 </body>
 </html>

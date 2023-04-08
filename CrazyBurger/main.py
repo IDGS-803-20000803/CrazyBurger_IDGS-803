@@ -16,5 +16,5 @@ def index():
 @login_required
 @roles_required('admin')
 def profile():
-    return render_template('profile.html', name = current_user.name)
+    return render_template('panel.html', name = current_user.name)
 
