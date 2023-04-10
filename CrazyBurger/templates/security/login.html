@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+﻿{% extends "layout.html" %}
 {% block title %}LOGIN{% endblock %}
 {% block description %}INICIA SESION CON NOSOTROS{% endblock %}
 {% block content %}
@@ -29,7 +29,7 @@
                 </div>
                 <button>Iniciar Sesion</button>
                 <div class="form-section">
-                    <p>¿Aun no tienes una cuenta? <a href="">Registrate aqui</a> </p>
+                    <p>¿Aun no tienes una cuenta? <a href="{{ url_for('auth.register') }}">Registrate aqui</a> </p>
                 </div>
             </form>
             </div>

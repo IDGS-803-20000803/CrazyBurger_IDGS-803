@@ -2,7 +2,7 @@
 {% block title %}LOGIN{% endblock %}
 {% block description %}INICIA SESION CON NOSOTROS{% endblock %}
 {% block content %}
-
+<link rel="stylesheet" type="text/css" href="../../static/bootstrap/css/bootstrap.min.css"/>
     <div class="box">
         {% with messages = get_flashed_messages() %}
         {% if messages %} 
@@ -34,7 +34,7 @@
             </label> 
             <div class="flex">     
             <label>
-                <input required="" placeholder="+52" name="celular" type="number" class="input_res">
+                <input required=""  name="celular" type="number" class="input_res">
                 <span>celular</span>
             </label>
             <label>

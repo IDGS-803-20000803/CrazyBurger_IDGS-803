@@ -36,12 +36,14 @@
                   <li><a href="{{ url_for('auth.register') }}">Register</a></li>
                   {% endif %}
                   {% if current_user.is_authenticated %}
-                  <li><a href="{{ url_for('auth.register') }}">Productos</a></li>
+                  <li><a href="{{ url_for('main.productos') }}">Productos</a></li>
+                  <li><a href="{{ url_for('main.productos') }}">Mi Cuenta</a></li>
+                  <li><a href="{{ url_for('main.productos') }}"><i class='bx bxs-shopping-bag'></i></a></li>
                   <li><a href="{{ url_for('auth.logout') }}">Cerrar Sesion</a></li>
                   {% endif %}
               </ul>
           </div>
-
+          {% if not current_user.is_authenticated %}
           <div class="darkLight-searchBox">
               <div class="dark-light">
                   <i class='bx bx-moon moon'></i>
@@ -60,6 +62,7 @@
                   </div>
               </div>
           </div>
+          {% endif %}
       </div>
   </nav>
   </nav>

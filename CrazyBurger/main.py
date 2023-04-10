@@ -2,6 +2,7 @@ from flask import Blueprint, render_template
 from flask_security import login_required, current_user
 from flask_security.decorators import roles_required,roles_accepted
 from models import db
+from datetime import datetime
 
 main = Blueprint('main',__name__)
 
@@ -16,5 +17,15 @@ def index():
 @login_required
 @roles_required('admin')
 def profile():
-    return render_template('panel.html', name = current_user.name)
+    fecha_actual = datetime.now().strftime('%Y-%m-%d')
+    return render_template('panel.html', name = current_user.name,fecha_actual=fecha_actual)
+
+@main.route('/productos')
+@login_required
+@roles_required('cliente')
+def productos():
+    fecha_actual = datetime.now().strftime('%Y-%m-%d')
+    return render_template('products.html', name = current_user.name,fecha_actual=fecha_actual)
+
+
 

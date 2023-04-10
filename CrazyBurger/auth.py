@@ -30,7 +30,19 @@ def login_post():
     
     #Si llegamos aqui los datos son correctos y creamos una session para el usuario
     login_user(user,remember=remember)
-    return redirect(url_for('main.profile'))
+    try:
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute('call sp_consultar_role(%s)',(email))
+            resulset = cursor.fetchone()
+            if resulset[0] == 'admin':
+                return redirect(url_for('main.profile'))
+            else:
+                return redirect(url_for('main.productos'))
+    except Exception as ex:
+        flash("No se encontro ningun registro en la BD: " + str(ex))
+    return redirect(url_for('auth.login'))
+
     
 
 @auth.route("/register")

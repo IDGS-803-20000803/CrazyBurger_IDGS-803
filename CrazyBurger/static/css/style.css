@@ -495,7 +495,7 @@ body.dark .search-field i{
 
 .register label .input_res {
   width: 100%;
-  padding: 10px 10px 20px 10px;
+  padding: 8px 8px 18px 8px;
   outline: 0;
   border: 1px solid rgba(105, 105, 105, 0.397);
   border-radius: 10px;
@@ -506,14 +506,14 @@ body.dark .search-field i{
   left: 10px;
   top: 15px;
   color: grey;
-  font-size: 0.9em;
+  font-size: 0.7em;
   cursor: text;
   transition: 0.3s ease;
 }
 
 .register label .input_res:placeholder-shown + span {
   top: 15px;
-  font-size: 0.9em;
+  font-size: 0.7em;
 }
 
 .register label .input_res:focus + span,.register label .input_res:valid + span {
@@ -876,14 +876,14 @@ body.dark .search-field i{
 }
 
 /*  Estilos para pagÃ­na de productos  */
-
-.productos {
+.productos{
   text-align: center;
   font-family: var(--font_title);
   font-size: 2rem;
-  color: #ff5252;
+  color: #ff0101;
   margin: 1rem;
 }
+
 
 .container__products {
   display: grid;
