@@ -13,10 +13,12 @@ app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
 csrf = CSRFProtect()
 
-#Registramos 2 blueprints
+#Registramos  blueprints
 app.register_blueprint(main)
 app.register_blueprint(auth)
-
+#Registramos los BluePrint de los modulos
+from Puestos.routes import puestos
+app.register_blueprint(puestos)
 #Definimos el LoginManger
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'

@@ -1,0 +1,23 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    <form class="fromPuesto" method="POST" action="/puesto/insertPuesto">
+        <h3 class="puesto_title">Puesto </h3>
+        <a href="{{url_for('puestos.getAll')}}" class="btn btn-outline-success">
+            <span class="material-symbols-sharp">assignment_return</span>
+        </a>
+        <h6 class="puesto_message">Agrega un nuevo tipo de puesto </h6>
+        <label>
+            <input required="" placeholder="" type="text" name="puesto" class="input_puesto">
+            <span>Tipo Puesto</span>
+        </label>             
+        <label>
+            <input required="" placeholder="" type="text" name="descripcion" class="input_puesto">
+            <span>Descripcion</span>
+        </label>  
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+        <button class="submit">Agregar</button>
+    
+    </form>
+</main>
+{% endblock %}
