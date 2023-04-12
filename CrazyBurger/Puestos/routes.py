@@ -47,7 +47,6 @@ def insertPuesto():
             cursor.execute('call sp_insertar_puesto(%s,%s)',(puesto,descripcion))
             connection.commit()
             connection.close()
-            flash("Registro guardado exitosamente")
     except Exception as ex:
             flash("Ocurrio un error al registrar el nuevo puesto: " + str(ex))
             return redirect(url_for('puestos.insert'))
@@ -55,27 +54,56 @@ def insertPuesto():
 
 @puestos.route('/updatePuesto', methods=['GET','POST'])
 def actualizar_puesto():
-    
-    id = request.args.get('id')
-    
-    try:
-        connection = get_connection()
-        with connection.cursor() as cursor:
-            cursor.execute('call sp_buscar_puesto(%s)', (int(id)))
-            resulset = cursor.fetchall()
-            return render_template('/puesto/ActualizarPuesto.html',  id = id,resulset = resulset)
-    except Exception as ex:
-            flash("No se encontro ningun registro en la BD: " + str(ex))
+    if request.method == 'GET':
+        id = request.args.get('id')
+        try:
+            connection = get_connection()
+            with connection.cursor() as cursor:
+                cursor.execute('call sp_buscar_puesto(%s)', (int(id)))
+                resulset = cursor.fetchall()
+                return render_template('/puesto/ActualizarPuesto.html',  id = id,resulset = resulset)
+        except Exception as ex:
+                flash("No se encontro ningun registro en la BD: " + str(ex))
         
     if request.method == 'POST':
         id = request.form.get('id')
+        puesto = request.form.get('puesto')
+        descripcion = request.form.get('descripcion')
+        usuario = current_user.id
         try:
             connection = get_connection()
             with connection.cursor () as cursor:
-                cursor.execute('call sp_eliminar_maestro(%s)', (int(id)))
+                cursor.execute('call sp_actualizar_puesto(%s,%s,%s,%s)', (int(id),puesto,descripcion,usuario))
                 connection.commit()
                 connection.close()
         except Exception as ex:
             flash("No se pude actualizar el registro: " + str(ex))
         return redirect(url_for('puestos.getAll'))
     return render_template('/puesto/ActualizarPuesto.html')
+
+@puestos.route('/deletePuesto', methods=['GET','POST'])
+def eliminar_puesto():
+    if request.method == 'GET':
+        id = request.args.get('id')
+        try:
+            connection = get_connection()
+            with connection.cursor() as cursor:
+                cursor.execute('call sp_buscar_puesto(%s)', (int(id)))
+                resulset = cursor.fetchall()
+                return render_template('/puesto/EliminarPuesto.html',  id = id,resulset = resulset)
+        except Exception as ex:
+                flash("No se encontro ningun registro en la BD: " + str(ex))
+        
+    if request.method == 'POST':
+        id = request.form.get('id')
+        usuario = current_user.id
+        try:
+            connection = get_connection()
+            with connection.cursor () as cursor:
+                cursor.execute('call sp_delete_puesto(%s,%s)', (int(id), usuario))
+                connection.commit()
+                connection.close()
+        except Exception as ex:
+            flash("No se pude eliminar el registro: " + str(ex))
+        return redirect(url_for('puestos.getAll'))
+    return render_template('/puesto/EliminarPuesto.html')

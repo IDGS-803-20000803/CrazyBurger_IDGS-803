@@ -1,6 +1,7 @@
 {% extends "panel.html" %}
 {% block content %}
 <main>
+    
     <div class="recent-order">
         <h2>Puestos de Trabajo</h2>
         <a href="{{url_for('puestos.insert')}}" class="btn primary">
@@ -26,7 +27,7 @@
                     <td ><a class="warning" href="updatePuesto?id={{ row[0] }}" class="btn">
                         <span class="material-symbols-sharp">edit_document</span>
                     </a></td>
-                    <td><a class="primary" href="updatePuesto?id={{ row[0] }}" class="btn">
+                    <td><a class="primary" href="deletePuesto?id={{ row[0] }}" class="btn">
                         <span class="material-symbols-sharp">delete</span></a>
                     </td>
                 </tr>
