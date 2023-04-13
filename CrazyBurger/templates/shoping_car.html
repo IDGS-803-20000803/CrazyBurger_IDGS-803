@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}PERFIL COMPRAS{% endblock %}
+{% block description %}COMPRAS DEL USUARIO{% endblock %}
+{% block content %}
+<div class="container__compras">
+  <h1>Carrito de compras</h1>
+  {% for pedido in pedidos %}
+  <div class="compras">
+    <ul>
+      <li class="title__compra">ID PEDIDO:<span>{{ pedido[0] }}</span></li>
+      <li class="title__compra">PRODUCTO:<span>{{ pedido[1] }}</span></li>
+      <li class="title__compra">DESCRIPCION:<span>{{ pedido[2] }}</span></li>
+      <li class="title__compra">CANTIDAD:<span>{{ pedido[3] }}</span></li>
+      <li class="title__compra">PRECIO UNIDAD:<span>MX$ {{ pedido[4] }}</span></li>
+      <li class="title__compra">TOTAL PAGO:<span>MX$ {{ pedido[5] }}</span></li>
+    </ul>
+    <div class="btn__compras">
+      <button class="btn__eliminar"><a href="eliminarPedido?id={{ pedido[0] }}">Eliminar</a></button>
+      <button class="btn__nuevo"><a href="/shoping">Comprar</a></button>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

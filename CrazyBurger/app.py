@@ -18,7 +18,13 @@ app.register_blueprint(main)
 app.register_blueprint(auth)
 #Registramos los BluePrint de los modulos
 from Puestos.routes import puestos
+from Pedido.routes import pedidos
+from Platillos.routes import platillos
+
 app.register_blueprint(puestos)
+app.register_blueprint(pedidos)
+app.register_blueprint(platillos)
+
 #Definimos el LoginManger
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'

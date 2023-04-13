@@ -43,26 +43,24 @@ def login_post():
         flash("No se encontro ningun registro en la BD: " + str(ex))
     return redirect(url_for('auth.login'))
 
-    
-
 @auth.route("/register")
 def register():
     return render_template('/security/register.html')
 
-@auth.route("/register",methods=["POST"])
+@auth.route("/register",methods = ["POST"])
 def register_post():
     #Datos para el registro del usuario
-    email=request.form.get('email')
-    name=request.form.get('name')
-    password=request.form.get('password')
-    apellidos=request.form.get('apellidos')
+    email = request.form.get('email')
+    name = request.form.get('name')
+    password = request.form.get('password')
+    apellidos = request.form.get('apellidos')
     celular = request.form.get('celular')
     codigoP = request.form.get('codigoP')
     calle = request.form.get('calle')
     colonia = request.form.get('colonia')
-    password=generate_password_hash(password,method='sha256')
+    password = generate_password_hash(password, method = 'sha256')
     #consultamos si existe un usuario ya registrado con ese email.
-    user=User.query.filter_by(email=email).first()
+    user = User.query.filter_by(email = email).first()
     
     if user:
         flash('Ese correo ya esta en uso')
@@ -79,7 +77,6 @@ def register_post():
             flash("Ocurrio un error al registrar el nuevo usuario: " + str(ex))
             return redirect(url_for('auth.register'))
     return redirect(url_for('auth.login'))
-   
 
 @auth.route("/logout")
 @login_required

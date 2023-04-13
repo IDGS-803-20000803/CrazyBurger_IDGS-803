@@ -1,38 +1,23 @@
-﻿{% extends "layout.html" %}
+{% extends "layout.html" %}
 {% block title %}LOGIN{% endblock %}
-{% block description %}INICIA SESION CON NOSOTROS{% endblock %}
+{% block description %}INICIA SESIÓN CON NOSOTROS{% endblock %}
 {% block content %}
-<link rel="stylesheet" type="text/css" href="../../static/bootstrap/css/bootstrap.min.css"/>
-    <div class="box">
-        
-        <div class="form-box">
-            <form class="form" action="/security/login" method="POST">
-                {%with messages = get_flashed_messages()%}
-                {%if messages%}
-                {%for message in messages%}
-                <div class="alert alert-danger">
-                    {{message}}
-                 </div>
-                 {%endfor%}
-                {%endif%}
-                {%endwith%}
-                <span class="title">Login</span>
-                <span class="subtitle">Crea una cuenta gratis con tu email.</span>
-                <div class="form-container">
-                    <input type="email" name="email" class="input" placeholder="Correo" autofocus="">
-                    <input type="password" name="password"  class="input" placeholder="Password">
-                    <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
-                </div>
-                <div class="remember">
-                    <input type="checkbox" name="remember" id="remember">
-                    <label for="remember"> RECUERDAME</label>
-                </div>
-                <button>Iniciar Sesion</button>
-                <div class="form-section">
-                    <p>¿Aun no tienes una cuenta? <a href="{{ url_for('auth.register') }}">Registrate aqui</a> </p>
-                </div>
-            </form>
-            </div>
-            <img src="../../static/img/logo-trans.png">
-    </div>
+<div class="login">
+  <div class="img__login">
+  </div>
+  <div class="form__login">
+    <form class="form_container" action="/security/login" method="POST">
+      <h1 class="title__login">COMIENZA A DISFRUTAR</h1>
+      <input type="email" name="email" id="user" placeholder="Correo">
+      <input type="password" name="password" id="password" placeholder="Contraseña">
+      <div class="remember">
+        <input type="checkbox" name="remember" id="remember">
+        <label for="remember">RECUERDAME</label>
+      </div>
+      <input type="hidden" name="csrf_token" value="{{csrf_token()}}" />
+      <input type="submit" value="Ingresar">
+      <span>¿Aún no tienes una cuenta? <a href="{{ url_for('auth.register') }}">Registrate aquí</a></span>
+    </form>
+  </div>
+</div>
 {% endblock %}

@@ -25,8 +25,7 @@ def getAll():
     except Exception as ex:
         flash("No se encontro ningun registro en la BD: " + str(ex))
     return render_template('puestos.html', fecha_actual=fecha_actual,name = current_user.name)
-    
-    
+
 @puestos.route('/insert')
 @login_required
 @roles_required('admin')
