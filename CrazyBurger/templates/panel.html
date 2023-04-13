@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CrazyBurger | Dashboard</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../static/css/dash.css">
+    <!-- Cargar Librerias de Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+    <!-- Libreria de Swal Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body>
     <div class="container">
         <aside>
@@ -25,7 +33,7 @@
                     <span class="material-symbols-sharp">dashboard</span>
                     <h3>DashBoard</h3>
                 </a>
-                <a href="#" >
+                <a href="#">
                     <span class="material-symbols-sharp">location_away</span>
                     <h3>Clientes</h3>
                 </a>
@@ -41,7 +49,7 @@
                     <span class="material-symbols-sharp">real_estate_agent</span>
                     <h3>Departamentos</h3>
                 </a>
-                <a href="#">
+                <a href="{{url_for('proveedor.getAll')}}">
                     <span class="material-symbols-sharp">supervisor_account</span>
                     <h3>Proveedores</h3>
                 </a>
@@ -80,8 +88,9 @@
             </div>
         </aside>
         {% block content %}
+
         {% endblock %}
-       
+
         <div class="right">
             <div class="top">
                 <button id="menu-btn">
@@ -105,4 +114,5 @@
     </div>
     <script src="../static/js/index.js"></script>
 </body>
+
 </html>

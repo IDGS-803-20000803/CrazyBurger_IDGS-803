@@ -1,0 +1,65 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    <form class="fromPuesto" method="POST" action="/proveedor/insertarProveedor">
+        <h3 class="puesto_title">Proveedor </h3>
+        <a href="{{url_for('proveedor.getAll')}}" class="btn btn-outline-success">
+            <span class="material-symbols-sharp">assignment_return</span>
+        </a>
+        <h6 class="puesto_message">Registra un nuevo proveedor. </h6>
+        <label>
+            <input required placeholder type="text" name="razon_social" class="input_puesto">
+            <span>Razon Social</span>
+        </label>
+        
+        <label>
+            <input required="" placeholder="" type="text" name="rfc" class="input_puesto">
+            <span>RFC</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="alias" class="input_puesto">
+            <span>Alias</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="correo" class="input_puesto">
+            <span>Correo</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="celular" class="input_puesto">
+            <span>Celular</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="ciudad" class="input_puesto">
+            <span>Ciudad</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="estado" class="input_puesto">
+            <span>Estado</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="codigo_postal" class="input_puesto">
+            <span>Codigo Postal</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="calle" class="input_puesto">
+            <span>Calle</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="colonia" class="input_puesto">
+            <span>Colonia</span>
+        </label>
+
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+        <button class="submit">Agregar</button>
+    
+    </form>
+</main>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    
+    <div class="recent-order">
+        <h2>Areas de Trabajo</h2>
+        <a href="{{url_for('proveedor.insertar_proveedor')}}" class="btn primary">
+            <span class="material-symbols-sharp">data_saver_on</span>
+            <h3>Nuevo</h3>
+        </a>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                <th>Alias</th>
+                <th>Razon Social</th>
+                <th>RFC</th>
+                <th>Direccion</th>
+                <th>Celular</th>
+                <th></th>
+                <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for row in resulset %}
+                <tr>
+                    <td>{{row[3]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[10]}}, {{row[11]}}, {{row[7]}}, {{row[8]}}</td>
+                    <td>{{row[6]}}</td>
+
+                    <td>
+                        <a class="warning" href="verProveedor?id={{ row[0] }}" class="btn">
+                            <span class="material-symbols-sharp">edit_document</span>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="primary" href="eliminarProveedor?id={{ row[0]}}" class="btn">
+                            <span class="material-symbols-sharp">delete</span>
+                        </a>
+                    </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</main>
+
+{% endblock %}

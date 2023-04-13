@@ -75,3 +75,21 @@ class Empresa(db.Model):
     fecha_modificacion = db.Column(db.DateTime())
     usuario_modificacion = db.Column(db.Integer)
 
+class Proveedor(db.Model):
+    __tablename__ ='proveedor'
+    id = db.Column(db.Integer(), primary_key=True, autoincrement=True, nullable=False)
+    razon_social = db.Column(db.String(250), nullable=False, unique=True)
+    rfc = db.Column(db.String(20), nullable=False, unique=True)
+    alias = db.Column(db.String(240), nullable=False, unique=True)
+    baja = db.Column(db.Boolean(), nullable=False)
+    correo = db.Column(db.String(250), nullable=False)
+    celular = db.Column(db.String(15), nullable=False)
+    ciudad = db.Column(db.String(250), nullable=False)
+    estado = db.Column(db.String(105), nullable=False)
+    codigo_postal = db.Column(db.String(10), nullable=False)
+    calle = db.Column(db.String(250), nullable=False)
+    colonia = db.Column(db.String(250), nullable=False)
+    fecha_creacion = db.Column(db.DateTime(), nullable=False)
+    fecha_modificacion = db.Column(db.DateTime(), nullable=False)
+    usuario_modificacion = db.Column(db.Integer, nullable=False)
+    empresa_id = db.Column(db.Integer, db.ForeignKey('empresa.id'), nullable=False)
