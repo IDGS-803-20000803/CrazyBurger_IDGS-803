@@ -1,0 +1,23 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    <form class="fromPuesto" method="POST" action="/departamento/insertDepartamento">
+        <h3 class="puesto_title">Departamento </h3>
+        <a href="{{url_for('departamento.getAll')}}" class="btn btn-outline-success">
+            <span class="material-symbols-sharp">assignment_return</span>
+        </a>
+        <h6 class="puesto_message">Agrega un nuevo tipo de departamento </h6>
+        <label>
+            <input required="" placeholder="" type="text" name="departamento" class="input_puesto">
+            <span>Tipo departamento</span>
+        </label>             
+        <label>
+            <input required="" placeholder="" type="text" name="descripcion" class="input_puesto">
+            <span>Descripcion</span>
+        </label>  
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+        <button class="submit">Agregar</button>
+    
+    </form>
+</main>
+{% endblock %}

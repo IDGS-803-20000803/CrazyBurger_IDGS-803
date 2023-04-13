@@ -44,4 +44,34 @@ class Cliente(db.Model):
     baja = db.Column(db.Boolean())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('clientes', lazy='dynamic'))
-    
+
+class Puesto(db.Model):
+    __tablename__ ='puesto'
+    id = db.Column(db.Integer(), primary_key=True)
+    puesto = db.Column(db.String(255))
+    descripcion = db.Column(db.String(255))
+    baja = db.Column(db.Boolean())
+    fecha_creacion = db.Column(db.DateTime())
+    fecha_modificacion = db.Column(db.DateTime())
+    usuario_modificacion = db.Column(db.Integer)
+
+class Departamento(db.Model):
+    __tablename__ ='departamento'
+    id = db.Column(db.Integer(), primary_key=True)
+    departamento = db.Column(db.String(255))
+    descripcion = db.Column(db.String(255))
+    baja = db.Column(db.Boolean())
+    fecha_creacion = db.Column(db.DateTime())
+    fecha_modificacion = db.Column(db.DateTime())
+    usuario_modificacion = db.Column(db.Integer)
+
+class Empresa(db.Model):
+    __tablename__ ='empresa'
+    id = db.Column(db.Integer(), primary_key=True)
+    razon_social = db.Column(db.String(255))
+    correo = db.Column(db.String(255))
+    direccion = db.Column(db.String(255))
+    rfc = db.Column(db.String(18))
+    fecha_modificacion = db.Column(db.DateTime())
+    usuario_modificacion = db.Column(db.Integer)
+
