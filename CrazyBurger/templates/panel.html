@@ -37,7 +37,7 @@
                     <span class="material-symbols-sharp">home_repair_service</span>
                     <h3>Puestos</h3>
                 </a>
-                <a href="#">
+                <a href="{{url_for('departamento.getAll')}}">
                     <span class="material-symbols-sharp">real_estate_agent</span>
                     <h3>Departamentos</h3>
                 </a>
@@ -69,7 +69,7 @@
                     <span class="material-symbols-sharp">food_bank</span>
                     <h3>Inventario</h3>
                 </a>
-                <a href="#">
+                <a href="{{url_for('empresa.getAll')}}">
                     <span class="material-symbols-sharp">apartment</span>
                     <h3>Empresa</h3>
                 </a>
@@ -93,7 +93,7 @@
                 </div>
                 <div class="profile">
                     <div class="info">
-                        <p>Hey <b>{{name}}</b></p>
+                        <p><b>{{name}}</b></p>
                         <small class="text-muted">Admin</small>
                     </div>
                     <div class="profile-photo">

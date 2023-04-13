@@ -62,7 +62,7 @@ body{
     width: 96%;
     margin: 0  auto;
     gap: 1.8rem;
-    grid-template-columns: 14rem auto 23rem;
+    grid-template-columns: 14rem 60rem 2rem;
 }
 a {
 color:var(--color-dark);
@@ -281,6 +281,7 @@ main .insights small{
     display: block;
 }
 main .recent-order{
+    
     margin-top: 2rem;
 }
 main .recent-order h2{
