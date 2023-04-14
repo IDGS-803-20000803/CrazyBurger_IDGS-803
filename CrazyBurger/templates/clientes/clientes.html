@@ -3,21 +3,18 @@
 <main>
     
     <div class="recent-order">
-        <h2>&Aacute;rea de Trabajo</h2><br>
-        <a href="{{url_for('proveedor.insertar_proveedor')}}" class="btn primary">
+        <h2>&Aacute;reas de Trabajo</h2><br>
+        <a href="{{url_for('clientes.insertar_cliente')}}" class="btn primary">
             <span class="material-symbols-sharp">data_saver_on</span>
             <h3>Nuevo</h3>
         </a>
         <br><br>
-        <p></p>
-        <table id="tblProveedor">
+        <table id="tblCliente">
             <thead>
                 <tr>
-                <th>Alias</th>
-                <th>Raz&oacute;n Social</th>
-                <th>RFC</th>
-                <th>Direcci&oacute;n</th>
+                <th>Nombre</th>
                 <th>Celular</th>
+                <th>Direcci&oacute;n</th>
                 <th></th>
                 <th></th>
                 </tr>
@@ -25,20 +22,18 @@
             <tbody>
                 {%for row in resulset %}
                 <tr>
+                    <td>{{row[1]}} {{row[2]}}</td>
                     <td>{{row[3]}}</td>
-                    <td>{{row[1]}}</td>
-                    <td>{{row[2]}}</td>
-                    <td>{{row[10]}}, {{row[11]}}, {{row[7]}}, {{row[8]}}</td>
-                    <td>{{row[6]}}</td>
+                    <td>{{row[5]}}, {{row[6]}}, {{row[4]}}</td>
 
                     <th>
-                        <a class="warning" href="verProveedor?id={{ row[0] }}" class="btn">
+                        <a class="warning" href="obtenerCliente?id={{ row[0] }}" class="btn">
                             <span class="material-symbols-sharp">edit_document</span>
                         </a>
                     </th>
 
                     <th>
-                        <a class="primary" href="eliminarProveedor?id={{ row[0]}}" class="btn">
+                        <a class="primary" href="eliminarCliente?id={{ row[0]}}" class="btn">
                             <span class="material-symbols-sharp">delete</span>
                         </a>
                     </th>
@@ -49,6 +44,6 @@
     </div>
 </main>
 
-<script src="../../static/js/proveedor/datables.js"></script>
+<script src="../../static/js/clientes/datables.js"></script>
 
 {% endblock %}

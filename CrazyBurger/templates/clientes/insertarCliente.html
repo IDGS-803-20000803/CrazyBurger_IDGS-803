@@ -1,0 +1,45 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    <form class="fromPuesto" method="POST" action="/clientes/insertarCliente">
+        <h3 class="puesto_title">Cliente </h3>
+        <a href="{{url_for('proveedor.getAll')}}" class="btn btn-outline-success">
+            <span class="material-symbols-sharp">assignment_return</span>
+        </a>
+        <h6 class="puesto_message">Registra un nuevo cliente. </h6>
+        <label>
+            <input required placeholder type="text" name="nombres" class="input_puesto">
+            <span>Nombres</span>
+        </label>
+        
+        <label>
+            <input required="" placeholder="" type="text" name="apellidos" class="input_puesto">
+            <span>Apellidos</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="celular" class="input_puesto">
+            <span>Celular</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="calle" class="input_puesto">
+            <span>Calle</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="colonia" class="input_puesto">
+            <span>Colonia</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="codigo_postal" class="input_puesto">
+            <span>Codigo Postal</span>
+        </label>
+
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+        <button class="submit">Agregar</button>
+    
+    </form>
+</main>
+{% endblock %}
