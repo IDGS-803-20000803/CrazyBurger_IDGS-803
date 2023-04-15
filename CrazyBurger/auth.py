@@ -14,22 +14,22 @@ auth = Blueprint('auth', __name__, url_prefix='/security')
 def login():
     return render_template('/security/login.html')
 
-@auth.route("/login", methods=["POST"])
+@auth.route("/login", methods = ["POST"])
 def login_post():
-    email=request.form.get('email')
-    password=request.form.get('password')
-    remember= True if request.form.get('remember') else False
+    email = request.form.get('email')
+    password = request.form.get('password')
+    remember = True if request.form.get('remember') else False
     
     #calculamos si existe un usuario ya registrado con ese email.
-    user=User.query.filter_by(email=email).first()
+    user=User.query.filter_by(email = email).first()
     
     #Verificamos si el usuario existe y comprobamos el password
     if not user or not check_password_hash(user.password,password):
-        flash('El usario y/o contrasena son incorrectos')
+        flash("Ocurrio un error, EL USARIO Y/O CONTRASENA SON INCORRECTOS", 'error')
         return redirect(url_for('auth.login'))
     
     #Si llegamos aqui los datos son correctos y creamos una session para el usuario
-    login_user(user,remember=remember)
+    login_user(user,remember = remember)
     try:
         connection = get_connection()
         with connection.cursor() as cursor:
@@ -39,33 +39,31 @@ def login_post():
                 return redirect(url_for('main.profile'))
             else:
                 return redirect(url_for('main.productos'))
-    except Exception as ex:
-        flash("No se encontro ningun registro en la BD: " + str(ex))
+    except Exception as exception:
+        flash("Ocurrio un error, no se encontro el usuario en la BD: " + str(exception), 'error')
     return redirect(url_for('auth.login'))
-
-    
 
 @auth.route("/register")
 def register():
     return render_template('/security/register.html')
 
-@auth.route("/register",methods=["POST"])
+@auth.route("/register",methods = ["POST"])
 def register_post():
     #Datos para el registro del usuario
-    email=request.form.get('email')
-    name=request.form.get('name')
-    password=request.form.get('password')
-    apellidos=request.form.get('apellidos')
+    email = request.form.get('email')
+    name = request.form.get('name')
+    password = request.form.get('password')
+    apellidos = request.form.get('apellidos')
     celular = request.form.get('celular')
     codigoP = request.form.get('codigoP')
     calle = request.form.get('calle')
     colonia = request.form.get('colonia')
-    password=generate_password_hash(password,method='sha256')
+    password = generate_password_hash(password, method = 'sha256')
     #consultamos si existe un usuario ya registrado con ese email.
-    user=User.query.filter_by(email=email).first()
+    user = User.query.filter_by(email = email).first()
     
     if user:
-        flash('Ese correo ya esta en uso')
+        flash('Ese correo ya esta en uso', 'warning')
         return redirect(url_for('auth.register'))
     
     try:
@@ -75,11 +73,10 @@ def register_post():
             connection.commit()
             connection.close()
             flash("Registro guardado exitosamente")
+            return redirect(url_for('auth.login'))
     except Exception as ex:
-            flash("Ocurrio un error al registrar el nuevo usuario: " + str(ex))
+            flash("Ocurrio un error al registrar el nuevo usuario: " + str(ex), 'error')
             return redirect(url_for('auth.register'))
-    return redirect(url_for('auth.login'))
-   
 
 @auth.route("/logout")
 @login_required

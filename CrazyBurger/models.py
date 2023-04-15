@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     
     __tablename__='user'
     id = db.Column(db.Integer, primary_key=True)
-    name=db.Column(db.String(50),nullable=False)
+    name = db.Column(db.String(50),nullable=False)
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255), nullable=False)
     active = db.Column(db.Boolean())
@@ -129,13 +129,21 @@ class Ingrediente(db.Model):
     user = db.relationship('User', backref=db.backref('empleados', lazy='dynamic'))
 
 class Receta(db.Model):
-    __tablename__='receta'
-    id = db.Column(db.Integer(), primary_key=True)
-    receta = db.Column(db.String(255))
-    descripcion = db.Column(db.String(255))
-    tiempo_preparacion = db.Column(db.Integer())
-    calorias = db.Column(db.String(100))
-    foto_receta = db.Column(db.String(255))
+    __tablename__ = 'receta'
+    id = db.Column(db.Integer(), primary_key = True)
+    nombre = db.Column(db.String(250))
+    fecha_creacion = db.Column(db.DateTime())
+    fecha_modificacion = db.Column(db.DateTime())
+    usuario_modificacion = db.Column(db.Integer)
+    baja = db.Column(db.Boolean())
+    stock_minimo = db.Column(db.Integer)
+    unidad_medida = db.Column(db.Integer)
+
+class Platillo(db.Model):
+    __tablename__ = 'platillo'
+    id = db.Column(db.Integer, primary_key = True)
+    nombre = db.Column(db.String(250))
+    descripcion = db.Column(db.String(250))
     baja = db.Column(db.Boolean())
     fecha_creacion = db.Column(db.DateTime())
     fecha_modificacion = db.Column(db.DateTime())
@@ -151,3 +159,24 @@ class DetalleReceta(db.Model):
     ingrediente_id = db.Column(db.Integer, db.ForeignKey('ingrediente.id'))
     receta = db.relationship('Receta', backref='detalles')
     ingrediente = db.relationship('Ingrediente', backref='detalles')
+    costo = db.Column(db.Float)
+    receta_id = db.Column(db.Integer, db.ForeignKey('receta.id'))
+    receta = db.relationship('Receta', backref = db.backref('platillos', lazy = 'dynamic'))
+
+class Pedido(db.Model):
+    __tablename__ = 'pedido'
+    id = db.Column(db.Integer, primary_key = True)
+    fecha_pedido = db.Column(db.DateTime())
+    baja = db.Column(db.Boolean())
+    cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
+    cliente = db.relationship('Cliente', backref = db.backref('pedidos', lazy = 'dynamic'))
+
+class Detalle_Pedido(db.Model):
+    __tablename__ = 'detalle_pedido'
+    id = db.Column(db.Integer, primary_key = True)
+    cantidad = db.Column(db.Integer)
+    baja = db.Column(db.Boolean())
+    pedido_id = db.Column(db.Integer, db.ForeignKey('pedido.id'))
+    platillo_id = db.Column(db.Integer, db.ForeignKey('platillo.id'))
+    pedido = db.relationship('Pedido', backref = db.backref('detalle_pedidos', lazy = 'dynamic'))
+    platillo = db.relationship('Platillo', backref = db.backref('detalle_platilllos', lazy = 'dynamic'))

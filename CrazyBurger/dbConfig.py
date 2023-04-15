@@ -6,5 +6,5 @@ def get_connection():
         database = ('crazy_burger'),
         port= 3308,
         user = ('root'),
-        password = ('root')
+        password = ('2992002')
     )

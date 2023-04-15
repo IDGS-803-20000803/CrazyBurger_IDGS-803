@@ -19,6 +19,9 @@ app.register_blueprint(auth)
 
 #Registramos los BluePrint de los modulos
 from Puestos.routes import puestos
+from Pedido.routes import pedidos
+from Platillos.routes import platillos
+
 app.register_blueprint(puestos)
 
 from Departamentos.routes import departamento
@@ -41,6 +44,8 @@ app.register_blueprint(ingrediente)
 
 from Recetas.routes import receta
 app.register_blueprint(receta)
+app.register_blueprint(pedidos)
+app.register_blueprint(platillos)
 
 #Definimos el LoginManger
 login_manager = LoginManager()
@@ -61,4 +66,4 @@ if __name__ == '__main__':
     db.init_app(app)
     with app.app_context():
         db.create_all()
-    app.run(port=5000)
+    app.run(port = 5000)
