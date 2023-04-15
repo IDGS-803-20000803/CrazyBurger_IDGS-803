@@ -1,0 +1,52 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    <form class="fromPuesto" method="POST" action="/receta/updateReceta" enctype="multipart/form-data">
+        <h3 class="puesto_title">Receta </h3>
+        <a href="{{url_for('receta.getAll')}}" class="btn btn-outline-success">
+            <span class="material-symbols-sharp">assignment_return</span>
+        </a>
+        <h6 class="puesto_message">Actualiza la receta</h6>
+        {% for row in resulset %}
+        <label style="display:none;">
+            <input  type="text" name="id" class="input_puesto" value="{{row[0]}}">
+            <span>id</span>
+        </label> 
+        <label>
+            <input required="" placeholder="" type="text" name="receta" class="input_puesto" value="{{row[1]}}">
+            <span>Nombre Receta</span>
+        </label>             
+        <label>
+            <input required="" placeholder="" type="text" name="descripcion" class="input_puesto" value="{{row[2]}}">
+            <span>Descripcion</span>
+        </label>  
+        <label>
+            <input required="" placeholder="" type="number" name="tiempo" min="1" max="240" class="input_puesto" value="{{row[3]}}">
+            <span>Tiempo Preparacion(Minutos)</span>
+        </label> 
+        
+        <div class="flex">       
+            <a class="contenedor-btn-file">
+                <span class="material-symbols-sharp">add_a_photo</span>
+                <label for="btn-file"></label>
+                <input type="file" id="btn-file" name="imagen" value="{{row[5]}}">
+            </a>
+            <div>
+              <img src="../../static/img/{{row[5]}}" width="90px" height="90px" alt="">
+            </div>
+        <label>
+            <input required="" placeholder="" type="text" name="calorias" class="input_puesto" value="{{row[4]}}">
+            <span>Calorias</span>
+        </label> 
+        </div>
+        {% endfor %}  
+        <br>
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+        <button class="submit">Continuar</button>
+    
+    </form>
+
+    
+</main>
+
+{% endblock %}

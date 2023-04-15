@@ -481,6 +481,51 @@ main .recent-order a h3{
   .submit:hover {
     background-color: rgb(194, 58, 56);
   }
+
+  .contenedor-btn-file input[type="file"] {
+    appearance: none;
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    z-index: -1;
+}
+.contenedor-btn-file {
+    display: inline-block;
+    position: relative;
+    background-color: #010600;
+    color: #fff;
+    font-weight: 800;
+    font-size: 16px;
+    border: 0;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, .15);
+    overflow: hidden;
+    transition: ease-out 120ms background-color;
+}
+.contenedor-btn-file:hover {
+    background-color: #ff0000;
+}
+.contenedor-btn-file:active {
+    background-color: #000000;
+}
+.contenedor-btn-file label {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.btn-receta span{
+  display: inline-block;
+  position: relative;
+  margin-top: 12px;
+  cursor: pointer;
+}
   
   @keyframes pulse {
     from {

@@ -23,6 +23,10 @@ from Departamentos.routes import departamento
 app.register_blueprint(departamento)
 from Empresa.routes import empresa
 app.register_blueprint(empresa)
+from Ingrediente.routes import ingrediente
+app.register_blueprint(ingrediente)
+from Recetas.routes import receta
+app.register_blueprint(receta)
 #Definimos el LoginManger
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'

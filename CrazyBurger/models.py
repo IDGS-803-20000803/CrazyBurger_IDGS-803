@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 #Importamos la clase UserMixin de  flask_login
 from flask_security import UserMixin,RoleMixin
 import datetime
-
+from sqlalchemy import DECIMAL
 db = SQLAlchemy()
 
 # Define models
@@ -75,3 +75,37 @@ class Empresa(db.Model):
     fecha_modificacion = db.Column(db.DateTime())
     usuario_modificacion = db.Column(db.Integer)
 
+class Ingrediente(db.Model):
+    __tablename__='ingrediente'
+    id = db.Column(db.Integer(), primary_key=True)
+    ingrediente = db.Column(db.String(255))
+    unidad_medida = db.Column(db.String(100))
+    stock_minimo = db.Column(db.DECIMAL(10,3))
+    baja = db.Column(db.Boolean())
+    fecha_creacion = db.Column(db.DateTime())
+    fecha_modificacion = db.Column(db.DateTime())
+    usuario_modificacion = db.Column(db.Integer)
+
+class Receta(db.Model):
+    __tablename__='receta'
+    id = db.Column(db.Integer(), primary_key=True)
+    receta = db.Column(db.String(255))
+    descripcion = db.Column(db.String(255))
+    tiempo_preparacion = db.Column(db.Integer())
+    calorias = db.Column(db.String(100))
+    foto_receta = db.Column(db.String(255))
+    baja = db.Column(db.Boolean())
+    fecha_creacion = db.Column(db.DateTime())
+    fecha_modificacion = db.Column(db.DateTime())
+    usuario_modificacion = db.Column(db.Integer)
+
+class DetalleReceta(db.Model):
+    __tablename__='detalle_receta'
+    id = db.Column(db.Integer(), primary_key=True)
+    cantidad = db.Column(db.String(255))
+    unidad_medida = db.Column(db.String(255))
+    baja = db.Column(db.Boolean())
+    receta_id = db.Column(db.Integer, db.ForeignKey('receta.id'))
+    ingrediente_id = db.Column(db.Integer, db.ForeignKey('ingrediente.id'))
+    receta = db.relationship('Receta', backref='detalles')
+    ingrediente = db.relationship('Ingrediente', backref='detalles')
