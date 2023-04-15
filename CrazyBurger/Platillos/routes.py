@@ -10,16 +10,18 @@ from datetime import datetime
 
 platillos = Blueprint('platillos', __name__, url_prefix = '/catalogo')
 
-@platillos.route('/productos', methods = ['GET'])
+@platillos.route('/', methods = ['GET'])
+@login_required
+@roles_required('cliente')
 def productos():
     fecha_actual = datetime.now().strftime('%Y-%m-%d')
     try:
         connection = get_connection()
         with connection.cursor() as cursor:
-            cursor.execute('call show_products()')
+            cursor.execute('call sp_consultar_productos()')
             resulset = cursor.fetchall()
             print(resulset)
             return render_template('platillos.html', fecha_actual = fecha_actual, platillos = resulset)
     except Exception as exception:
-        flash('No fue posible encontrar ningun producto' + str(exception))
+        flash("Ocurrio un error al consultar los productos de la BD: " + str(exception), 'error')
     return render_template('platillos.html', fecha_actual = fecha_actual)

@@ -10,29 +10,23 @@
       </div>
     </div>
     <div class="form__detail">
-      <form action="/generarPedido" method="POST">
-        <h1>Generar Pedido</h1>
-        <div class="input">
-          <select name="complements" id="complements">
-            <option value="1" selected>Selecciona primer complemento</option>
-            <option value="2">Papas</option>
-            <option value="3">Refresco</option>
-            <option value="4">Hot Dog</option>
-          </select>
-        </div>
+      <h1>Generar pedido</h1>
+      <form action="/pedido/generarPedido" method="POST">
+        {% for platillo in platillos %}
+        <input type="number" name="id" id="id" placeholder="Id del producto" value="{{ platillo[0] }}" hidden>
         <div class="inputs">
-          {% for platillo in platillos %}
-          <input type="number" name="id" id="id" placeholder="Id del producto" value="{{ platillo[0] }}" disabled
-            hidden>
-          <input type="text" name="platillo" id="product" placeholder="Nombre del Producto" value="{{ platillo[1] }}"
-            disabled style="color: #000000; background-color: #ffffff; border: none; font-size: 1.1rem;">
-          <input type="number" name="total" id="total" class="total" placeholder="Precio Unidad"
-            value="{{ platillo[7] }}" disabled
-            style="color: brown; background-color: #ffffff; border: none; font-size: 1.1rem;">
-          {% endfor %}
+          <input type="text" name="name" id="name" value="{{ platillo[1] }}">
+          <input type="number" name="precioUnitario" value="{{ platillo[7] }}">
         </div>
+        <span>{{ platillo[2] }}</span>
+        {% endfor %}
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}" />
         <div class="inputs">
-          <input type="number" name="unidades" id="units" placeholder="Número de unidades">
+          <div class="input_unidades">
+            <button>-</button>
+            <input type="number" name="unidades" id="units" class="unidades">
+            <button>+</button>
+          </div>
           <input type="submit" value="Agregar">
         </div>
       </form>

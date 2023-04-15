@@ -780,6 +780,13 @@ button {
   text-align: center;
 }
 
+.input_unidades {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .inputs input[type="submit"] {
   border-radius: 0rem;
   background-color: #000000;
