@@ -59,13 +59,13 @@ def generar_pedido():
         return redirect(url_for('pedidos.historial_pedidos'))
     return render_template('order_form.html')
 
-@pedidos.route('/modificarPedido', methods = ['GET'])
+@pedidos.route('/modificarPedido', methods = ['POST'])
 @login_required
 @roles_required('cliente')
 def modificar_pedido():
     try:
-        id_pedido = request.args.get('id')
-        cantidad = request.args.get('unidades')
+        id_pedido = request.form.get('id')
+        cantidad = request.form.get('unidades')
         connection = get_connection()
         with connection.cursor() as cursor:
             cursor.execute('call sp_actualiar_orden(%s,%s)', (id_pedido, cantidad))

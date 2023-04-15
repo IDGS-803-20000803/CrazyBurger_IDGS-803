@@ -6,69 +6,78 @@
 <div class="container__compras">
   {% for pedido in pedidos %}
   <div class="carrito_compras">
-    <div class="inputs">
-      <input class="label" type="text" name="name" id="name" value="ID PEDIDO"
-        style="border: none; color: black; background-color: #f8f9f9;" disabled>
-      <input class="value" type="text" name="id" id="name" value="{{ pedido[0] }}"
-        style="border: none; color: black; background-color: #f8f9f9;">
-    </div>
-    <div class="inputs">
-      <input class="label" type="text" name="name" id="name" value="PRODUCTO"
-        style="border: none; color: black; background-color: #f8f9f9;" disabled>
-      <input class="value" type="text" name="name" id="name" value="{{ pedido[1] }}"
-        style="border: none; color: black; background-color: #f8f9f9;" disabled>
-    </div>
-    <div class="inputs">
-      <input class="label" type="text" name="name" id="name" value="FECHA DEL PEDIDO"
-        style="border: none; color: black; background-color: #f8f9f9;" disabled>
-      <input class="value" type="text" name="name" id="name" value="{{ pedido[6] }}"
-        style="border: none; color: black; background-color: #f8f9f9;" disabled>
-    </div>
-    <div class="inputs">
-      <input class="label" type="text" name="name" id="name" value="PRECIO UNITARIO"
-        style="border: none; color: black; background-color: #f8f9f9;" disabled>
-      <input class="value" type="text" name="name" id="name" value="{{ pedido[4] }}"
-        style="border: none; color: black; background-color: #f8f9f9;" disabled>
-    </div>
-    <div class="inputs">
-      <input class="label" type="text" name="name" id="name" value="SUBTOTAL"
-        style="border: none; color: black; background-color: #f8f9f9;" disabled>
-      <input class="value" type="text" name="name" id="name" value="{{ pedido[5] }}"
-        style="border: none; color: black; background-color: #f8f9f9;" disabled>
-    </div>
-    <div class="inputs">
-      <input class="label" type="text" name="name" id="name" value="PRECIO UNITARIO"
-        style="border: none; color: black; background-color: #f8f9f9;" disabled>
-      <div class="input_unidades">
-        <button style="border: none; border-radius: 0%;" class="resta" type="button">-</button>
-        <input type="text" name="unidades" id="unidades" value="{{ pedido[3] }}">
-        <button style="border: none; border-radius: 0%;" class="suma" type="button">+</button>
+    <form action="/pedido/modificarPedido" method="POST">
+      <div class="inputs">
+        <input class="label" type="text" name="name" id="name" value="ID PEDIDO"
+          style="border: none; color: black; background-color: #f8f9f9;" disabled>
+        <input class="value" type="text" name="id" id="name" value="{{ pedido[0] }}"
+          style="border: none; color: black; background-color: #f8f9f9;">
       </div>
-    </div>
+      <div class="inputs">
+        <input class="label" type="text" name="name" id="name" value="PRODUCTO"
+          style="border: none; color: black; background-color: #f8f9f9;" disabled>
+        <input class="value" type="text" name="name" id="name" value="{{ pedido[1] }}"
+          style="border: none; color: black; background-color: #f8f9f9;" disabled>
+      </div>
+      <div class="inputs">
+        <input class="label" type="text" name="name" id="name" value="FECHA DEL PEDIDO"
+          style="border: none; color: black; background-color: #f8f9f9;" disabled>
+        <input class="value" type="text" name="name" id="name" value="{{ pedido[6] }}"
+          style="border: none; color: black; background-color: #f8f9f9;" disabled>
+      </div>
+      <div class="inputs">
+        <input class="label" type="text" name="name" id="name" value="PRECIO UNITARIO"
+          style="border: none; color: black; background-color: #f8f9f9;" disabled>
+        <input class="value" type="text" name="name" id="name" value="{{ pedido[4] }}"
+          style="border: none; color: black; background-color: #f8f9f9;" disabled>
+      </div>
+      <div class="inputs">
+        <input class="label" type="text" name="name" id="name" value="SUBTOTAL"
+          style="border: none; color: black; background-color: #f8f9f9;" disabled>
+        <input class="value" type="text" name="name" id="name" value="{{ pedido[5] }}"
+          style="border: none; color: black; background-color: #f8f9f9;" disabled>
+      </div>
+      <div class="inputs">
+        <input class="label" type="text" name="name" id="name" value="PRECIO UNITARIO"
+          style="border: none; color: black; background-color: #f8f9f9;" disabled>
+        <div class="input_unidades">
+          <button style="border: none; border-radius: 0%;" class="resta" type="button">-</button>
+          <input type="text" name="unidades" id="unidades{{ pedido[0] }}" value="{{ pedido[3] }}">
+          <button style="border: none; border-radius: 0%;" class="suma" type="button">+</button>
+        </div>
+      </div>
+      <input type="hidden" name="csrf_token" value="{{csrf_token()}}" />
+      <div class="inputs">
+        <button type="submit" name="action" value="Actualizar" class="edit"><a><i
+              class="fa-solid fa-pen-to-square"></i></a></button>
+      </div>
+    </form>
     <div class="inputs">
-      <button class="edit"><a href="/pedido/modificarPedido?id={{ pedido[0] }}&unidades={{ pedido[3] }}"><i
-            class="fa-solid fa-pen-to-square"></i></a></button>
+      <button class="sho"><a href="">COMPRAR</a></button>
       <button class="delete"><a href="/pedido/eliminarPedido?id={{ pedido[0] }}"><i
             class="fa-solid fa-trash"></i></a></button>
-      <button class="sho"><a href="">COMPRAR</a></button>
     </div>
   </div>
   {% endfor %}
 </div>
 
 <script>
-  var unidadesInput = document.getElementById('unidades');
-  var restaButton = document.querySelector('.resta');
-  var sumaButton = document.querySelector('.suma');
+  var pedidos = document.querySelectorAll('.carrito_compras');
 
-  restaButton.addEventListener('click', function () {
-    var unidades = parseInt(unidadesInput.value);
-    unidadesInput.value = unidades - 1;
-  });
+  pedidos.forEach(function (pedido) {
+    var unidadesInput = pedido.querySelector('input[name="unidades"]');
+    var restaButton = pedido.querySelector('.resta');
+    var sumaButton = pedido.querySelector('.suma');
 
-  sumaButton.addEventListener('click', function () {
-    var unidades = parseInt(unidadesInput.value);
-    unidadesInput.value = unidades + 1;
+    restaButton.addEventListener('click', function () {
+      var unidades = parseInt(unidadesInput.value);
+      unidadesInput.value = unidades - 1;
+    });
+
+    sumaButton.addEventListener('click', function () {
+      var unidades = parseInt(unidadesInput.value);
+      unidadesInput.value = unidades + 1;
+    });
   });
 </script>
 {% endblock %}
