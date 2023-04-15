@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Flask, Blueprint
 from flask_security import login_required, current_user
 from flask import render_template, url_for, flash, redirect, request
 from dbConfig import get_connection
@@ -15,13 +15,13 @@ def getAll():
             cursor.execute('call sp_consultar_empleados()')
             resulset = cursor.fetchall()
             print(resulset)
-            return render_template('/empleados/empleados.html', name = current_user.name, resulset=resulset)
+            return render_template('/empleados/empleados.html', name = current_user.name, resulset=resulset, active = 'empleados')
         
     except Exception as ex:
 
         flash("No se encontro ningun registro en la BD: " + str(ex))
     
-        return render_template('/empleados/empleados.html', name = current_user.name)
+        return render_template('/empleados/empleados.html', name = current_user.name, active = 'empleados')
 
 @empleados.route('/insertarEmpleado', methods=['GET','POST'])
 @login_required

@@ -15,13 +15,13 @@ def getAll():
             cursor.execute('call sp_consultar_clientes()')
             resulset = cursor.fetchall()
             print(resulset)
-            return render_template('/clientes/clientes.html', name = current_user.name, resulset=resulset)
+            return render_template('/clientes/clientes.html', name = current_user.name, resulset=resulset, active = 'clientes')
         
     except Exception as ex:
 
         flash("No se encontro ningun registro en la BD: " + str(ex))
     
-        return render_template('/clientes/clientes.html', name = current_user.name)
+        return render_template('/clientes/clientes.html', name = current_user.name, active = 'clientes')
 
 @clientes.route('/insertarCliente', methods=['GET','POST'])
 @login_required

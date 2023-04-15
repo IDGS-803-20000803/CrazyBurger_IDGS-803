@@ -20,10 +20,10 @@ def getAll():
         with connection.cursor() as cursor:
             cursor.execute('call sp_consultar_departamentos()')
             resulset = cursor.fetchall()
-            return render_template('/departamento/Departamento.html', name = current_user.name,fecha_actual=fecha_actual, resulset=resulset)
+            return render_template('/departamento/Departamento.html', name = current_user.name,fecha_actual=fecha_actual, resulset=resulset, active = 'departamento')
     except Exception as ex:
         flash("No se encontro ningun registro en la BD: " + str(ex))
-    return render_template('/departamento/Departamento.html', fecha_actual=fecha_actual,name = current_user.name)
+    return render_template('/departamento/Departamento.html', fecha_actual=fecha_actual,name = current_user.name, active = 'departamento')
 
 @departamento.route('/insert')
 @login_required

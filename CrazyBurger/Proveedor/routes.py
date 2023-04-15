@@ -15,13 +15,13 @@ def getAll():
             cursor.execute('call sp_consultar_proveedor()')
             resulset = cursor.fetchall()
             print(resulset)
-            return render_template('/proveedor/proveedor.html', name = current_user.name, resulset=resulset)
+            return render_template('/proveedor/proveedor.html', name = current_user.name, resulset=resulset, active = 'proveedor')
         
     except Exception as ex:
 
         flash("No se encontro ningun registro en la BD: " + str(ex))
     
-        return render_template('/proveedor/proveedor.html', name = current_user.name)
+        return render_template('/proveedor/proveedor.html', name = current_user.name, active = 'proveedor')
     
 @proveedor.route('/insertarProveedor', methods=['GET','POST'])
 @login_required
