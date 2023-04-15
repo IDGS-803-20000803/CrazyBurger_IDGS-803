@@ -33,6 +33,9 @@ app.register_blueprint(proveedor)
 from Cliente.routes import clientes
 app.register_blueprint(clientes)
 
+from Empleados.routes import empleados
+app.register_blueprint(empleados)
+
 #Definimos el LoginManger
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'

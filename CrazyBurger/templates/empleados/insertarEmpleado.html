@@ -1,0 +1,106 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    <form class="fromPuesto" method="POST" action="/empleados/insertarEmpleado">
+        <h3 class="puesto_title">Empleados </h3>
+        <a href="{{url_for('empleados.getAll')}}" class="btn btn-outline-success">
+            <span class="material-symbols-sharp">assignment_return</span>
+        </a>
+        <h6 class="puesto_message">Registra un nuevo empleado. </h6>
+
+        <label>
+            <input required="" placeholder="" type="text" name="nombres" class="input_puesto">
+            <span>Nombre</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="ape_paterno" class="input_puesto">
+            <span>Apellido Paterno</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="ape_materno" class="input_puesto">
+            <span>Apellido Materno</span>
+        </label>
+
+        <!-- Foto de perfil -->
+        <label>
+            <input required="" placeholder="" type="file" name="foto_perfil" class="input_puesto" value="NA">
+            <span>Foto de Perfil</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="rfc" class="input_puesto">
+            <span>RFC</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="curp" class="input_puesto">
+            <span>CURP</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="num_seguro_social" class="input_puesto">
+            <span>Número de Seguro Social</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="celular" class="input_puesto">
+            <span>Teléfono</span>   
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="alergias" class="input_puesto">
+            <span>Alergias</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="observaciones" class="input_puesto">
+            <span>Observaciones</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="codigo_postal" class="input_puesto">
+            <span>Codigo Postal</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="calle" class="input_puesto">
+            <span>Calle</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="colonia" class="input_puesto">
+            <span>Colonia</span>
+        </label>
+
+        <!-- Puestos -->
+        <label>
+            <select name="puesto_id" class="input_puesto">
+                <option value="0" disabled>Selecciona un puesto</option>
+                {% for row in puestos %}
+                    <option value="{{row[0]}}">{{row[1]}}</option>
+                {% endfor %}
+            </select>
+            <span>Puesto</span>
+        </label>
+
+        <!-- Departamentos -->
+        <label>
+            <select name="departamento_id" class="input_puesto">
+                <option value="0" disabled>Selecciona un departamento</option>
+                {% for row in departamentos %}
+                    <option value="{{row[0]}}">{{row[1]}}</option>
+                {% endfor %}
+            </select>
+            <span>Departamento</span>
+        </label>
+
+        <input type="hidden" name="usuario_id" value="{{session['_user_id']}}"/>
+
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+        <button class="submit">Agregar</button>
+    
+    </form>
+</main>
+{% endblock %}

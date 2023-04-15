@@ -93,3 +93,32 @@ class Proveedor(db.Model):
     fecha_modificacion = db.Column(db.DateTime(), nullable=False)
     usuario_modificacion = db.Column(db.Integer, nullable=False)
     empresa_id = db.Column(db.Integer, db.ForeignKey('empresa.id'), nullable=False)
+
+class Empleados(db.Model):
+    __tablename__ ='empleados'
+    id = db.Column(db.Integer(), primary_key=True)
+    nombres = db.Column(db.String(255))
+    ape_paterno = db.Column(db.String(255))
+    ape_materno = db.Column(db.String(255))
+    foto_empleado = db.Column(db.String(255))
+    rfc = db.Column(db.String(15))
+    curp = db.Column(db.String(18))
+    num_seguro_social = db.Column(db.String(45))
+    celular = db.Column(db.String(10))
+    alergias = db.Column(db.String(255))
+    observaciones = db.Column(db.String(255))
+    codigo_postal = db.Column(db.String(20))
+    calle = db.Column(db.String(255))
+    colonia = db.Column(db.String(255))
+    baja = db.Column(db.Boolean())
+    fecha_creacion = db.Column(db.DateTime())
+    fecha_modificacion = db.Column(db.DateTime())
+    usuario_modificacion = db.Column(db.Integer)
+    puesto_id = db.Column(db.Integer, db.ForeignKey('puesto.id'))
+    puesto = db.relationship('Puesto', backref=db.backref('empleados', lazy='dynamic'))
+    departamento_id = db.Column(db.Integer, db.ForeignKey('departamento.id'))
+    departamento = db.relationship('Departamento', backref=db.backref('empleados', lazy='dynamic'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('empleados', lazy='dynamic'))
+
+

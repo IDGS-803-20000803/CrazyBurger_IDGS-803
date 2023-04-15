@@ -1,0 +1,53 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    
+    <div class="recent-order">
+        <h2>&Aacute;rea de Trabajo</h2><br>
+        <a href="{{url_for('empleados.insertarEmpleado')}}" class="btn primary">
+            <span class="material-symbols-sharp">data_saver_on</span>
+            <h3>Nuevo</h3>
+        </a>
+        <br><br>
+        <table id="tblEmpleados">
+            <thead>
+                <tr>
+                <th>Nombre</th>
+                <th>RFC</th>
+                <th>Celular</th>
+                <th>Direcci&oacute;n</th>
+                <th>Num. Seguro Social</th>
+                <th></th>
+                <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for row in resulset %}
+                <tr>
+                    <td>{{row[1]}} {{row[2]}} {{row[3]}}</td>
+                    <td>{{row[5]}}</td>
+                    <td>{{row[8]}}</td>
+                    <td>{{row[12]}}, {{row[13]}}, {{row[11]}}</td>
+                    <td>{{row[7]}}</td>
+
+                    <th>
+                        <a class="warning" href="obtenerEmpleado?id={{ row[0] }}" class="btn">
+                            <span class="material-symbols-sharp">edit_document</span>
+                        </a>
+                    </th>
+
+                    <th>
+                        <a class="primary" href="eliminarEmpleado?id={{ row[0]}}" class="btn">
+                            <span class="material-symbols-sharp">delete</span>
+                        </a>
+                    </th>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<script src="../../static/js/empleados/datables.js"></script>
+
+{% endblock %}
