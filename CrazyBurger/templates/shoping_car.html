@@ -2,23 +2,73 @@
 {% block title %}PERFIL COMPRAS{% endblock %}
 {% block description %}COMPRAS DEL USUARIO{% endblock %}
 {% block content %}
+<h1 class="title_car">Carrito de compras: <span style="color: #69f0ae;">{{ name }}</span></h1>
 <div class="container__compras">
-  <h1>Carrito de compras: <span>{{ name }}</span></h1>
   {% for pedido in pedidos %}
-  <div class="compras">
-    <ul>
-      <li class="title__compra">ID PEDIDO:<span>{{ pedido[0] }}</span></li>
-      <li class="title__compra">PRODUCTO:<span>{{ pedido[1] }}</span></li>
-      <li class="title__compra">DESCRIPCION:<span>{{ pedido[2] }}</span></li>
-      <li class="title__compra">CANTIDAD:<span>{{ pedido[3] }}</span></li>
-      <li class="title__compra">PRECIO UNIDAD:<span>MX$ {{ pedido[4] }}</span></li>
-      <li class="title__compra">TOTAL PAGO:<span>MX$ {{ pedido[5] }}</span></li>
-    </ul>
-    <div class="btn__compras">
-      <button class="btn__eliminar"><a href="eliminarPedido?id={{ pedido[0] }}">Eliminar</a></button>
-      <button class="btn__nuevo"><a href="/shoping">Comprar</a></button>
+  <div class="carrito_compras">
+    <div class="inputs">
+      <input class="label" type="text" name="name" id="name" value="ID PEDIDO"
+        style="border: none; color: black; background-color: #f8f9f9;" disabled>
+      <input class="value" type="text" name="id" id="name" value="{{ pedido[0] }}"
+        style="border: none; color: black; background-color: #f8f9f9;">
+    </div>
+    <div class="inputs">
+      <input class="label" type="text" name="name" id="name" value="PRODUCTO"
+        style="border: none; color: black; background-color: #f8f9f9;" disabled>
+      <input class="value" type="text" name="name" id="name" value="{{ pedido[1] }}"
+        style="border: none; color: black; background-color: #f8f9f9;" disabled>
+    </div>
+    <div class="inputs">
+      <input class="label" type="text" name="name" id="name" value="FECHA DEL PEDIDO"
+        style="border: none; color: black; background-color: #f8f9f9;" disabled>
+      <input class="value" type="text" name="name" id="name" value="{{ pedido[6] }}"
+        style="border: none; color: black; background-color: #f8f9f9;" disabled>
+    </div>
+    <div class="inputs">
+      <input class="label" type="text" name="name" id="name" value="PRECIO UNITARIO"
+        style="border: none; color: black; background-color: #f8f9f9;" disabled>
+      <input class="value" type="text" name="name" id="name" value="{{ pedido[4] }}"
+        style="border: none; color: black; background-color: #f8f9f9;" disabled>
+    </div>
+    <div class="inputs">
+      <input class="label" type="text" name="name" id="name" value="SUBTOTAL"
+        style="border: none; color: black; background-color: #f8f9f9;" disabled>
+      <input class="value" type="text" name="name" id="name" value="{{ pedido[5] }}"
+        style="border: none; color: black; background-color: #f8f9f9;" disabled>
+    </div>
+    <div class="inputs">
+      <input class="label" type="text" name="name" id="name" value="PRECIO UNITARIO"
+        style="border: none; color: black; background-color: #f8f9f9;" disabled>
+      <div class="input_unidades">
+        <button style="border: none; border-radius: 0%;" class="resta" type="button">-</button>
+        <input type="text" name="unidades" id="unidades" value="{{ pedido[3] }}">
+        <button style="border: none; border-radius: 0%;" class="suma" type="button">+</button>
+      </div>
+    </div>
+    <div class="inputs">
+      <button class="edit"><a href="/pedido/modificarPedido?id={{ pedido[0] }}&unidades={{ pedido[3] }}"><i
+            class="fa-solid fa-pen-to-square"></i></a></button>
+      <button class="delete"><a href="/pedido/eliminarPedido?id={{ pedido[0] }}"><i
+            class="fa-solid fa-trash"></i></a></button>
+      <button class="sho"><a href="">COMPRAR</a></button>
     </div>
   </div>
   {% endfor %}
 </div>
+
+<script>
+  var unidadesInput = document.getElementById('unidades');
+  var restaButton = document.querySelector('.resta');
+  var sumaButton = document.querySelector('.suma');
+
+  restaButton.addEventListener('click', function () {
+    var unidades = parseInt(unidadesInput.value);
+    unidadesInput.value = unidades - 1;
+  });
+
+  sumaButton.addEventListener('click', function () {
+    var unidades = parseInt(unidadesInput.value);
+    unidadesInput.value = unidades + 1;
+  });
+</script>
 {% endblock %}

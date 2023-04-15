@@ -787,13 +787,38 @@ button {
   align-items: center;
 }
 
+.input_unidades .unidades {
+  text-align: center;
+}
+
+.input_unidades button {
+  border-radius: none;
+  background-color: #000000;
+  font-family: var(--font_text);
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.nombrePlatillo {
+  color: #000000;
+  font-size: 1rem;
+  background-color: #ffffff;
+}
+
+.precioPlatillo {
+  color: #ff5252;
+  font-size: 1rem;
+  background-color: #ffffff;
+}
+
 .inputs input[type="submit"] {
   border-radius: 0rem;
   background-color: #000000;
   border-left: #000000;
   border-right: #000000;
   border-top: #000000;
-  border-bottom: solid thick #ffffff;
+  border-bottom: solid thick #000000;
   color: #ffffff;
 }
 
@@ -1299,6 +1324,89 @@ i {
 
 .alert-error i {
   color: #ffffff;
+}
+
+.carrito_compras {
+  width: 98%;
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: #f8f9f9;
+}
+
+.label {
+  text-align: left;
+}
+
+.value {
+  text-align: right;
+}
+
+.label,
+.value {
+  max-width: 50%;
+  padding: 0.5rem;
+}
+
+.input_unidades {
+  width: 50%;
+}
+
+.inputs button {
+  margin-top: 0.25rem;
+}
+
+.edit a > i {
+  color: #69f0ae;
+  font-size: 1rem;
+}
+
+.delete a > i {
+  color: #ff5252;
+  font-size: 1rem;
+}
+
+.edit,
+.delete {
+  max-width: 2rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.sho {
+  max-width: 50%;
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 0%;
+}
+
+.sho a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #ffffff;
+  font-family: var(--font_text);
+}
+
+.container__compras {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(38rem, 1fr));
+  grid-gap: 1rem;
+}
+
+.pedido {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.title_car {
+  margin: 2rem;
+  font-family: var(--font_title);
+  text-align: center;
+  color: #ff5252;
 }
 
 @media screen and (max-width: 768px) {

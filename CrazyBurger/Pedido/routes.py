@@ -7,6 +7,7 @@ from flask_security import login_required, current_user
 from flask_security.decorators import roles_required,roles_accepted
 from dbConfig import get_connection
 from datetime import datetime
+from flask import jsonify
 
 pedidos = Blueprint('pedidos', __name__, url_prefix = '/pedido')
 
@@ -58,15 +59,22 @@ def generar_pedido():
         return redirect(url_for('pedidos.historial_pedidos'))
     return render_template('order_form.html')
 
-@pedidos.route('/modificarPedido', methods = ['GET', 'POST'])
+@pedidos.route('/modificarPedido', methods = ['GET'])
 @login_required
 @roles_required('cliente')
 def modificar_pedido():
     try:
-        pass
-    except Exception as ex:
-        flash('' + str(ex))
-    return render_template('')
+        id_pedido = request.args.get('id')
+        cantidad = request.args.get('unidades')
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute('call sp_actualiar_orden(%s,%s)', (id_pedido, cantidad))
+            connection.commit()
+            connection.close()
+            flash('Pedido Actualizado correctamente')
+    except Exception as exception:
+        flash("Ocurrio un error al actualizar el pedido: " + str(exception), 'error')
+    return redirect(url_for('pedidos.historial_pedidos'))
 
 @pedidos.route('/eliminarPedido', methods = ['GET'])
 @login_required
