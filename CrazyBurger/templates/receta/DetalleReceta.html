@@ -1,0 +1,57 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    <form class="fromPuesto" method="POST" action="/receta/detalleIngrediente">
+        <h3 class="puesto_title">Ingredientes </h3>
+        <h6 class="puesto_message">Agrega los ingredientes</h6>
+        <label for="ing">Seleccion el tipo de ingrediente:</label>
+        <select id="ing" name="ingrediente" class="input_puesto">
+        {%for row in resulset %}
+        <option value="{{row[0]}}">{{row[1]}}</option> 
+        {%endfor%}
+        </select>
+                    
+        <label>
+            <input required="" placeholder="" type="text" name="cantidad" class="input_puesto">
+            <span>Cantidad</span>
+        </label>  
+        <label>
+            <input required="" placeholder="" type="text" name="unidad" class="input_puesto">
+            <span>Unidad Medida</span>
+        </label> 
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+        <div class="flex">
+        <button class="submit">Agregar</button>
+        <a href="{{url_for('receta.getAll')}}" class="btn-receta">
+            <span class="material-symbols-sharp">restaurant</span>
+            Finalizar
+        </a>
+        </div>
+    </form>
+    <div class="recent-order">
+        <h2>Ingredientes</h2>
+        <table>
+            <thead>
+                <tr>
+                <th>Ingrediente</th>
+                <th>Cantidad</th>
+                <th>Unidad Medida</th>
+                <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for row in tabla %}
+                <tr>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td><a class="primary" href="deleteIngrediente?id={{ row[0] }}" class="btn">
+                        <span class="material-symbols-sharp">delete</span></a>
+                    </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}

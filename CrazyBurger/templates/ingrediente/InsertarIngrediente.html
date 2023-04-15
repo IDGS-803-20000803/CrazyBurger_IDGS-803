@@ -1,0 +1,27 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    <form class="fromPuesto" method="POST" action="/ingrediente/insertIngrediente">
+        <h3 class="puesto_title">Ingrediente </h3>
+        <a href="{{url_for('ingrediente.getAll')}}" class="btn btn-outline-success">
+            <span class="material-symbols-sharp">assignment_return</span>
+        </a>
+        <h6 class="puesto_message">Agrega un nuevo ingrediente</h6>
+        <label>
+            <input required="" placeholder="" type="text" name="ingrediente" class="input_puesto">
+            <span>Ingrediente</span>
+        </label>             
+        <label>
+            <input required="" placeholder="" type="text" name="unidad" class="input_puesto">
+            <span>Unidad Medida</span>
+        </label>  
+        <label>
+            <input required="" placeholder="" type="text" name="stock" class="input_puesto">
+            <span>Stock Minimo</span>
+        </label> 
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+        <button class="submit">Agregar</button>
+    
+    </form>
+</main>
+{% endblock %}

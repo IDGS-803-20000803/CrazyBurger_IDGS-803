@@ -36,6 +36,12 @@ app.register_blueprint(clientes)
 from Empleados.routes import empleados
 app.register_blueprint(empleados)
 
+from Ingrediente.routes import ingrediente
+app.register_blueprint(ingrediente)
+
+from Recetas.routes import receta
+app.register_blueprint(receta)
+
 #Definimos el LoginManger
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
