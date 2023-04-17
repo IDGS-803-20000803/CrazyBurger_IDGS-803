@@ -42,10 +42,10 @@
             <tbody>
                 {%for row in tabla %}
                 <tr>
-                    <td>{{row[0]}}</td>
                     <td>{{row[1]}}</td>
                     <td>{{row[2]}}</td>
-                    <td><a class="primary" href="deleteIngrediente?id={{ row[0] }}" class="btn">
+                    <td>{{row[3]}}</td>
+                    <td><a class="primary" href="deleteDetalle?id={{ row[0] }}" class="btn">
                         <span class="material-symbols-sharp">delete</span></a>
                     </td>
                 </tr>

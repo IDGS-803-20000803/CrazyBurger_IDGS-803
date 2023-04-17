@@ -1,0 +1,36 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    <form class="fromPuesto" method="POST" action="/menu/deleteMenu" enctype="multipart/form-data">
+        <h3 class="puesto_title">Menu </h3>
+        <a href="{{url_for('menu.getAll')}}" class="btn btn-outline-success">
+            <span class="material-symbols-sharp">assignment_return</span>
+        </a>
+        <h6 class="puesto_message">Eliminar Platillo</h6> 
+        <label style="display:none;">
+            <input readonly type="text" value="{{id}}" name="id" class="input_puesto">
+            <span>Id</span>
+        </label> 
+        {%for row in resulset %} 
+        <label>
+            <input readonly type="text" value="{{row[1]}}"  class="input_puesto">
+            <span>Platillo</span>
+        </label>           
+        <label>
+            <input readonly type="text" value="{{row[2]}}"  class="input_puesto">
+            <span>Descripcion</span>
+        </label>
+        <div>
+            <img src="../../static/img/{{row[3]}}"  alt="platillo">
+        </div> 
+        <label>
+            <input  type="number" value="{{row[4]}}" name="costo" class="input_puesto">
+            <span>Costo($Pesos)</span>
+        </label> 
+        {%endfor%}
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+        <button class="submit">Eliminar</button>
+    </form>
+</main>
+
+{% endblock %}

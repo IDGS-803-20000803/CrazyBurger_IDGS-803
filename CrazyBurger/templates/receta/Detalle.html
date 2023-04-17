@@ -1,0 +1,30 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+
+    <div class="recent-order">
+        <h2 class="puesto_title">Ingredientes</h2>
+        <a href="{{url_for('receta.getAll')}}" class="btn btn-outline-success">
+            <span class="material-symbols-sharp">assignment_return</span>
+        </a>
+        <table>
+            <thead>
+                <tr>
+                <th>Ingrediente</th>
+                <th>Cantidad</th>
+                <th>Unidad Medida</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for row in tabla %}
+                <tr>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}

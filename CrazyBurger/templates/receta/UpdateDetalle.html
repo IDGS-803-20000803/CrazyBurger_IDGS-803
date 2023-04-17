@@ -1,11 +1,11 @@
 {% extends "panel.html" %}
 {% block content %}
 <main>
-    <form class="fromPuesto" method="POST" action="/receta/detalleIngrediente">
+    <form class="fromPuesto" method="POST" action="/receta/detalleUpdate">
         <h3 class="puesto_title">Ingredientes </h3>
         <h6 class="puesto_message">Agrega los ingredientes</h6>
-        <label style="display:none;">
-            <input required="" placeholder="" type="text" name="cantidad" class="input_puesto" value="{{id}}">
+        <label style="display:none">
+            <input required="" placeholder="" type="text" name="id" class="input_puesto" value="{{id}}">
             <span>ID</span>
         </label>  
         <label for="ing">Seleccion el tipo de ingrediente:</label>
@@ -46,10 +46,10 @@
             <tbody>
                 {%for row in tabla %}
                 <tr>
-                    <td>{{row[0]}}</td>
                     <td>{{row[1]}}</td>
                     <td>{{row[2]}}</td>
-                    <td><a class="primary" href="deleteIngrediente?id={{ row[0] }}" class="btn">
+                    <td>{{row[3]}}</td>
+                    <td><a class="primary" href="deleteDetalle?id={{ row[0] }}" class="btn">
                         <span class="material-symbols-sharp">delete</span></a>
                     </td>
                 </tr>
