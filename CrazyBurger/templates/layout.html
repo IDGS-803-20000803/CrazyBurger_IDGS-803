@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -8,117 +8,60 @@
   <title>CRAZY BURGER - {% block title%}HOME{% endblock %}</title>
   <meta name="description" content="{% block description%}BIENVENIDO A CRAZY BURGER{% endblock %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
-  <link rel="stylesheet" href="../static/css/style.css">
-   <!-- ===== Boxicons CSS ===== -->
-   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="../static/css/style_final.css">
 </head>
 
 <body>
-  <nav>
-    <nav>
-      <div class="nav-bar">
-          <i class='bx bx-menu sidebarOpen' ></i>
-          <img class="logoImgP" src="../static/img/logo.png">
-          <span class="logo navLogo"><a href="{{ url_for('main.index') }}">CRAZY BURGER</a></span>
-
-          <div class="menu">
-              <div class="logo-toggle">
-                  <span class="logo"><a href="{{ url_for('main.index') }}">Crazy Burger</a></span>
-                  <i class='bx bx-x siderbarClose'></i>
-              </div>
-
-              <ul class="nav-links">
-                {% if not current_user.is_authenticated %}
-                  <li><a href="{{ url_for('main.index') }}">Inicio</a></li>
-                  <li><a href="#conocenos">Conocenos</a></li>
-                  <li><a href="#filosofia">Contactanos</a></li>
-                  <li><a href="{{ url_for('auth.login') }}">Login</a></li>
-                  <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-                  {% endif %}
-                  {% if current_user.is_authenticated %}
-                  <li><a href="{{ url_for('main.productos') }}">Productos</a></li>
-                  <li><a href="{{ url_for('main.productos') }}">Mi Cuenta</a></li>
-                  <li><a href="{{ url_for('main.productos') }}"><i class='bx bxs-shopping-bag'></i></a></li>
-                  <li><a href="{{ url_for('auth.logout') }}">Cerrar Sesion</a></li>
-                  {% endif %}
-              </ul>
-          </div>
-          {% if not current_user.is_authenticated %}
-          <div class="darkLight-searchBox">
-              <div class="dark-light">
-                  <i class='bx bx-moon moon'></i>
-                  <i class='bx bx-sun sun'></i>
-              </div>
-
-              <div class="searchBox">
-                 <div class="searchToggle">
-                  <i class='bx bx-x cancel'></i>
-                  <i class='bx bx-search search'></i>
-                 </div>
-
-                  <div class="search-field">
-                      <input type="text" placeholder="Search...">
-                      <i class='bx bx-search'></i>
-                  </div>
-              </div>
-          </div>
-          {% endif %}
+  <header class="header">
+    <nav class="nav__header">
+      <h5 class="title__header"><a href="{{ url_for('main.index') }}">Crazy Burgers</a></h5>
+      <ul class="menu__header">
+        <li class="option_menu"><a href="{{ url_for('auth.login') }}">INICIAR SESIÓN</a></li>
+        <li class="option_menu"><a href="{{ url_for('auth.register') }}">REGISTRARSE</a></li>
+        <li class="option_menu"><a href="{{ url_for('platillos.productos') }}">PRODUCTOS</a></li>
+        <li class="option_menu">
+          <a href="{{ url_for('pedidos.historial_pedidos') }}">
+            <i class="fa-solid fa-cart-shopping" style="color: #f4ff81;"></i>
+          </a>
+        </li>
+        <li class="option_menu">
+          <a href="">
+            <i class="fa-solid fa-bag-shopping" style="color: #f4ff81;"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="dropdown">
+      <button><i class="fa-solid fa-caret-down"></i></button>
+      <div class="dropdown-content">
+        <a href="{{ url_for('main.index') }}">Inicio</a>
+        <a href="{{ url_for('auth.login') }}">Login</a>
+        <a href="{{ url_for('auth.register') }}">Join</a>
+        <a href="{{ url_for('platillos.productos') }}">Productos</a>
+        <a href="{{ url_for('pedidos.historial_pedidos') }}">Carrito</a>
+        <a href="/profile">Compras</a>
       </div>
-  </nav>
-  </nav>
+    </div>
+  </header>
+
+  <div class="container_alerts" style="font-weight: bold; text-align: center;">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    {% if 'error' in message %}
+    <div class="alert-error"><i class="fa-solid fa-xmark"></i> {{ message }}</div>
+    {% elif 'warning' in message %}
+    <div class="alert-warning"><i class="fa-solid fa-triangle-exclamation"></i> {{ message }}</div>
+    {% else %}
+    <div class="alert-success"><i class="fa-solid fa-circle-check"></i> {{ message }}</div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+  </div>
 
   {% block content %}
   {% endblock %}
 </body>
-<script
-    type="text/javascript"
-    src="../static/bootstrap/js/bootstrap.bundle.js"
-  ></script>
-<script>
 
-  const body = document.querySelector("body"),
-        nav = document.querySelector("nav"),
-        modeToggle = document.querySelector(".dark-light"),
-        searchToggle = document.querySelector(".searchToggle"),
-        sidebarOpen = document.querySelector(".sidebarOpen"),
-        siderbarClose = document.querySelector(".siderbarClose");
-  
-        let getMode = localStorage.getItem("mode");
-            if(getMode && getMode === "dark-mode"){
-              body.classList.add("dark");
-            }
-  
-  // js code to toggle dark and light mode
-        modeToggle.addEventListener("click" , () =>{
-          modeToggle.classList.toggle("active");
-          body.classList.toggle("dark");
-  
-          // js code to keep user selected mode even page refresh or file reopen
-          if(!body.classList.contains("dark")){
-              localStorage.setItem("mode" , "light-mode");
-          }else{
-              localStorage.setItem("mode" , "dark-mode");
-          }
-        });
-  
-  // js code to toggle search box
-          searchToggle.addEventListener("click" , () =>{
-          searchToggle.classList.toggle("active");
-        });
-   
-        
-  //   js code to toggle sidebar
-  sidebarOpen.addEventListener("click" , () =>{
-      nav.classList.add("active");
-  });
-  
-  body.addEventListener("click" , e =>{
-      let clickedElm = e.target;
-  
-      if(!clickedElm.classList.contains("sidebarOpen") && !clickedElm.classList.contains("menu")){
-          nav.classList.remove("active");
-      }
-  });
-  
-  </script>
 </html>

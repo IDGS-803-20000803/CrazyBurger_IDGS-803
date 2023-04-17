@@ -1,0 +1,128 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    <form class="fromPuesto" method="POST" action="/empleados/actualizarEmpleado">
+        <h3 class="puesto_title">Empleados </h3>
+        <a href="{{url_for('empleados.getAll')}}" class="btn btn-outline-success">
+            <span class="material-symbols-sharp">assignment_return</span>
+        </a>
+        <h6 class="puesto_message">Actualiza un empleado. </h6>
+
+        {% for em in empleado %}
+
+        <label style="display:none;">
+            <input type="text" name="empleado_idEdit" class="input_puesto" value="{{em[0]}}">
+            <span>id</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="nombresEdit" class="input_puesto" value="{{ em[1] }}">
+            <span>Nombre</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="ape_paternoEdit" class="input_puesto"
+                value="{{ em[2] }}">
+            <span>Apellido Paterno</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="ape_maternoEdit" class="input_puesto"
+                value="{{ em[3] }}">
+            <span>Apellido Materno</span>
+        </label>
+
+        <!-- Foto de perfil -->
+        <label>
+            <input required="" placeholder="" type="file" name="foto_perfilEdit" class="input_puesto" value="NA">
+            <span>Foto de Perfil</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="rfcEdit" class="input_puesto" value="{{ em[5] }}">
+            <span>RFC</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="curpEdit" class="input_puesto" value="{{ em[6] }}">
+            <span>CURP</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="num_seguro_socialEdit" class="input_puesto"
+                value="{{ em[7] }}">
+            <span>Número de Seguro Social</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="celularEdit" class="input_puesto" value="{{ em[8] }}">
+            <span>Teléfono</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="alergiasEdit" class="input_puesto" value="{{ em[9] }}">
+            <span>Alergias</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="observacionesEdit" class="input_puesto"
+                value="{{ em[10] }}">
+            <span>Observaciones</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="codigo_postalEdit" class="input_puesto"
+                value="{{ em[11] }}">
+            <span>Codigo Postal</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="calleEdit" class="input_puesto" value="{{ em[12] }}">
+            <span>Calle</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" name="coloniaEdit" class="input_puesto" value="{{ em[13] }}">
+            <span>Colonia</span>
+        </label>
+
+        <!-- Puestos -->
+        <label>
+            <select name="puesto_idEdit" class="input_puesto">
+                <option value="0" disabled>Selecciona un puesto</option>
+                {% for row in puestos %}
+                    {% if em[18] in row %}
+                        <option value="{{row[0]}}" selected>{{row[1]}}</option>
+                    {% else %}
+                        <option value="{{row[0]}}">{{row[1]}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <span>Puesto</span>
+        </label>
+
+        <!-- Departamentos -->
+        <label>
+            <select name="departamento_idEdit" class="input_puesto">
+                <option value="0" disabled>Selecciona un departamento</option>
+                {% for row in departamentos %}
+                    {% if em[18] in row %}
+                        <option value="{{row[0]}}" selected>{{row[1]}}</option>
+                    {% else %}
+                        <option value="{{row[0]}}">{{row[1]}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <span>Departamento</span>
+        </label>
+
+        {% endfor %}
+
+        <input type="hidden" name="usuario_idEdit" value="{{session['_user_id']}}" />
+
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}" />
+        <button class="submit">Actualizar</button>
+
+    </form>
+</main>
+{% endblock %}

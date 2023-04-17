@@ -1,6 +1,6 @@
-﻿{% extends "layout.html" %}
+{% extends "layout.html" %}
 {% block title %}BIENVENIDO{% endblock %}
-{% block description %}BIENVENIDO A CRAZY BURGER{% endblock %}
+{% block description %}BIENVENIDOACRAZY BURGER{% endblock %}
 {% block content %}
 <div class="container__home">
   <div class="hero">
@@ -13,51 +13,51 @@
     <div class="info__somos">
       <h3 class="title__somos" id="conocenos">¿Quienes somos?</h3>
       <p class="somos">
-        Crazy Burger era una idea que nacio en la mente de dos amigos, Javier y Luis, quienes eran amantes de las
+        Crazy Burger era una idea que nació en la mente de dos amigos, Javier y Luis, quienes eran amantes de las
         hamburguesas.
-        Un dia, mientras disfrutaban de una hamburguesa en un local de comida rapida, se dieron cuenta de que en Leon,
-        Guanajuato, faltaba un lugar que ofreciera hamburguesas de calidad y con un toque innovador. Asi, decidieron
+        Un día, mientras disfrutaban de una hamburguesa en un local de comida rápida, se dieron cuenta de que en León,
+        Guanajuato, faltaba un lugar que ofreciera hamburguesas de calidad y con un toque innovador. Así, decidieron
         unirse y
-        crear su propio negocio de comida rapida.
+        crear su propio negocio de comida rápida.
         <br><br>
-        Una vez que tuvieron su menu listo, buscaron un local en una ubicacion centrica de Leon, Guanajuato, y abrieron
+        Una vez que tuvieron su menú listo, buscaron un local en una ubicación céntrica de León, Guanajuato, y abrieron
         las
-        puertas de Crazy Burger. Desde el primer dia, su concepto de hamburguesas unicas y deliciosas se volvia un
-        exito. Los
+        puertas de Crazy Burger. Desde el primer día, su concepto de hamburguesas únicas y deliciosas se volvió un
+        éxito. Los
         clientes quedaron impresionados con la calidad de los ingredientes y el sabor excepcional de las hamburguesas de
         Crazy Burger.
         <br><br>
-        Hoy en dia, Crazy Burger es una exitosa cadena de comida rapida, que pretende seguir creciendo a todo Guanajuato
+        Hoy en día, Crazy Burger es una exitosa cadena de comida rápida, que pretende seguir creciendo a todo Guanajuato
       </p>
     </div>
     <div class="logo__somos">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m24!1m12!1m3!1d878.2338212272246!2d-101.67281564242168!3d21.119526437016056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m9!3e3!4m3!3m2!1d21.1197452!2d-101.6722896!4m3!3m2!1d21.1197837!2d-101.6724529!5e0!3m2!1ses-419!2smx!4v1680830292515!5m2!1ses-419!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <img class="img__somos" src="../static/img/logo.png" alt="CRAZY BURGER">
     </div>
   </div>
   <div class="container__filos">
     <h3 class="title__filos">Filosofia</h3>
     <p class="filosofia">
-      En Crazy Burguer, creemos que la comida rapida puede ser deliciosa, innovadora y de calidad. Nos apasiona ofrecer
-      hamburguesas unicas y sabrosas, utilizando ingredientes frescos y locales siempre que sea posible. Valoramos la
-      satisfaccion de nuestros clientes y nos esforzamos por brindarles una experiencia excepcional en cada visita.
+      En Crazy Burguer, creemos que la comida rápida puede ser deliciosa, innovadora y de calidad. Nos apasiona ofrecer
+      hamburguesas únicas y sabrosas, utilizando ingredientes frescos y locales siempre que sea posible. Valoramos la
+      satisfacción de nuestros clientes y nos esforzamos por brindarles una experiencia excepcional en cada visita.
     </p>
-    <button class="btn__filos"><a href="#filosofia">Conoce nuestros productos</a></button>
+    <button class="btn__filos"><a href="{{ url_for('platillos.productos') }}">Conoce nuestros productos</a></button>
   </div>
-  <div class="container__cards" id ='filosofia'>
+  <div class="container__cards">
     <div class="card">
-      <h5 class="mision">Mision</h5>
+      <h5 class="mision">Misión</h5>
       <p>
-        Nuestra mision es ofrecer hamburguesas excepcionales que deleiten a nuestros clientes y superen sus
+        Nuestra misión es ofrecer hamburguesas excepcionales que deleiten a nuestros clientes y superen sus
         expectativas. Nos dedicamos a utilizar ingredientes frescos y locales siempre que sea posible, a mantener altos
-        estandares de
-        calidad en todos nuestros productos y a brindar un servicio amable y rapido en un ambiente acogedor y limpio.
+        estándares de
+        calidad en todos nuestros productos y a brindar un servicio amable y rápido en un ambiente acogedor y limpio.
       </p>
     </div>
     <div class="card">
-      <h5 class="vision">Vision</h5>
+      <h5 class="vision">Visión</h5>
       <p>
-        Nuestra vision es convertirnos en la cadena de comida rapida preferida en Leon, Guanajuato, y en las ciudades
-        circundantes, reconocida por nuestras hamburguesas innovadoras, deliciosas y de calidad, asi como por nuestro
+        Nuestra visión es convertirnos en la cadena de comida rápida preferida en León, Guanajuato, y en las ciudades
+        circundantes, reconocida por nuestras hamburguesas innovadoras, deliciosas y de calidad, así como por nuestro
         compromiso con los ingredientes frescos y locales.
       </p>
     </div>
@@ -69,12 +69,12 @@
           utilizamos hasta el servicio a nuestros clientes.
         </li>
         <li class="li__card">
-          Innovacion: mejorar y ofrecer hamburguesas de calidad
+          Innovación: mejorar y ofrecer hamburguesas de calidad
           que sorprendan a nuestros clientes.
         </li>
         <li class="li__card">
-          Satisfaccion del cliente: escuchando sus necesidades y
-          brindndoles una experiencia excepcional en cada visita a Crazy Burger.
+          Satisfacción del cliente: escuchando sus necesidades y
+          brindándoles una experiencia excepcional en cada visita a Crazy Burger.
         </li>
       </ul>
     </div>
@@ -83,7 +83,7 @@
     <div class="img__contact">
     </div>
     <div class="form__contact">
-      <form action="{{ url_for('main.index') }}">
+      <form action="/">
         <h5 class="title__form">Contactanos</h5>
         <input type="email" name="email" placeholder="Correo">
         <textarea name="message" id="" cols="30" rows="10"></textarea>
@@ -91,6 +91,28 @@
       </form>
     </div>
   </div>
-
 </div>
+<footer>
+  <div class="container__footer">
+    <div class="datos__contacto">
+      <ul class="ul__contact">
+        <li><span>Dirección: Miguel Lara 321. Col León II, Guanajuato México</span></li>
+        <li><span>Teléfono: (+52) 4791458890</span></li>
+        <li><span>Horario de atención: Lunes a domingo 2:00pm - 12:00am</span></li>
+      </ul>
+      <ul class="ul__redes">
+        <li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a></li>
+        <li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
+        <li><a href="https://www.twitter.com/"><i class="fa-brands fa-twitter"></i></a></li>
+      </ul>
+      <span class="derechos">
+        ©2023 Crazy Burger. Todos los derechos reservados. Este mensaje es confidencial y está dirigido únicamente a
+        su
+        destinatario. Si usted ha recibido este mensaje por error, por favor notifíquenoslo de inmediato y elimine el
+        mensaje de
+        su sistema.
+      </span>
+    </div>
+  </div>
+</footer>
 {% endblock %}

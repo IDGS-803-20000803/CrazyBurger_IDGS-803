@@ -20,10 +20,10 @@ def getAll():
         with connection.cursor() as cursor:
             cursor.execute('call sp_consultar_empresa()')
             resulset = cursor.fetchall()
-            return render_template('/empresa/Empresa.html', name = current_user.name,fecha_actual=fecha_actual, resulset=resulset)
+            return render_template('/empresa/Empresa.html', name = current_user.name,fecha_actual=fecha_actual, resulset=resulset, active = 'empresa')
     except Exception as ex:
         flash("No se encontro ningun registro en la BD: " + str(ex))
-    return render_template('/empresa/Empresa.html', fecha_actual=fecha_actual,name = current_user.name)
+    return render_template('/empresa/Empresa.html', fecha_actual=fecha_actual,name = current_user.name, active = 'empresa')
 
 @empresa.route('/updateEmpresa', methods=['GET','POST'])
 @login_required

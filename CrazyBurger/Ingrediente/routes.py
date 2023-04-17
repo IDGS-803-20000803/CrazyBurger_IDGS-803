@@ -21,10 +21,10 @@ def getAll():
         with connection.cursor() as cursor:
             cursor.execute('call sp_consultar_ingredientes()')
             resulset = cursor.fetchall()
-            return render_template('/ingrediente/ingrediente.html', name = current_user.name,fecha_actual=fecha_actual, resulset=resulset)
+            return render_template('/ingrediente/ingrediente.html', name = current_user.name,fecha_actual=fecha_actual, resulset=resulset, active = 'ingrediente')
     except Exception as ex:
         flash("No se encontro ningun registro en la BD: " + str(ex))
-    return render_template('/ingrediente/ingrediente.html', fecha_actual=fecha_actual,name = current_user.name)
+    return render_template('/ingrediente/ingrediente.html', fecha_actual=fecha_actual,name = current_user.name, active = 'ingrediente')
 
 @ingrediente.route('/insert')
 @login_required

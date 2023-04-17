@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     
     __tablename__='user'
     id = db.Column(db.Integer, primary_key=True)
-    name=db.Column(db.String(50),nullable=False)
+    name = db.Column(db.String(50),nullable=False)
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255), nullable=False)
     active = db.Column(db.Boolean())
@@ -75,6 +75,42 @@ class Empresa(db.Model):
     fecha_modificacion = db.Column(db.DateTime())
     usuario_modificacion = db.Column(db.Integer)
 
+class Proveedor(db.Model):
+    __tablename__ ='proveedor'
+    id = db.Column(db.Integer(), primary_key=True, autoincrement=True, nullable=False)
+    razon_social = db.Column(db.String(250), nullable=False, unique=True)
+    rfc = db.Column(db.String(20), nullable=False, unique=True)
+    alias = db.Column(db.String(240), nullable=False, unique=True)
+    baja = db.Column(db.Boolean(), nullable=False)
+    correo = db.Column(db.String(250), nullable=False)
+    celular = db.Column(db.String(15), nullable=False)
+    ciudad = db.Column(db.String(250), nullable=False)
+    estado = db.Column(db.String(105), nullable=False)
+    codigo_postal = db.Column(db.String(10), nullable=False)
+    calle = db.Column(db.String(250), nullable=False)
+    colonia = db.Column(db.String(250), nullable=False)
+    fecha_creacion = db.Column(db.DateTime(), nullable=False)
+    fecha_modificacion = db.Column(db.DateTime(), nullable=False)
+    usuario_modificacion = db.Column(db.Integer, nullable=False)
+    empresa_id = db.Column(db.Integer, db.ForeignKey('empresa.id'), nullable=False)
+
+class Empleados(db.Model):
+    __tablename__ ='empleados'
+    id = db.Column(db.Integer(), primary_key=True)
+    nombres = db.Column(db.String(255))
+    ape_paterno = db.Column(db.String(255))
+    ape_materno = db.Column(db.String(255))
+    foto_empleado = db.Column(db.String(255))
+    rfc = db.Column(db.String(15))
+    curp = db.Column(db.String(18))
+    num_seguro_social = db.Column(db.String(45))
+    celular = db.Column(db.String(10))
+    alergias = db.Column(db.String(255))
+    observaciones = db.Column(db.String(255))
+    codigo_postal = db.Column(db.String(20))
+    calle = db.Column(db.String(255))
+    colonia = db.Column(db.String(255))
+    
 class Ingrediente(db.Model):
     __tablename__='ingrediente'
     id = db.Column(db.Integer(), primary_key=True)
@@ -85,15 +121,29 @@ class Ingrediente(db.Model):
     fecha_creacion = db.Column(db.DateTime())
     fecha_modificacion = db.Column(db.DateTime())
     usuario_modificacion = db.Column(db.Integer)
+    puesto_id = db.Column(db.Integer, db.ForeignKey('puesto.id'))
+    puesto = db.relationship('Puesto', backref=db.backref('empleados', lazy='dynamic'))
+    departamento_id = db.Column(db.Integer, db.ForeignKey('departamento.id'))
+    departamento = db.relationship('Departamento', backref=db.backref('empleados', lazy='dynamic'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('empleados', lazy='dynamic'))
 
 class Receta(db.Model):
-    __tablename__='receta'
-    id = db.Column(db.Integer(), primary_key=True)
-    receta = db.Column(db.String(255))
-    descripcion = db.Column(db.String(255))
-    tiempo_preparacion = db.Column(db.Integer())
-    calorias = db.Column(db.String(100))
-    foto_receta = db.Column(db.String(255))
+    __tablename__ = 'receta'
+    id = db.Column(db.Integer(), primary_key = True)
+    nombre = db.Column(db.String(250))
+    fecha_creacion = db.Column(db.DateTime())
+    fecha_modificacion = db.Column(db.DateTime())
+    usuario_modificacion = db.Column(db.Integer)
+    baja = db.Column(db.Boolean())
+    stock_minimo = db.Column(db.Integer)
+    unidad_medida = db.Column(db.Integer)
+
+class Platillo(db.Model):
+    __tablename__ = 'platillo'
+    id = db.Column(db.Integer, primary_key = True)
+    nombre = db.Column(db.String(250))
+    descripcion = db.Column(db.String(250))
     baja = db.Column(db.Boolean())
     fecha_creacion = db.Column(db.DateTime())
     fecha_modificacion = db.Column(db.DateTime())
@@ -120,3 +170,22 @@ class Menu(db.Model):
     usuario_modificacion = db.Column(db.Integer)
     receta_id = db.Column(db.Integer, db.ForeignKey('receta.id'))
     receta = db.relationship('Receta', backref='menu')
+    
+
+class Pedido(db.Model):
+    __tablename__ = 'pedido'
+    id = db.Column(db.Integer, primary_key = True)
+    fecha_pedido = db.Column(db.DateTime())
+    baja = db.Column(db.Boolean())
+    cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
+    cliente = db.relationship('Cliente', backref = db.backref('pedidos', lazy = 'dynamic'))
+
+class Detalle_Pedido(db.Model):
+    __tablename__ = 'detalle_pedido'
+    id = db.Column(db.Integer, primary_key = True)
+    cantidad = db.Column(db.Integer)
+    baja = db.Column(db.Boolean())
+    pedido_id = db.Column(db.Integer, db.ForeignKey('pedido.id'))
+    platillo_id = db.Column(db.Integer, db.ForeignKey('platillo.id'))
+    pedido = db.relationship('Pedido', backref = db.backref('detalle_pedidos', lazy = 'dynamic'))
+    platillo = db.relationship('Platillo', backref = db.backref('detalle_platilllos', lazy = 'dynamic'))

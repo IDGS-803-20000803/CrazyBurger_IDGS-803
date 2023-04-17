@@ -1,59 +1,32 @@
 {% extends "layout.html" %}
-{% block title %}LOGIN{% endblock %}
-{% block description %}INICIA SESION CON NOSOTROS{% endblock %}
+{% block title %}JOIN{% endblock %}
+{% block description %}UNETE A NUESTRA FAMILIA{% endblock %}
 {% block content %}
-<link rel="stylesheet" type="text/css" href="../../static/bootstrap/css/bootstrap.min.css"/>
-    <div class="box">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %} 
-        <div class="notification is-danger"> 
-            {{messages[0] }}
-            <a href="{{ url_for('auth.login') }}">Login</a>.
-        </div>
-        {% endif %}
-        {% endwith %}
-        <form class="register" method="POST" action="/security/register">
-            <h3 class="res_title">Registrarse </h3>
-            <h6 class="res_message">Registrate ahora y accede a nuestra aplicacion </h6>
-            
-            <label>
-                <input required="" placeholder="" type="text" name="name" class="input_res">
-                <span>Nombres</span>
-            </label>             
-            <label>
-                <input required="" placeholder="" type="text" name="apellidos" class="input_res">
-                <span>Apellidos</span>
-            </label>  
-            <label>
-                <input required="" placeholder="" type="email" name="email" class="input_res">
-                <span>Email</span>
-            </label>
-            <label>
-                <input required="" placeholder="" name="password" type="password" class="input_res">
-                <span>Password</span>
-            </label> 
-            <div class="flex">     
-            <label>
-                <input required=""  name="celular" type="number" class="input_res">
-                <span>celular</span>
-            </label>
-            <label>
-                <input required=""  type="text" name ="codigoP" class="input_res">
-                <span>C.P</span>
-            </label>
-            </div>
-            <label>
-                <input required=""  type="text" name="calle" class="input_res">
-                <span>Calle</span>
-            </label>
-            <label>
-                <input required=""  type="text" name="colonia" class="input_res">
-                <span>Colonia</span>
-            </label>
-            <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
-            <button class="submit">Registrarse</button>
-        
-        </form>
-        <img class="img-register" width="40%" height="40%" src="../../static/img/logo-trans.png">
-    </div>
+<div class="login">
+  <div class="img__login">
+  </div>
+  <div class="form__login">
+    <form class="form_container" action="/security/register" method="POST">
+      <h1 class="title__login">Unete a Crazy Burger</h1>
+      <div class="names">
+        <input type="text" name="name" id="name" placeholder="Nombres">
+        <input type="text" name="apellidos" id="lastname" placeholder="Apellidos">
+        <input type="tel" name="celular" id="phone" placeholder="Teléfono">
+      </div>
+      <div class="contacts">
+        <input type="text" name="calle" id="calle" placeholder="Calle">
+        <input type="text" name="colonia" id="colonia" placeholder="Colonia">
+        <input type="number" name="codigoP" id="codigoP" placeholder="CP">
+      </div>
+      <div class="user">
+        <input type="email" name="email" id="email" placeholder="Correo">
+        <input type="password" name="password" id="password" placeholder="Contraseña">
+      </div>
+      <input type="hidden" name="csrf_token" value="{{csrf_token()}}" />
+      <div class="btn__join">
+        <input type="submit" value="Registrar">
+      </div>
+    </form>
+  </div>
+</div>
 {% endblock %}
