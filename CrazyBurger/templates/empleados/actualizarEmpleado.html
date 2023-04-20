@@ -1,4 +1,4 @@
-{% extends "panel.html" %}
+﻿{% extends "panel.html" %}
 {% block content %}
 <main>
     <form class="fromPuesto" method="POST" action="/empleados/actualizarEmpleado">
@@ -14,7 +14,7 @@
             <input type="text" name="empleado_idEdit" class="input_puesto" value="{{em[0]}}">
             <span>id</span>
         </label>
-
+        <div class="flex">
         <label>
             <input required="" placeholder="" type="text" name="nombresEdit" class="input_puesto" value="{{ em[1] }}">
             <span>Nombre</span>
@@ -31,13 +31,13 @@
                 value="{{ em[3] }}">
             <span>Apellido Materno</span>
         </label>
-
+    </div>
         <!-- Foto de perfil -->
         <label>
             <input required="" placeholder="" type="file" name="foto_perfilEdit" class="input_puesto" value="NA">
             <span>Foto de Perfil</span>
         </label>
-
+        <div class="flex">
         <label>
             <input required="" placeholder="" type="text" name="rfcEdit" class="input_puesto" value="{{ em[5] }}">
             <span>RFC</span>
@@ -47,7 +47,8 @@
             <input required="" placeholder="" type="text" name="curpEdit" class="input_puesto" value="{{ em[6] }}">
             <span>CURP</span>
         </label>
-
+    </div>
+    <div class="flex">
         <label>
             <input required="" placeholder="" type="text" name="num_seguro_socialEdit" class="input_puesto"
                 value="{{ em[7] }}">
@@ -58,7 +59,7 @@
             <input required="" placeholder="" type="text" name="celularEdit" class="input_puesto" value="{{ em[8] }}">
             <span>Teléfono</span>
         </label>
-
+    </div>
         <label>
             <input required="" placeholder="" type="text" name="alergiasEdit" class="input_puesto" value="{{ em[9] }}">
             <span>Alergias</span>
@@ -69,7 +70,7 @@
                 value="{{ em[10] }}">
             <span>Observaciones</span>
         </label>
-
+        <div class="flex">
         <label>
             <input required="" placeholder="" type="text" name="codigo_postalEdit" class="input_puesto"
                 value="{{ em[11] }}">
@@ -85,7 +86,8 @@
             <input required="" placeholder="" type="text" name="coloniaEdit" class="input_puesto" value="{{ em[13] }}">
             <span>Colonia</span>
         </label>
-
+    </div>
+    <div class="flex">
         <!-- Puestos -->
         <label>
             <select name="puesto_idEdit" class="input_puesto">
@@ -115,11 +117,16 @@
             </select>
             <span>Departamento</span>
         </label>
-
+    </div>
+    <label>
+        <input required=""  type="email" name="correo" class="input_puesto" value="{{ em[21] }}">
+        <span>Email</span>
+    </label>
         {% endfor %}
-
-        <input type="hidden" name="usuario_idEdit" value="{{session['_user_id']}}" />
-
+        <label>
+            <input required="" type="password" name="password" class="input_puesto">
+            <span>Password</span>
+        </label>
         <input type="hidden" name="csrf_token" value="{{csrf_token()}}" />
         <button class="submit">Actualizar</button>
 

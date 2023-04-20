@@ -12,6 +12,10 @@ main = Blueprint('main',__name__)
 def index():
     return render_template('index.html')
 
+@main.route('/contact')
+def contact():
+    return render_template('contact.html')
+
 #Definimos la ruta para la pagina de perfil de usuario
 @main.route('/profile')
 @login_required

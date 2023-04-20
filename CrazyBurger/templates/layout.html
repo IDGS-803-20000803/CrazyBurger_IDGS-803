@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,40 +9,40 @@
   <meta name="description" content="{% block description%}BIENVENIDO A CRAZY BURGER{% endblock %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
   <link rel="stylesheet" href="../static/css/style_final.css">
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="../static/bootstrap/bcss/bootstrap.min.css">    
+   <!-- Site CSS -->
+   <link rel="stylesheet" href="../static/bootstrap/bcss/style.css">    
+     <!-- Responsive CSS -->
+   <link rel="stylesheet" href="../static/bootstrap/bcss/responsive.css">
+     <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/bootstrap/bcss/custom.css">
 </head>
 
 <body>
-  <header class="header">
-    <nav class="nav__header">
-      <h5 class="title__header"><a href="{{ url_for('main.index') }}">Crazy Burgers</a></h5>
-      <ul class="menu__header">
-        <li class="option_menu"><a href="{{ url_for('auth.login') }}">INICIAR SESIÓN</a></li>
-        <li class="option_menu"><a href="{{ url_for('auth.register') }}">REGISTRARSE</a></li>
-        <li class="option_menu"><a href="{{ url_for('platillos.productos') }}">PRODUCTOS</a></li>
-        <li class="option_menu">
-          <a href="{{ url_for('pedidos.historial_pedidos') }}">
-            <i class="fa-solid fa-cart-shopping" style="color: #f4ff81;"></i>
-          </a>
-        </li>
-        <li class="option_menu">
-          <a href="">
-            <i class="fa-solid fa-bag-shopping" style="color: #f4ff81;"></i>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <div class="dropdown">
-      <button><i class="fa-solid fa-caret-down"></i></button>
-      <div class="dropdown-content">
-        <a href="{{ url_for('main.index') }}">Inicio</a>
-        <a href="{{ url_for('auth.login') }}">Login</a>
-        <a href="{{ url_for('auth.register') }}">Join</a>
-        <a href="{{ url_for('platillos.productos') }}">Productos</a>
-        <a href="{{ url_for('pedidos.historial_pedidos') }}">Carrito</a>
-        <a href="/profile">Compras</a>
-      </div>
-    </div>
-  </header>
+  <header class="top-navbar">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container">
+				<a class="navbar-brand" href="{{ url_for('main.index') }}">
+					<img src="../static/img/logoNombre.png" width="180px" alt="" />
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+				  <span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbars-rs-food">
+					<ul class="navbar-nav ml-auto">
+            
+						<li class="nav-item active"><a class="nav-link" href="{{ url_for('main.index') }}">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">Iniciar Sesión</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{ url_for('auth.register') }}">Registrarse</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{ url_for('main.contact') }}">Contacto</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+ 
 
   <div class="container_alerts" style="font-weight: bold; text-align: center;">
     {% with messages = get_flashed_messages() %}

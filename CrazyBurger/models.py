@@ -92,7 +92,7 @@ class Proveedor(db.Model):
     fecha_creacion = db.Column(db.DateTime(), nullable=False)
     fecha_modificacion = db.Column(db.DateTime(), nullable=False)
     usuario_modificacion = db.Column(db.Integer, nullable=False)
-    empresa_id = db.Column(db.Integer, db.ForeignKey('empresa.id'), nullable=False)
+    
 
 class Empleados(db.Model):
     __tablename__ ='empleados'
@@ -110,7 +110,17 @@ class Empleados(db.Model):
     codigo_postal = db.Column(db.String(20))
     calle = db.Column(db.String(255))
     colonia = db.Column(db.String(255))
-    
+    baja = db.Column(db.Boolean())
+    fecha_creacion = db.Column(db.DateTime())
+    fecha_modificacion = db.Column(db.DateTime())
+    usuario_modificacion = db.Column(db.Integer)
+    puesto_id = db.Column(db.Integer, db.ForeignKey('puesto.id'))
+    departamento_id = db.Column(db.Integer, db.ForeignKey('departamento.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('empleados', lazy='dynamic'))
+    puesto = db.relationship('Puesto', backref=db.backref('empleados', lazy='dynamic'))
+    departamento = db.relationship('Departamento', backref=db.backref('empleados', lazy='dynamic'))
+
 class Ingrediente(db.Model):
     __tablename__='ingrediente'
     id = db.Column(db.Integer(), primary_key=True)
@@ -121,12 +131,7 @@ class Ingrediente(db.Model):
     fecha_creacion = db.Column(db.DateTime())
     fecha_modificacion = db.Column(db.DateTime())
     usuario_modificacion = db.Column(db.Integer)
-    puesto_id = db.Column(db.Integer, db.ForeignKey('puesto.id'))
-    puesto = db.relationship('Puesto', backref=db.backref('empleados', lazy='dynamic'))
-    departamento_id = db.Column(db.Integer, db.ForeignKey('departamento.id'))
-    departamento = db.relationship('Departamento', backref=db.backref('empleados', lazy='dynamic'))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', backref=db.backref('empleados', lazy='dynamic'))
+   
 
 class Receta(db.Model):
     __tablename__ = 'receta'

@@ -19,58 +19,7 @@ html {
   padding: 0;
 }
 
-/*  Estilos para barra de navegación  */
 
-.header {
-  max-width: 100%;
-  height: 50px;
-  background-color: #000000;
-}
-
-.nav__header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.title__header {
-  padding: 0;
-  margin-left: 0.5rem;
-
-  font-size: 2rem;
-  font-family: var(--font_title);
-}
-
-.title__header a {
-  color: #ff8a80;
-  text-decoration: none;
-}
-
-.menu__header {
-  list-style: none;
-  margin-top: 0.5rem;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.option_menu {
-  margin-right: 1rem;
-}
-
-.option_menu > a {
-  text-decoration: none;
-  color: #f4ff81;
-  font-family: var(--font_text);
-}
-
-.option_menu > a:hover {
-  color: #ffd740;
-  font-weight: bold;
-  text-decoration: underline;
-}
 
 .dropdown {
   display: none;
@@ -194,13 +143,13 @@ label {
 span a {
   text-decoration: none;
   font-weight: bold;
-  color: #69f0ae;
+  color: #f80000;
 }
 
 span a:hover {
   text-decoration: none;
   font-weight: bold;
-  color: #b9f6ca;
+  color: #ff0000;
   text-decoration: underline;
 }
 
@@ -286,7 +235,7 @@ span a:hover {
 .title__hero {
   font-family: var(--font_title);
   font-size: 3rem;
-  color: #ff8a80;
+  color: #eafa06;
 
   margin-bottom: 0.5rem;
 }
@@ -298,19 +247,17 @@ span a:hover {
 
   margin-bottom: 0.7rem;
 }
-
 .btn__hero {
   padding: 0.5rem;
   margin-top: 1rem;
-  background-color: #69f0ae;
+  background-color: #070700;
   width: 10%;
 
-  border-left: solid thin #69f0ae;
-  border-bottom: solid thick #b9f6ca;
-  border-right: solid thin #69f0ae;
-  border-top: solid thin #69f0ae;
+  border-left: solid thin #f7df02;
+  border-bottom: solid thick  #f7df02;
+  border-right: solid thin  #f7df02;
+  border-top: solid thin  #f7df02;
 }
-
 .btn__hero a {
   text-decoration: none;
   text-transform: uppercase;
@@ -320,131 +267,17 @@ span a:hover {
 }
 
 .btn__hero:hover {
-  background-color: #b9f6ca;
-
-  border-left: solid thin #b9f6ca;
-  border-bottom: solid thick #69f0ae;
-  border-right: solid thin #b9f6ca;
-  border-top: solid thin #b9f6ca;
+  background-color: #050606;
+  border-left: solid thin #000000;
+  border-bottom: solid thick #0b0c0c;
+  border-right: solid thin #0d0e0e;
+  border-top: solid thin #090909;
 }
 
 .btn__hero a:hover {
-  color: #69f0ae;
+  color: #fcef00;
 }
 
-.container__somos {
-  max-width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-
-  height: 75vh;
-}
-
-.info__somos,
-.logo__somos {
-  width: 50%;
-}
-
-.title__somos {
-  font-family: var(--font_title);
-  color: #69f0ae;
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.info__somos {
-  padding: 2rem;
-}
-
-.somos {
-  font-family: var(--font_text);
-  text-align: justify;
-}
-
-.logo__somos {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.img__somos {
-  width: 450px;
-}
-
-.container__filos {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  background-image: url(../img/banner_home_2.png);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-
-  max-width: 100%;
-  height: 75vh;
-}
-
-.container__filos > * {
-  margin-bottom: 0.5rem;
-}
-
-.title__filos {
-  font-family: var(--font_title);
-  font-size: 3rem;
-  color: #69f0ae;
-}
-
-.filosofia {
-  font-family: var(--font_text);
-  font-size: 1rem;
-  justify-content: center;
-  color: #ffffff;
-  padding: 1rem;
-}
-
-.btn__filos a {
-  text-decoration: none;
-  font-family: var(--font_text);
-  text-transform: uppercase;
-  color: #ffffff;
-}
-
-.btn__filos a {
-  text-decoration: none;
-  font-family: var(--font_text);
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #ffffff;
-}
-
-.btn__filos a:hover {
-  color: #69f0ae;
-}
-
-.btn__filos {
-  padding: 0.5rem;
-  margin-top: 1rem;
-  background-color: #69f0ae;
-  width: 20%;
-
-  border-left: solid thin #69f0ae;
-  border-bottom: solid thick #b9f6ca;
-  border-right: solid thin #69f0ae;
-  border-top: solid thin #69f0ae;
-}
-
-.btn__filos:hover {
-  background-color: #b9f6ca;
-
-  border-left: solid thin #b9f6ca;
-  border-bottom: solid thick #69f0ae;
-  border-right: solid thin #b9f6ca;
-  border-top: solid thin #b9f6ca;
-}
 
 .container__cards {
   max-width: 100%;
@@ -452,11 +285,11 @@ span a:hover {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-
   height: 70vh;
 }
 
 .card {
+  box-shadow: -10px -10px 0px #130b00;
   width: 35%;
   height: 60%;
   margin: 0.25rem;
@@ -485,15 +318,15 @@ span a:hover {
 }
 
 .mision {
-  color: #ff5252;
+  color: #ed0000;
 }
 
 .vision {
-  color: #69f0ae;
+  color: #027011;
 }
 
 .valores {
-  color: #ffd740;
+  color: #fdc705;
 }
 
 .container__contact {

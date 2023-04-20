@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+{% block title %}BIENVENIDO{% endblock %}
+{% block description %}BIENVENIDO A CRAZY BURGER{% endblock %}
+{% block content %}
+	<!-- Start All Pages -->
+	<div class="all-page-title page-breadcrumb">
+		<div class="container text-center">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>Contactanos</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End All Pages -->
+	
+	<!-- Start Contact -->
+	<div class="map-full">
+		<iframe src="https://www.google.com/maps/embed?pb=!1m24!1m12!1m3!1d878.2338212272246!2d-101.67281564242168!3d21.119526437016056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m9!3e3!4m3!3m2!1d21.1197452!2d-101.6722896!4m3!3m2!1d21.1197837!2d-101.6724529!5e0!3m2!1ses-419!2smx!4v1680830292515!5m2!1ses-419!2smx" width="1200" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+	</div>
+	<div class="contact-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading-title text-center">
+						<h2>Contactanos</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<form id="contactForm">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<input type="text" class="form-control" id="name" name="name" placeholder="Nombres" required data-error="Please enter your name">
+									<div class="help-block with-errors"></div>
+								</div>                                 
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<input type="text" placeholder="Email" id="email" class="form-control" name="name" required data-error="Please enter your email">
+									<div class="help-block with-errors"></div>
+								</div> 
+							</div>
+							<div class="col-md-12">
+								<div class="form-group"> 
+									<textarea class="form-control" id="message" placeholder="Mensaje" rows="4" data-error="Write your message" required></textarea>
+									<div class="help-block with-errors"></div>
+								</div>
+								<div class="submit-button text-center">
+									<button class="btn btn-common" id="submit" type="submit">Enviar</button>
+									<div id="msgSubmit" class="h3 text-center hidden"></div> 
+									<div class="clearfix"></div> 
+								</div>
+							</div>
+						</div>            
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Contact -->
+
+  <div class="contact-imfo-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<i class="fa-solid fa-phone"></i>
+					<div class="overflow-hidden">
+						<h4>Phone</h4>
+						<p class="lead">
+							+52 45623587
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<i class="fa-solid fa-envelopes-bulk"></i>
+					<div class="overflow-hidden">
+						<h4>Email</h4>
+						<p class="lead">
+							CrazyBurger@gmail.com
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<i class="fa-solid fa-map-location-dot"></i>
+					<div class="overflow-hidden">
+						<h4>Location</h4>
+						<p class="lead">
+							#800, Blv. Mariano Escobedo, Leon,Guanajuato
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  
+  <!-- Start Footer -->
+	<footer class="footer-area bg-f">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-6">
+					<h3>Sobre Nosotros</h3>
+					<p>Un d�a, mientras disfrutaban de una hamburguesa en un local de comida r�pida, se dieron cuenta de que en Le�n,
+            Guanajuato, faltaba un lugar que ofreciera hamburguesas de calidad y con un toque innovador. As�, decidieron
+            unirse y crear su propio negocio de comida r�pida.</p>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<h3>Horario Servicio</h3>
+					<p><span class="text-color">Lunes: </span>Closed</p>
+					<p><span class="text-color">Mar-Mier :</span> 9:Am - 10PM</p>
+					<p><span class="text-color">Jue-Vier :</span> 9:Am - 10PM</p>
+					<p><span class="text-color">Sab-Dom :</span> 5:PM - 10PM</p>
+				</div>
+				<div class="col-lg-6 col-md-6">
+					<h3>Informaci�n Contacto</h3>
+					<p class="lead">#800, Blv. Mariano Escobedo, Leon,Guanajuato</p>
+					<p class="lead"><a href="#">+52 45623587</a></p>
+					<p><a href="#"> CrazyBurger@gmail.com</a></p>
+				</div>
+				
+			</div>
+		</div>
+		
+		<div class="copyright">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<p class="company-name">All Rights Reserved. &copy; 2023 <a href="#">Crazy Burger Restaurant</a> Design By : IDGS-803
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</footer>
+
+
+{% endblock %}
