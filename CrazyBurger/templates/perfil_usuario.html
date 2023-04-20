@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block title %}PERFIL DE USUARIO{% endblock %}
+{% block description %}EDITAR PERFIL{% endblock %}
+{% block content %}
+<div class="container_perfil">
+  <h1>Bienvenido a tu perfil <span>{{ current_user.name }}</span></h1>
+  <div class="perfil_form">
+    <form action="/pedido/perfilUsuario" method="POST">
+      {% for row in resulset %}
+      <div class="label">
+        <p>Datos Personales:</p>
+      </div>
+      <div class="inputs_perfil">
+        <input type="number" name="id" id="id" value="{{ row[0] }}" hidden>
+        <input type="text" name="name" id="name" value="{{ row[1] }}">
+        <input type="text" name="lastname" id="lastname" value="{{ row[2] }}">
+        <input type="tel" name="phone" id="phone" value="{{ row[3] }}">
+      </div>
+      <div class="label">
+        <p>Dirección:</p>
+      </div>
+      <div class="inputs_perfil">
+        <input type="text" name="street" id="street" value="{{ row[5] }}">
+        <input type="text" name="col" id="col" value="{{ row[6] }}">
+        <input type="text" name="cp" id="" value="{{ row[4] }}">
+      </div>
+      <div class="input_perfil">
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}" />
+        <input type="submit" value="EDITAR">
+      </div>
+      {% endfor %}
+    </form>
+    <button class="btn_perfil"><a href="{{ url_for('security.logout') }}">CERRAR SESIÓN</a></button>
+  </div>
+</div>
+{% endblock %}
