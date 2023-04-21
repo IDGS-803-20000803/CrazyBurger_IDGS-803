@@ -194,3 +194,53 @@ class Detalle_Pedido(db.Model):
     platillo_id = db.Column(db.Integer, db.ForeignKey('platillo.id'))
     pedido = db.relationship('Pedido', backref = db.backref('detalle_pedidos', lazy = 'dynamic'))
     platillo = db.relationship('Platillo', backref = db.backref('detalle_platilllos', lazy = 'dynamic'))
+
+class Inventario(db.Model):
+    __tablename__='inventario'
+    id = db.Column(db.Integer, primary_key = True)  
+    cantidad_disponible = db.Column(db.DECIMAL(10,3))
+    unidad_medida = db.Column(db.String(100))
+    fecha_alta = db.Column(db.DateTime())
+    fecha_vencimiento = db.Column(db.DateTime())
+    fecha_modificacion = db.Column(db.DateTime())
+    ingrediente_id = db.Column(db.Integer, db.ForeignKey('ingrediente.id'))
+    ingrediente = db.relationship('Ingrediente', backref='inventario')
+
+class Tipo_salida(db.Model):
+    __tablename__='tipo_salida'
+    id = db.Column(db.Integer, primary_key = True)  
+    tipo_salida = db.Column(db.String(250))
+
+class Tipo_entrada(db.Model):
+    __tablename__='tipo_entrada'
+    id = db.Column(db.Integer, primary_key = True)  
+    tipo_entrada = db.Column(db.String(250))
+
+class Salida(db.Model):
+    __tablename__='salida'
+    id = db.Column(db.Integer, primary_key = True)  
+    fecha_salida = db.Column(db.DateTime())
+    cantidad = db.Column(db.DECIMAL(10,3))
+    unidad_medida = db.Column(db.String(100))
+    empleado_id = db.Column(db.Integer, db.ForeignKey('empleados.id'))
+    ingrediente_id = db.Column(db.Integer, db.ForeignKey('ingrediente.id'))
+    tipo_salida_id = db.Column(db.Integer, db.ForeignKey('tipo_salida.id'))
+    ingrediente = db.relationship('Ingrediente', backref='salida')
+    empleado = db.relationship('Empleados', backref='salida')
+    tipo_salida = db.relationship('Tipo_salida', backref='salida')
+
+class Entrada(db.Model):
+    __tablename__='entrada'
+    id = db.Column(db.Integer, primary_key = True)  
+    fecha_entrada = db.Column(db.DateTime())
+    fecha_vencimiento = db.Column(db.DateTime())
+    cantidad = db.Column(db.DECIMAL(10,3))
+    unidad_medida = db.Column(db.String(100))
+    empleado_id = db.Column(db.Integer, db.ForeignKey('empleados.id'))
+    proveedor_id = db.Column(db.Integer, db.ForeignKey('proveedor.id'))
+    ingrediente_id = db.Column(db.Integer, db.ForeignKey('ingrediente.id'))
+    tipo_entrada_id = db.Column(db.Integer, db.ForeignKey('tipo_entrada.id'))
+    ingrediente = db.relationship('Ingrediente', backref='entrada')
+    empleado = db.relationship('Empleados', backref='entrada')
+    tipo_entrada = db.relationship('Tipo_entrada', backref='entrada')
+    proveedor = db.relationship('Proveedor', backref='entrada')

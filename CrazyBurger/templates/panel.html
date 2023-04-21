@@ -175,12 +175,17 @@
                 {% endif %}
 
                 <!-- --------------------------------------------------------- -->
-
-                        <a href="#">
+                {% if active == 'inventario' %}
+                        <a href="{{url_for('inventario.getAll')}}"  class="active">
                             <span class="material-symbols-sharp">food_bank</span>
                             <h3>Inventario</h3>
                         </a>
-
+                {% else %}
+                        <a href="{{url_for('inventario.getAll')}}"  >
+                            <span class="material-symbols-sharp">food_bank</span>
+                            <h3>Inventario</h3>
+                        </a>
+                {% endif %}
                 <!-- --------------------------------------------------------- -->
 
                 {% if active == 'empresa' %}
