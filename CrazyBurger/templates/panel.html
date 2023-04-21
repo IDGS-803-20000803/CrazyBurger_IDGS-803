@@ -157,12 +157,20 @@
 
                 <!-- --------------------------------------------------------- -->
                 
-                        <a href="#">
-                            <span class="material-symbols-sharp">menu_book</span>
-                            <h3>Menu</h3>
-                        </a>
+                {% if active == 'menu' %}
 
-                        <!-- Falta menu -->
+                    <a href="{{url_for('menu.getAll')}}" class="active">
+                        <span class="material-symbols-sharp">menu_book</span>
+                        <h3>Menú</h3>
+                    </a>
+
+                {% else %}
+                    <a href="{{url_for('menu.getAll')}}">
+                        <span class="material-symbols-sharp">menu_book</span>
+                        <h3>Menú</h3>
+                    </a>
+                {% endif %}
+                
                 <!-- --------------------------------------------------------- -->
 
                 {% if active == 'receta' %}

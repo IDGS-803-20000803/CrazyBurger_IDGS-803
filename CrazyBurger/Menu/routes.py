@@ -23,10 +23,10 @@ def getAll():
         with connection.cursor() as cursor:
             cursor.execute('call sp_consultar_menu()')
             resulset = cursor.fetchall()
-            return render_template('/menu/Menu.html', name = current_user.name,fecha_actual=fecha_actual, resulset=resulset)
+            return render_template('/menu/Menu.html', name = current_user.name,fecha_actual=fecha_actual, resulset=resulset, active='menu')
     except Exception as ex:
         flash("No se encontro ningun registro en la BD: " + str(ex))
-    return render_template('/menu/Menu.html', fecha_actual=fecha_actual,name = current_user.name)
+    return render_template('/menu/Menu.html', fecha_actual=fecha_actual,name = current_user.name, active='menu')
 
 @menu.route('/insert')
 @login_required
@@ -37,10 +37,10 @@ def insert():
         with connection.cursor() as cursor:
             cursor.execute('call sp_consultar_receta()')
             resulset = cursor.fetchall()
-            return render_template('/menu/InsertarMenu.html', name = current_user.name,resulset=resulset)
+            return render_template('/menu/InsertarMenu.html', name = current_user.name,resulset=resulset, active='menu')
     except Exception as ex:
         flash("No se encontro ningun registro en la BD: " + str(ex))
-        return render_template('/menu/Menu.html',name = current_user.name)
+        return render_template('/menu/Menu.html',name = current_user.name, active='menu')
 
 @menu.route('/insertarMenu',methods=["GET","POST"])
 @login_required
@@ -57,8 +57,8 @@ def insertarMenu():
             connection.close()
     except Exception as ex:
             flash("Ocurrio un error al registrar el platillo: " + str(ex))
-            return redirect(url_for('menu.insert'))
-    return redirect(url_for('menu.getAll'))
+            return redirect(url_for('menu.insert'), name = current_user.name, active='menu')
+    return redirect(url_for('menu.getAll'), name = current_user.name, active='menu')
 
 
 @menu.route('/updateMenu', methods=['GET','POST'])
@@ -75,7 +75,7 @@ def updateMenu():
                 return render_template('/menu/ActualizarMenu.html',  id = id,resulset = resulset)
         except Exception as ex:
                 flash("No se encontro ningun registro en la BD: " + str(ex))
-                return redirect(url_for('menu.getAll'))
+                return redirect(url_for('menu.getAll'), name = current_user.name, active='menu')
         
     if request.method == 'POST':
         id = request.form.get('id')
@@ -87,10 +87,10 @@ def updateMenu():
                 cursor.execute('call sp_actualizar_menu(%s,%s,%s)', (int(id),Decimal(costo),usuario))
                 connection.commit()
                 connection.close()
-                return redirect(url_for('menu.getAll'))
+                return redirect(url_for('menu.getAll'), name = current_user.name, active='menu')
         except Exception as ex:
             flash("No se pude actualizar el registro: " + str(ex))
-            return redirect(url_for('menu.getAll'))
+            return redirect(url_for('menu.getAll'), name = current_user.name, active='menu')
 
 
 @menu.route('/deleteMenu', methods=['GET','POST'])
@@ -118,8 +118,8 @@ def deleteMenu():
                 cursor.execute('call sp_delete_menu(%s,%s)', (int(id), usuario))
                 connection.commit()
                 connection.close()
-                return redirect(url_for('menu.getAll'))
+                return redirect(url_for('menu.getAll'), name = current_user.name, active='menu')
         except Exception as ex:
             flash("No se pude eliminar el registro: " + str(ex))
-        return redirect(url_for('menu.getAll'))
+        return redirect(url_for('menu.getAll'), name = current_user.name, active='menu')
     
