@@ -29,9 +29,14 @@
             <i class="fa-solid fa-bag-shopping" style="color: #f4ff81;"></i>
           </a>
         </li>
+        <li class="option_menu">
+          <a href="{{ url_for('pedidos.perfil_usuario', id = current_user.id) }}">
+            <i class="fa-solid fa-user" style="color: #f4ff81;"></i>
+          </a>
+        </li>
       </ul>
     </nav>
-    <div class="dropdown">
+    <div class=" dropdown">
       <button><i class="fa-solid fa-caret-down"></i></button>
       <div class="dropdown-content">
         <a href="{{ url_for('main.index') }}">Inicio</a>
@@ -40,6 +45,7 @@
         <a href="{{ url_for('platillos.productos') }}">Productos</a>
         <a href="{{ url_for('pedidos.historial_pedidos') }}">Carrito</a>
         <a href="/profile">Compras</a>
+        <a href="{{ url_for('pedidos.perfil_usuario', id = current_user.id) }}">Perfil de usuario</a>
       </div>
     </div>
   </header>

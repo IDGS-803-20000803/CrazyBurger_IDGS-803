@@ -1409,6 +1409,131 @@ i {
   color: #ff5252;
 }
 
+.container_perfil {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container_perfil h1 {
+  font-family: var(--font_title);
+  margin-top: 1rem;
+  color: #ff5252;
+}
+
+.container_perfil h1 > span {
+  font-family: var(--font_text);
+  color: #69f0ae;
+}
+
+.perfil_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.perfil_form div {
+  margin-bottom: 0.5rem;
+}
+
+.inputs_perfil input,
+.input_perfil input {
+  padding: 0.5rem;
+  font-family: var(--font_text);
+  text-transform: uppercase;
+  font-weight: bold;
+  border: solid thin #dddddd;
+  border-radius: 0.25rem;
+  text-align: center;
+
+  margin: 0.5rem;
+}
+
+.inputs_perfil {
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.input_pefil {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputs_perfil > * {
+  width: 50%;
+}
+
+.input_perfil > * {
+  width: 25%;
+}
+
+.label {
+  max-width: 100%;
+  padding: 0.5rem;
+  font-family: var(--font_text);
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+.perfil_form input[type="submit"] {
+  border-radius: 0%;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #000000;
+  border-left: #000000;
+  border-right: #000000;
+  border-top: #000000;
+  border-bottom: solid thick #ffffff;
+}
+
+.perfil_form input[type="submit"]:hover {
+  color: #000000;
+  background-color: #ffffff;
+  border-left: #ffffff;
+  border-right: #ffffff;
+  border-top: #ffffff;
+  border-bottom: solid thick #000000;
+}
+
+.btn_perfil {
+  max-width: 50%;
+  border-radius: 0%;
+  cursor: pointer;
+  background-color: #69f0ae;
+  border-left: #69f0ae;
+  border-right: #69f0ae;
+  border-top: #69f0ae;
+  border-bottom: solid thick #b9f6ca;
+
+  margin-top: 4.5rem;
+}
+
+.btn_perfil:hover {
+  background-color: #b9f6ca;
+  border-left: #b9f6ca;
+  border-right: #b9f6ca;
+  border-top: #b9f6ca;
+  border-bottom: solid thick #69f0ae;
+}
+
+.btn_perfil a {
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
 @media screen and (max-width: 768px) {
   .header {
     width: 100vw;
