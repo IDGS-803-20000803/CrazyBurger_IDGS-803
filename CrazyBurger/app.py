@@ -47,6 +47,9 @@ app.register_blueprint(receta)
 app.register_blueprint(pedidos)
 app.register_blueprint(platillos)
 
+from Compras.routes import compras
+app.register_blueprint(compras)
+
 #Definimos el LoginManger
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'

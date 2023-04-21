@@ -96,7 +96,7 @@ class Proveedor(db.Model):
 
 class Empleados(db.Model):
     __tablename__ ='empleados'
-    id = db.Column(db.Integer(), primary_key=True)
+    id = db.Column(db.Integer(), primary_key=True, autoincrement=True, nullable=False)
     nombres = db.Column(db.String(255))
     ape_paterno = db.Column(db.String(255))
     ape_materno = db.Column(db.String(255))
@@ -180,3 +180,19 @@ class Detalle_Pedido(db.Model):
     platillo_id = db.Column(db.Integer, db.ForeignKey('platillo.id'))
     pedido = db.relationship('Pedido', backref = db.backref('detalle_pedidos', lazy = 'dynamic'))
     platillo = db.relationship('Platillo', backref = db.backref('detalle_platilllos', lazy = 'dynamic'))
+
+class Compras(db.Model):
+    __tablename__ = 'compras'
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True, nullable = False)
+    tipo_compra = db.Column(db.String(255))
+    nombre = db.Column(db.String(255))
+    cantidad = db.Column(db.Float, nullable = False)
+    unidad_medida = db.Column(db.String(100))
+    fecha_compra = db.Column(db.DateTime())
+    total = db.Column(db.Float, nullable = False)
+    observaciones = db.Column(db.String(255))
+    estatus = db.Column(db.String(50), nullable = False, default = 'En Revision')
+    proveedor_id = db.Column(db.Integer, db.ForeignKey('proveedor.id'))
+    proveedor = db.relationship('Proveedor', backref = db.backref('compras', lazy = 'dynamic'))
+    empleado_id = db.Column(db.Integer, db.ForeignKey('empleados.id'))
+    empleado = db.relationship('Empleados', backref = db.backref('compras', lazy = 'dynamic'))

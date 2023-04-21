@@ -1,0 +1,122 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    <form class="fromPuesto" method="POST" action="/compras/actualizarCompra">
+        <h3 class="puesto_title">Compras </h3>
+        <a href="{{url_for('compras.getAll')}}" class="btn btn-outline-success">
+            <span class="material-symbols-sharp">assignment_return</span>
+        </a>
+        <h6 class="puesto_message">Actualiza tu orden de compra. </h6>
+
+        <input type="hidden" name="id" value="{{resulset[0][0]}}">
+
+        <label>
+            <select required name="compraEdit" class="input_puesto">
+                <option value="0" disabled selected>Selecciona el tipo de compra</option>
+                {% if resulset[0][1] == "Ingredientes" %}
+                    <option value="Ingredientes" selected disabled>Ingredientes</option>
+                    <option value="Other" disabled>Otro</option>
+                {% else %}
+                    <option value="Ingredientes" disabled>Ingredientes</option>
+                    <option value="Other" selected disabled>Otro</option>
+                {% endif %}
+            </select>
+            <span>Tipo de Compra</span>
+        </label>
+        
+        {% if resulset[0][1] == 'Ingredientes' %}
+        
+            <label>
+                <input required placeholder type="text" name="nombreEdit" class="input_puesto" value="{{resulset[0][2]}}">
+                <span>Nombre</span>
+            </label>
+
+            <label>
+                <input required placeholder type="number" step="0.1" min="1" name="cantidadEdit" class="input_puesto" value="{{resulset[0][3]}}">
+                <span>Cantidad</span>
+            </label>
+
+        {% else %}
+
+            <label>
+                <input required placeholder type="text" name="otherCompraEdit" class="input_puesto" value="{{resulset[0][2]}}">
+                <span>Especifica</span>
+            </label>
+
+            <label>
+                <input required placeholder type="number" step="1" min="1" name="cantidadEdit" class="input_puesto" value="{{resulset[0][3]}}">
+                <span>Cantidad</span>
+            </label>
+
+        {% endif %}
+
+        <label>
+            <select required name="unidadMedidaEdit" class="input_puesto">
+                {% if resulset[0][4] == 'Kg' %}
+                    <option value="0" disabled selected>Selecciona una unidad de medida</option>
+                    <option value="Kg" selected>Kilogramos</option>
+                    <option value="L">Litros</option>
+                    <option value="Gr">Gramos</option>
+                    <option value="Paquete">Paquete</option>
+                    <option value="Pieza">Pieza</option>
+                {% elif resulset[0][4] == 'L' %}
+                    <option value="0" disabled selected>Selecciona una unidad de medida</option>
+                    <option value="Kg">Kilogramos</option>
+                    <option value="L" selected>Litros</option>
+                    <option value="Gr">Gramos</option>
+                    <option value="Paquete">Paquete</option>
+                    <option value="Pieza">Pieza</option>
+                {% elif resulset[0][4] == 'Gr' %}
+                    <option value="0" disabled selected>Selecciona una unidad de medida</option>
+                    <option value="Kg">Kilogramos</option>
+                    <option value="L">Litros</option>
+                    <option value="Gr" selected>Gramos</option>
+                    <option value="Paquete">Paquete</option>
+                    <option value="Pieza">Pieza</option>
+                {% elif resulset[0][4] == 'Paquete' %}
+                    <option value="0" disabled selected>Selecciona una unidad de medida</option>
+                    <option value="Kg">Kilogramos</option>
+                    <option value="L">Litros</option>
+                    <option value="Gr">Gramos</option>
+                    <option value="Paquete" selected>Paquete</option>
+                    <option value="Pieza">Pieza</option>
+                {% elif resulset[0][4] == 'Pieza' %}
+                    <option value="0" disabled selected>Selecciona una unidad de medida</option>
+                    <option value="Kg">Kilogramos</option>
+                    <option value="L">Litros</option>
+                    <option value="Gr">Gramos</option>
+                    <option value="Paquete">Paquete</option>
+                    <option value="Pieza" selected>Pieza</option>
+                {% endif %}
+            </select>
+            <span>Unidad de Medida</span>
+        </label>
+
+        <label>
+            <select required name="sltProveedorEdit" class="input_puesto">
+                <option value="0" disabled selected>Selecciona un proveedor</option>
+                {% for pro in proveedores %}
+                    {% if resulset[0][9] == pro[0] %}
+                        <option value="{{pro[0]}}" selected>{{pro[1]}}</option>
+                    {% else %}
+                        <option value="{{pro[0]}}">{{pro[1]}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <span>Proveedor</span>
+        </label>
+        
+        <label>
+            <input required placeholder type="text" name="observacionesEdit" class="input_puesto" value="{{resulset[0][7]}}">
+            <span>Observaciones</span>
+        </label>
+
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+        <button class="submit">Actualizar orden de compra</button>
+    
+    </form>
+</main>
+
+<script src="../../static/js/compras/actualizarOrden.js"></script>
+
+{% endblock %}

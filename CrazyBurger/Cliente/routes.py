@@ -28,7 +28,7 @@ def getAll():
 def insertar_cliente():
 
     if request.method == 'GET':
-        return render_template('/clientes/insertarCliente.html')
+        return render_template('/clientes/insertarCliente.html', active = 'clientes', name = current_user.name)
     
     if request.method == 'POST':
         

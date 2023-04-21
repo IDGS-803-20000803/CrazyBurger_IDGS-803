@@ -20,6 +20,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+    <!-- CSFR-token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -137,10 +140,23 @@
                             <span class="material-symbols-sharp">point_of_sale</span>
                             <h3>Ventas</h3>
                         </a>
-                        <a href="#">
-                            <span class="material-symbols-sharp">store</span>
-                            <h3>Compras</h3>
-                        </a>
+
+                <!-- --------------------------------------------------------- -->
+
+                {% if active == 'compras' %}
+                    <a href="{{url_for('compras.getAll')}}" class="active">
+                        <span class="material-symbols-sharp">store</span>
+                        <h3>Compras</h3>
+                    </a>
+                {% else %}
+                    <a href="{{url_for('compras.getAll')}}">
+                        <span class="material-symbols-sharp">store</span>
+                        <h3>Compras</h3>
+                    </a>
+                {% endif %}
+
+                <!-- --------------------------------------------------------- -->
+                
                         <a href="#">
                             <span class="material-symbols-sharp">menu_book</span>
                             <h3>Menu</h3>

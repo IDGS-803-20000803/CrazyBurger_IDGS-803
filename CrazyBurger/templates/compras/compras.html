@@ -1,0 +1,66 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+
+    <div class="recent-order">
+        <h2>&Aacute;rea de Trabajo</h2><br>
+        <a href="{{url_for('compras.insertarCompra')}}" class="btn primary">
+            <span class="material-symbols-sharp">data_saver_on</span>
+            <h3>Nuevo</h3>
+        </a>
+        <br><br>
+        <table id="tblCompra">
+            <thead>
+                <tr>
+                <th>Tipo de Orden</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Estatus</th>
+                <th>Proveedor</th>
+                <th>Empleado</th>
+                <th></th>
+                <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for row in resulset %}
+                <tr>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}} {{row[4]}}</td>
+                    
+                    {%if row[8] == 'Revision' %}
+
+                        <td class="warning">{{row[8]}}</td>
+
+                    {% endif %}
+                    
+                    {%if row[8] == 'Aprobado' %}
+                        <td class="success">{{row[8]}}</td>
+                    {% endif %}
+
+                    <td>{{row[11]}}</td>
+                    <td>{{row[12]}}</td>
+
+                    <th>
+                        <a class="warning" href="obtenerCompra?id={{ row[0] }}" class="btn">
+                            <span class="material-symbols-sharp">edit_document</span>
+                        </a>
+                    </th>
+
+                    <th>
+                        <!-- <a class="primary" onclick="eliminarCompra('{{row[0]}}')" class="button">
+                            <span class="material-symbols-sharp">delete</span>
+                        </a> -->
+                        <button class="primary" onclick="eliminarCompra('{{row[0]}}')">Eliminar</button>
+                    </th>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<script src="../../static/js/compras/compras.js"></script>
+
+{% endblock %}

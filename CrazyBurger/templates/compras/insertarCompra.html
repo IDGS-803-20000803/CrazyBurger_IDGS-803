@@ -1,0 +1,70 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    <form class="fromPuesto" method="POST" action="/compras/insertarCompra">
+        <h3 class="puesto_title">Compras </h3>
+        <a href="{{url_for('compras.getAll')}}" class="btn btn-outline-success">
+            <span class="material-symbols-sharp">assignment_return</span>
+        </a>
+        <h6 class="puesto_message">Genera una orden de compra. </h6>
+
+        <label>
+            <select required name="compra" id="compra" class="input_puesto">
+                <option value="0" disabled selected>Selecciona el tipo de compra</option>
+                <option value="Ingrediente">Ingrediente</option>
+                <option value="Other">Otro</option>
+            </select>
+            <span>Tipo de Compra</span>
+        </label>
+        
+        <label>
+            <input placeholder type="text" name="otherCompra" id="otherCompra" class="input_puesto" hidden>
+            <span>Especifica</span>
+        </label>
+
+        <label>
+            <input placeholder type="text" name="nombre" id="nombreCompra" class="input_puesto" hidden>
+            <span>Nombre</span>
+        </label>
+
+        <label>
+            <input required placeholder type="number" id="cantidadCompra" name="cantidad" class="input_puesto">
+            <span>Cantidad</span>
+        </label>
+
+        <label id="unidadMedida" hidden>
+            <select name="unidadMedida" id="sltUnidadMedida" class="input_puesto">
+                <option value="0" disabled selected>Selecciona una opcion</option>
+                <option value="Kg">Kilogramos</option>
+                <option value="L">Litros</option>
+                <option value="Gr">Gramos</option>
+                <option value="Paquete">Paquete</option>
+                <option value="Pieza">Pieza</option>
+            </select>
+            <span>Unidad de Medida</span>
+        </label>
+
+        <label id="proveedor">
+            <select required name="sltProveedor" id="sltProveedor" class="input_puesto">
+                <option value="0" disabled selected>Selecciona un proveedor</option>
+                {% for pro in proveedores %}
+                    <option value="{{pro[0]}}">{{pro[3]}}</option>
+                {% endfor %}
+            </select>
+            <span>Proveedor</span>
+        </label>
+        
+        <label>
+            <input required placeholder type="text" name="observaciones" class="input_puesto">
+            <span>Observaciones</span>
+        </label>
+
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+        <button class="submit">Generar Orden</button>
+    
+    </form>
+</main>
+
+<script src="../../static/js/compras/datables.js"></script>
+
+{% endblock %}
