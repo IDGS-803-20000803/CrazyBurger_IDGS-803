@@ -1,0 +1,25 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    <form class="fromPuesto" method="POST" action="/menu/insertarMenu" enctype="multipart/form-data">
+        <h3 class="puesto_title">Menu </h3>
+        <a href="{{url_for('menu.getAll')}}" class="btn btn-outline-success">
+            <span class="material-symbols-sharp">assignment_return</span>
+        </a>
+        <h6 class="puesto_message">Agrega el platillo al menu</h6>
+        <label for="ing">Seleccion el tipo de platillo:</label>
+        <select id="ing" name="receta" >
+        {%for row in resulset %}
+        <option value="{{row[0]}}">{{row[1]}}</option> 
+        {%endfor%}
+        </select>              
+        <label>
+            <input required=""  type="number" name="costo"  class="input_puesto">
+            <span>Costo($Pesos)</span>
+        </label> 
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+        <button class="submit">Agregar</button>
+    </form>
+</main>
+
+{% endblock %}

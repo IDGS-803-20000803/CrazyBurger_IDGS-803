@@ -196,3 +196,14 @@ class Compras(db.Model):
     proveedor = db.relationship('Proveedor', backref = db.backref('compras', lazy = 'dynamic'))
     empleado_id = db.Column(db.Integer, db.ForeignKey('empleados.id'))
     empleado = db.relationship('Empleados', backref = db.backref('compras', lazy = 'dynamic'))
+
+class Menu(db.Model):
+    __tablename__='menu'
+    id = db.Column(db.Integer(), primary_key=True)
+    costo = db.Column(db.DECIMAL(10,3))
+    baja = db.Column(db.Boolean())
+    fecha_creacion = db.Column(db.DateTime())
+    fecha_modificacion = db.Column(db.DateTime())
+    usuario_modificacion = db.Column(db.Integer)
+    receta_id = db.Column(db.Integer, db.ForeignKey('receta.id'))
+    receta = db.relationship('Receta', backref='menu')

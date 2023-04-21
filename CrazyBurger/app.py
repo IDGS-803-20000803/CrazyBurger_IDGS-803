@@ -50,6 +50,8 @@ app.register_blueprint(platillos)
 from Compras.routes import compras
 app.register_blueprint(compras)
 
+from Menu.routes import menu
+app.register_blueprint(menu)
 #Definimos el LoginManger
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'

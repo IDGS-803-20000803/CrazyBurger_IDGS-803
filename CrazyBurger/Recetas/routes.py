@@ -92,6 +92,40 @@ def detalleIngrediente():
             return redirect(url_for('receta.getAll'))
     
 
+@receta.route('/detalleUpdate',methods=["GET","POST"])
+@login_required
+@roles_required('admin')
+def detalleUpdate():
+    if request.method == 'GET':
+        id = request.args.get('id')
+        print(id)
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute('call sp_consultar_tipo_ing()')
+            resulset = cursor.fetchall()
+            print(resulset)
+            cursor.execute('call sp_consultar_detalle_receta(%s)', (int(id),))
+            tabla = cursor.fetchall()
+            connection.commit()
+            print(tabla)
+            connection.close()
+            return render_template('/receta/UpdateDetalle.html',id=id, resulset=resulset, tabla = tabla)
+    if request.method == 'POST':
+        id = request.form.get('id')
+        ingrediente = request.form.get('ingrediente')
+        cantidad = request.form.get('cantidad')
+        unidad = request.form.get('unidad')
+    try:        
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute('call sp_insertar_d_receta_2(%s,%s,%s,%s)',(int(id),int(ingrediente),cantidad,unidad))
+            connection.commit()
+            connection.close()
+            return redirect(url_for('receta.detalleUpdate', id=id))
+    except Exception as ex:
+            flash("Ocurrio un error al registrar nuevo registro: " + str(ex))
+            return redirect(url_for('receta.getAll'))
+
 
 @receta.route('/updateReceta',methods=["GET","POST"])
 @login_required
@@ -120,33 +154,66 @@ def updateReceta():
         ruta_imagen = os.path.abspath('..\\CrazyBurger\\static\\img')       
         img = str(uuid.uuid4()) + '.png'
         imagen.save(os.path.join(ruta_imagen, img))  
-
         connection = get_connection()
         with connection.cursor() as cursor:
             cursor.execute('call sp_actualizar_e_receta(%s,%s,%s,%s,%s,%s,%s)',(int(id),receta,descripcion,int(tiempo), calorias, img, int(usuario)))
             connection.commit()
             connection.close()
-            
-            connection = get_connection()
-            with connection.cursor() as cursor:
-                cursor.execute('call sp_consultar_tipo_ing()')
-                resulset = cursor.fetchall()
-                cursor.execute('call sp_consultar_ultima_receta()')
-                tabla = cursor.fetchall()
-            
-            return render_template('/receta/UpdateDetalle.html',  id = id,resulset = resulset,tabla=tabla)
+            return redirect(url_for('receta.detalleUpdate', id=id))
     except Exception as ex:
-            flash("Ocurrio un error al registrar nuevo registro: " + str(ex))
+            flash("Ocurrio un error al actualizar el registro: " + str(ex))
             return redirect(url_for('receta.getAll'))
 
-@receta.route('/detalleUpdate')
+@receta.route('/deleteDetalle',methods=["GET","POST"])
 @login_required
 @roles_required('admin')
-def detalleUpdate():
-    connection = get_connection()
-    with connection.cursor() as cursor:
-        cursor.execute('call sp_consultar_tipo_ing()')
-        resulset = cursor.fetchall()
-        cursor.execute('call sp_consultar_ultima_receta()')
-        tabla = cursor.fetchall()
-        return render_template('/receta/DetalleReceta.html',name = current_user.name, resulset=resulset, tabla=tabla)
+def deleteDetalle():
+     if request.method == 'GET':
+        id = request.args.get('id')
+        try:
+            connection = get_connection()
+            with connection.cursor() as cursor:
+                cursor.execute('call sp_delete_detalle_receta(%s)', (int(id)))
+                connection.commit()
+                connection.close()
+                return redirect(url_for('receta.getAll'))
+        except Exception as ex:
+                flash("No se pudo eliminar el registro corectamente: " + str(ex))
+
+
+@receta.route('/deleteReceta',methods=["GET","POST"])
+@login_required
+@roles_required('admin')
+def deleteReceta():
+     if request.method == 'GET':
+        id = request.args.get('id')
+        usuario = current_user.id
+        try:
+            connection = get_connection()
+            with connection.cursor() as cursor:
+                cursor.execute('call sp_delete_receta(%s,%s)', (int(id), usuario))
+                connection.commit()
+                connection.close()
+                return redirect(url_for('receta.getAll'))
+        except Exception as ex:
+                flash("No se pudo eliminar el registro corectamente: " + str(ex))
+
+
+@receta.route('/verDetalle',methods=["GET","POST"])
+@login_required
+@roles_required('admin')
+def verDetalle():
+     if request.method == 'GET':
+        id = request.args.get('id')
+        try:
+            connection = get_connection()
+            with connection.cursor() as cursor:
+                cursor.execute('call sp_consultar_detalle_receta(%s)', (int(id),))
+                tabla = cursor.fetchall()
+                connection.commit()
+                connection.close()
+                return render_template('/receta/Detalle.html',  tabla = tabla)
+        except Exception as ex:
+                flash("No se pudo obtner registro : " + str(ex))
+
+
