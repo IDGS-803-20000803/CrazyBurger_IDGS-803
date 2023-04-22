@@ -16,7 +16,7 @@ def getAll():
         connection = get_connection()
 
         with connection.cursor() as cursor:
-            cursor.execute('call sp_consultar_compras()')
+            cursor.execute('call sp_obtenerTodas_compras()')
             resulset = cursor.fetchall()
 
             lista = list(resulset)
