@@ -1,0 +1,40 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    
+    <div class="recent-order">
+        <h2>Ventas</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                <th>Nombre Cliente</th>
+                <th>Producto</th>
+                <th>Total Venta</th>
+                <th>Fecha Creacion</th>
+                <th>Estatus</th>
+                <th></th>
+                <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for detalle in detalle %}
+                <tr>
+                    <td>{{detalle[1]}}</td>
+                    <td>{{detalle[3]}}</td>
+                    <td>{{detalle[7]}}</td>
+                    <td>{{detalle[2]}}</td>
+                    <td>{{detalle[8]}}</td>
+                    <td ><a class="success" href="/compras/enviarVenta?id={{detalle[0]}}" class="btn">
+                        <span class="material-symbols-sharp">arrow_forward</span>
+                    </a></td>
+                    <td><a class="success" href="/compras/finalizarVenta?id={{detalle[0]}}" class="btn">
+                        <span class="material-symbols-sharp">done_all</span></a>
+                    </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}

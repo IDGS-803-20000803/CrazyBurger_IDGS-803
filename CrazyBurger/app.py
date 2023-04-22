@@ -43,8 +43,8 @@ app.register_blueprint(menu)
 from Inventario.routes import inventario
 app.register_blueprint(inventario)
 
-
-
+from Compras.routes import compras
+app.register_blueprint(compras)
 #Definimos el LoginManger
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'

@@ -244,3 +244,28 @@ class Entrada(db.Model):
     empleado = db.relationship('Empleados', backref='entrada')
     tipo_entrada = db.relationship('Tipo_entrada', backref='entrada')
     proveedor = db.relationship('Proveedor', backref='entrada')
+
+
+class Venta(db.Model):
+    __tablename__ = 'venta'
+    id = db.Column(db.Integer, primary_key = True)
+    fecha_venta = db.Column(db.DateTime())
+    baja = db.Column(db.Boolean())
+    cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
+    cliente = db.relationship('Cliente', backref = db.backref('ventas', lazy = 'dynamic'))
+
+class Detalle_Venta(db.Model):
+    __tablename__ = 'detalle_venta'
+    id = db.Column(db.Integer, primary_key = True)
+    cantidad = db.Column(db.Integer)
+    precio_unitario = db.Column(db.DECIMAL(10,3))
+    subtotal = db.Column(db.DECIMAL(10,3))
+    total = db.Column(db.DECIMAL(10,3))
+    fecha_creacion = db.Column(db.DateTime())
+    estatus = db.Column(db.String(10))
+    venta_id = db.Column(db.Integer, db.ForeignKey('venta.id'))
+    menu_id = db.Column(db.Integer, db.ForeignKey('menu.id'))
+    empleado_id = db.Column(db.Integer, db.ForeignKey('empleados.id'))
+    pedido = db.relationship('Venta', backref = db.backref('detalle_pedidos', lazy = 'dynamic'))
+    menu = db.relationship('Menu', backref = db.backref('detalle_menu', lazy = 'dynamic'))
+    empleado = db.relationship('Empleados', backref = db.backref('empleados', lazy = 'dynamic'))

@@ -2,12 +2,18 @@
 
 {% block content %}
 <h1 class="title_car">Carrito de compras: <span style="color: #010b06;">{{ name }}</span></h1>
+<a href="{{url_for('compras.confirmarCompra')}}" class="btn" style="margin-left:46%;font-weight: 800; font-family:'Courier New', Courier, monospace; background:black; border-radius:20%; color:white;">
+  Finalizar Compra
+</a>
 <div class="container__products">
   {% for pedido in pedidos %}
+  <form action="/pedido/modificarPedido" method="POST">
   <div class="card_products">
     <div class="card-body">
       <h6 class="title-product">{{ pedido[1] }}</h6>
     </div>
+    <input style="display:none;" class="input_label" type="text" name="id"  value="{{ pedido[0] }}">
+    <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
     <div class="inputs">
       <input class="input_label" type="text" value="FECHA DEL PEDIDO" disabled>
     </div>
@@ -16,16 +22,16 @@
       <div class="inputs">
       <input class="input_label" type="text"  value="PRECIO UNITARIO"  disabled>
       </div>
-      <input class="input_label" type="text"  value="{{ pedido[4] }}">
+      <input class="input_label" type="text"  value="{{ pedido[4] }}" disabled>
       
       <div class="inputs">
         <input class="input_label" type="text"  value="Sub Total"  disabled>
         </div>
-      <input class="input_label" type="text"  value="{{ pedido[5] }}">
+      <input class="input_label" type="text"  value="{{ pedido[5] }}" disabled>
       <div class="inputs">
         <input class="input_label" type="text"  value="Total"  disabled>
       </div>
-      <input class="input_label" type="text"  value="{{ pedido[8] }}">
+      <input class="input_label" type="text"  value="{{ pedido[8] }}" disabled>
       <div class="inputs">
         <input class="input_label" type="text"  value="Cantidad"  disabled>
       </div>
@@ -34,6 +40,14 @@
         <input class="input_label" type="number" name="unidades" id="unidades{{ pedido[0] }}" value="{{ pedido[3] }}">
         <button style="border: none; border-radius: 0%;" class="suma" type="button">+</button>
       </div>
+      <button class="edit" type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
+    </form>
+    
+      <div class="inputs">
+        <a class="delete" href="eliminarPedido?id={{ pedido[0] }}"><i class="fa-solid fa-trash"></i></a>
+      </div>
+    
+    <br>
   </div>
   {% endfor %}
 </div>

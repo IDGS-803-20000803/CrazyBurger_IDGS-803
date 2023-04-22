@@ -1104,14 +1104,16 @@ i {
   margin-top: 0.25rem;
 }
 
-.edit a > i {
-  color: #69f0ae;
+.edit  > i {
+  color: #00affa;
   font-size: 1rem;
+  cursor: pointer;
 }
 
-.delete a > i {
-  color: #ff5252;
+.delete  > i {
+  color: #fd1313;
   font-size: 1rem;
+  cursor: pointer;
 }
 
 .edit,

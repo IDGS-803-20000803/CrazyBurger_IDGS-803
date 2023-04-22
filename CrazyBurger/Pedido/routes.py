@@ -21,7 +21,6 @@ def historial_pedidos():
         with connection.cursor() as cursor:
             cursor.execute('call sp_consultar_pedido_cliente(%s)',(id_cliente,))
             pedidos = cursor.fetchall()
-            print(pedidos)
             return render_template('/pedido/shoping_car.html', pedidos = pedidos, name = current_user.name)
     except Exception as exception:
         flash("Ocurrio un error al consultar tus pedidos: " + str(exception), 'error')
@@ -60,24 +59,25 @@ def generar_pedido():
         return redirect(url_for('pedidos.historial_pedidos'))
     
 
-@pedidos.route('/modificarPedido', methods = ['POST'])
+@pedidos.route('/modificarPedido', methods = ['GET', 'POST'])
 @login_required
 @roles_required('cliente')
 def modificar_pedido():
-    try:
-        id_pedido = request.form.get('id')
-        cantidad = request.form.get('unidades')
-        connection = get_connection()
-        with connection.cursor() as cursor:
-            cursor.execute('call sp_actualiar_orden(%s,%s)', (id_pedido, cantidad))
-            connection.commit()
-            connection.close()
-            flash('Pedido Actualizado correctamente')
-    except Exception as exception:
-        flash("Ocurrio un error al actualizar el pedido: " + str(exception), 'error')
-    return redirect(url_for('pedidos.historial_pedidos'))
+        try:
+            id_pedido = request.form.get('id')
+            cantidad = request.form.get('unidades')
+            
+            connection = get_connection()
+            with connection.cursor() as cursor:
+                cursor.execute('call sp_actualizar_pedido(%s,%s)', (id_pedido, cantidad))
+                connection.commit()
+                connection.close()
+                flash('Pedido Actualizado correctamente')
+        except Exception as exception:
+            flash("Ocurrio un error al actualizar el pedido: " + str(exception), 'error')
+        return redirect(url_for('pedidos.historial_pedidos'))
 
-@pedidos.route('/eliminarPedido', methods = ['GET'])
+@pedidos.route('/eliminarPedido')
 @login_required
 @roles_required('cliente')
 def eliminar_pedido():
@@ -85,7 +85,7 @@ def eliminar_pedido():
         id = request.args.get('id')
         connection = get_connection()
         with connection.cursor() as cursor:
-            cursor.execute('call sp_delete_orden(%s)', (id,))
+            cursor.execute('call sp_eliminar_detalle(%s)', (id,))
             connection.commit()
             connection.close()
             flash('Pedido eliminado del carrito')
