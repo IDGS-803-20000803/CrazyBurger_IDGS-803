@@ -88,6 +88,8 @@ def insertarCompra():
 
             connection = get_connection()
 
+            nm = request.form['nombre']
+
             with connection.cursor() as cursor:
                 cursor.execute('call sp_buscar_ingrediente(%s)', (nm))
                 ingrediente = cursor.fetchall()
