@@ -49,10 +49,10 @@
                     </th>
 
                     <th>
-                        <!-- <a class="primary" onclick="eliminarCompra('{{row[0]}}')" class="button">
+                        <a class="primary" href="eliminarCompra?id={{ row[0] }}" class="button">
                             <span class="material-symbols-sharp">delete</span>
-                        </a> -->
-                        <button class="primary" onclick="eliminarCompra('{{row[0]}}')">Eliminar</button>
+                        </a>
+                        <!-- <button class="primary" onclick="eliminarCompra('{{row[0]}}')">Eliminar</button> -->
                     </th>
                 </tr>
                 {%endfor%}

@@ -23,8 +23,13 @@
         </label>
 
         <label>
-            <input placeholder type="text" name="nombre" id="nombreCompra" class="input_puesto" hidden>
-            <span>Nombre</span>
+            <select name="nombre" id="nombreCompra" class="input_puesto" hidden>
+                <option value="0" disabled selected>Selecciona el ingrediente</option>
+                {% for pro in ingredientes %}
+                    <option value="{{pro[0]}}">{{pro[1]}}</option>
+                {% endfor %}
+            </select>
+            <span>Ingrediente</span>
         </label>
 
         <label>
@@ -55,6 +60,21 @@
         </label>
         
         <label>
+            <select required name="sltEmpleado" id="sltEmpleado" class="input_puesto">
+                <option value="0" disabled selected>Selecciona el empleado</option>
+                {% for pro in empleados %}
+                    <option value="{{pro[0]}}">{{pro[1]}} {{pro[2]}} {{pro[3]}}</option>
+                {% endfor %}
+            </select>
+            <span>Empleado</span>
+        </label>
+
+        <label hidden id="fechaVencimiento">
+            <input placeholder type="date" name="fechaVencimiento" id="fecha" class="input_puesto" value="">
+            <span>Fecha Vencimiento</span>
+        </label>
+
+        <label>
             <input required placeholder type="text" name="observaciones" class="input_puesto">
             <span>Observaciones</span>
         </label>
@@ -65,6 +85,6 @@
     </form>
 </main>
 
-<script src="../../static/js/compras/datables.js"></script>
+<script src="../../static/js/compras/compras.js"></script>
 
 {% endblock %}

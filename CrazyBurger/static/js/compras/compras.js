@@ -50,6 +50,12 @@ function obtenerValorSelect() {
         document.getElementById("cantidadCompra").setAttribute("step", "1");
         document.getElementById("cantidadCompra").setAttribute("min", "1");
 
+        document.getElementById("unidadMedida").style.display = "block";
+        document.getElementById("sltUnidadMedida").removeAttribute("required");
+
+        document.getElementById("fechaVencimiento").style.display = "none";
+        document.getElementById("fecha").removeAttribute("required");
+
     }else if (valor == "Ingrediente") {
         
         // Ocultar el input
@@ -68,6 +74,9 @@ function obtenerValorSelect() {
 
         document.getElementById("unidadMedida").style.display = "block";
         document.getElementById("sltUnidadMedida").setAttribute("required", "required");
+
+        document.getElementById("fechaVencimiento").style.display = "block";
+        document.getElementById("fecha").setAttribute("required", "required");
     }
 }
 

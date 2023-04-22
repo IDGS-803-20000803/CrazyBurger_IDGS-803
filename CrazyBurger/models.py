@@ -93,6 +93,21 @@ class Proveedor(db.Model):
     fecha_modificacion = db.Column(db.DateTime(), nullable=False)
     usuario_modificacion = db.Column(db.Integer, nullable=False)
     
+class Compras(db.Model):
+    __tablename__ = 'compras'
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True, nullable = False)
+    tipo_compra = db.Column(db.String(255))
+    nombre = db.Column(db.String(255))
+    cantidad = db.Column(db.Float, nullable = False)
+    unidad_medida = db.Column(db.String(100))
+    fecha_compra = db.Column(db.DateTime())
+    total = db.Column(db.Float, nullable = False)
+    observaciones = db.Column(db.String(255))
+    estatus = db.Column(db.String(50), nullable = False, default = 'En Revision')
+    proveedor_id = db.Column(db.Integer, db.ForeignKey('proveedor.id'))
+    proveedor = db.relationship('Proveedor', backref = db.backref('compras', lazy = 'dynamic'))
+    empleado_id = db.Column(db.Integer, db.ForeignKey('empleados.id'))
+    empleado = db.relationship('Empleados', backref = db.backref('compras', lazy = 'dynamic'))
 
 class Empleados(db.Model):
     __tablename__ ='empleados'
@@ -132,7 +147,6 @@ class Ingrediente(db.Model):
     fecha_modificacion = db.Column(db.DateTime())
     usuario_modificacion = db.Column(db.Integer)
    
-
 class Receta(db.Model):
     __tablename__ = 'receta'
     id = db.Column(db.Integer(), primary_key = True)
@@ -176,7 +190,6 @@ class Menu(db.Model):
     receta_id = db.Column(db.Integer, db.ForeignKey('receta.id'))
     receta = db.relationship('Receta', backref='menu')
     
-
 class Pedido(db.Model):
     __tablename__ = 'pedido'
     id = db.Column(db.Integer, primary_key = True)

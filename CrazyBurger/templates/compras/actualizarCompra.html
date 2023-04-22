@@ -11,13 +11,13 @@
         <input type="hidden" name="id" value="{{resulset[0][0]}}">
 
         <label>
-            <select required name="compraEdit" class="input_puesto">
+            <select required name="compraEdit" id="compraEdit" class="input_puesto">
                 <option value="0" disabled selected>Selecciona el tipo de compra</option>
-                {% if resulset[0][1] == "Ingredientes" %}
+                {% if resulset[0][1] == "Ingrediente" %}
                     <option value="Ingredientes" selected disabled>Ingredientes</option>
                     <option value="Other" disabled>Otro</option>
                 {% else %}
-                    <option value="Ingredientes" disabled>Ingredientes</option>
+                    <option value="Ingrediente" disabled>Ingredientes</option>
                     <option value="Other" selected disabled>Otro</option>
                 {% endif %}
             </select>
@@ -116,7 +116,5 @@
     
     </form>
 </main>
-
-<script src="../../static/js/compras/actualizarOrden.js"></script>
 
 {% endblock %}

@@ -8,7 +8,7 @@ from flask_security.decorators import roles_required, roles_accepted
 from dbConfig import get_connection
 from datetime import datetime
 
-pedidos = Blueprint("pedidos", __name__, url_prefix="/pedido")
+pedidos = Blueprint('pedidos', __name__, url_prefix='/pedido')
 
 
 @pedidos.route("/historialPedidos")

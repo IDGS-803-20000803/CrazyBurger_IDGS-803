@@ -72,7 +72,7 @@ def obtener_cliente():
                     resulset = cursor.fetchall()
                     connection.commit()
                     connection.close()
-                    return render_template('/clientes/actualizarCliente.html', resulset=resulset)
+                    return render_template('/clientes/actualizarCliente.html', resulset=resulset, active = 'clientes', name = current_user.name)
             except Exception as ex:
                         
                         flash("No se pude consultar el registro: " + str(ex))

@@ -31,7 +31,7 @@ def getAll():
 @login_required
 @roles_required('admin')
 def insert():
-    return render_template('/puesto/InsertarPuesto.html')
+    return render_template('/puesto/InsertarPuesto.html', name = current_user.name, active = 'puestos')
 
 @puestos.route('/insertPuesto',methods=["GET","POST"])
 @login_required
@@ -63,7 +63,7 @@ def actualizar_puesto():
             with connection.cursor() as cursor:
                 cursor.execute('call sp_buscar_puesto(%s)', (int(id)))
                 resulset = cursor.fetchall()
-                return render_template('/puesto/ActualizarPuesto.html',  id = id,resulset = resulset)
+                return render_template('/puesto/ActualizarPuesto.html',  id = id,resulset = resulset, name = current_user.name, active = 'puestos')
         except Exception as ex:
                 flash("No se encontro ningun registro en la BD: " + str(ex))
         
@@ -81,7 +81,7 @@ def actualizar_puesto():
         except Exception as ex:
             flash("No se pude actualizar el registro: " + str(ex))
         return redirect(url_for('puestos.getAll'))
-    return render_template('/puesto/ActualizarPuesto.html')
+    return render_template('/puesto/ActualizarPuesto.html', name = current_user.name, active = 'puestos')
 
 @puestos.route('/deletePuesto', methods=['GET','POST'])
 @login_required
@@ -94,7 +94,7 @@ def eliminar_puesto():
             with connection.cursor() as cursor:
                 cursor.execute('call sp_buscar_puesto(%s)', (int(id)))
                 resulset = cursor.fetchall()
-                return render_template('/puesto/EliminarPuesto.html',  id = id,resulset = resulset)
+                return render_template('/puesto/EliminarPuesto.html',  id = id,resulset = resulset, name = current_user.name, active = 'puestos')
         except Exception as ex:
                 flash("No se encontro ningun registro en la BD: " + str(ex))
         
@@ -110,4 +110,4 @@ def eliminar_puesto():
         except Exception as ex:
             flash("No se pude eliminar el registro: " + str(ex))
         return redirect(url_for('puestos.getAll'))
-    return render_template('/puesto/EliminarPuesto.html')
+    return render_template('/puesto/EliminarPuesto.html', name = current_user.name, active = 'puestos')

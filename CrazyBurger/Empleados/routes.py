@@ -44,7 +44,7 @@ def insertarEmpleado():
             cursor.execute('call sp_consultar_departamentos()')
             departamentos = cursor.fetchall()
 
-        return render_template('/empleados/insertarEmpleado.html', name = current_user.name, puestos=puestos, departamentos=departamentos)
+        return render_template('/empleados/insertarEmpleado.html', name = current_user.name, puestos=puestos, departamentos=departamentos, active = 'empleados')
     
     if request.method == 'POST':
 
@@ -105,7 +105,7 @@ def obtenerEmpleado():
             cursor.execute('call sp_consultar_departamentos()')
             departamentos = cursor.fetchall()
 
-        return render_template('/empleados/actualizarEmpleado.html', name = current_user.name, empleado=empleado, puestos=puestos, departamentos=departamentos)
+        return render_template('/empleados/actualizarEmpleado.html', name = current_user.name, empleado=empleado, puestos=puestos, departamentos=departamentos, active = 'empleados')
 
 @empleados.route('/actualizarEmpleado', methods=['POST'])
 @login_required

@@ -12,7 +12,7 @@ auth = Blueprint('auth', __name__, url_prefix='/security')
 
 @auth.route("/login")
 def login():
-    return render_template('/security/login.html')
+    return render_template('/security/login.html', active="login")
 
 @auth.route("/login", methods = ["POST"])
 def login_post():
@@ -34,11 +34,11 @@ def login_post():
         connection = get_connection()
         with connection.cursor() as cursor:
             cursor.execute('call sp_consultar_role(%s)',(email))
-            resulset = cursor.fetchone()
+            resulset = cursor.fetchall()
             print(resulset[0])
             if resulset[0] == 'cliente':
                 return redirect(url_for('main.productos'))
-            if resulset[0] == 'admin'or 'empleado':
+            if resulset[0] == 'admin' or 'empleado':
                 return redirect(url_for('main.profile'))
             
     except Exception as exception:
@@ -47,7 +47,7 @@ def login_post():
 
 @auth.route("/register")
 def register():
-    return render_template('/security/register.html')
+    return render_template('/security/register.html', active="register")
 
 @auth.route("/register",methods = ["POST"])
 def register_post():

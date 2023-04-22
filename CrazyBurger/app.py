@@ -47,8 +47,6 @@ app.register_blueprint(ingrediente)
 
 from Recetas.routes import receta
 app.register_blueprint(receta)
-app.register_blueprint(pedidos)
-app.register_blueprint(platillos)
 
 from Compras.routes import compras
 app.register_blueprint(compras)
@@ -59,7 +57,15 @@ app.register_blueprint(menu)
 from Inventario.routes import inventario
 app.register_blueprint(inventario)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    print("Error 404: Page not found")
+    return render_template("404.html"), 404
 
+@app.errorhandler(500)
+def page_not_found(e):
+    print("Error 500: Por el momento no nos encontramos disponibles")
+    return render_template("500.html"), 500
 
 #Definimos el LoginManger
 login_manager = LoginManager()

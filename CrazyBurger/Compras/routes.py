@@ -38,7 +38,7 @@ def getAll():
         
     except Exception as ex:
         
-        print(ex)     
+        print(ex)
         
         return render_template('/compras/compras.html', active = 'compras', name = current_user.name)
 
@@ -56,7 +56,15 @@ def insertarCompra():
                 cursor.execute('call sp_consultar_proveedor()')
                 proveedores = cursor.fetchall()
 
-                return render_template('/compras/insertarCompra.html', proveedores=proveedores, active = 'compras', name = current_user.name)
+            with connection.cursor() as cursor:
+                cursor.execute('call sp_consultar_empleados()')
+                empleados = cursor.fetchall()
+
+            with connection.cursor() as cursor:
+                cursor.execute('call sp_consultar_tipo_ing()')
+                tipo_ing = cursor.fetchall()
+
+                return render_template('/compras/insertarCompra.html', proveedores=proveedores, active = 'compras', name = current_user.name, empleados=empleados, ingredientes = tipo_ing)
             
         except Exception as ex:
                 
@@ -70,16 +78,32 @@ def insertarCompra():
         tipo_conmpra = request.form['compra']
 
         other = request.form['otherCompra']
-        nm = request.form['nombre']
 
         if tipo_conmpra == 'Other':
             nombre = other
+
+            idIngrediente = 2518
+
         else:
-            nombre = nm
+
+            connection = get_connection()
+
+            with connection.cursor() as cursor:
+                cursor.execute('call sp_buscar_ingrediente(%s)', (nm))
+                ingrediente = cursor.fetchall()
+
+
+            nombre = ingrediente[0][1]
+
+            idIngrediente = ingrediente[0][0]
 
         cantidad = request.form['cantidad']
         unidad_medida = request.form['unidadMedida']
+
+        empleado = request.form['sltEmpleado']
         proveedor = request.form['sltProveedor']
+
+        fechaVencimiento = request.form['fechaVencimiento']
 
         observaciones = request.form['observaciones']
 
@@ -87,7 +111,7 @@ def insertarCompra():
             connection = get_connection()
 
             with connection.cursor () as cursor:
-                cursor.execute('call sp_insertar_compra(%s, %s, %s, %s, %s, %s, %s)', (tipo_conmpra, nombre, cantidad, unidad_medida, current_user.id, proveedor, observaciones))
+                cursor.execute('call sp_insertar_compra(%s, %s, %s, %s, %s, %s, %s, %s, %s)', (tipo_conmpra, nombre, cantidad, unidad_medida, empleado, proveedor, observaciones, fechaVencimiento, idIngrediente))
                 connection.commit()
                 connection.close()
                 flash("Registro insertado correctamente")
@@ -177,11 +201,7 @@ def eliminarCompra():
             cursor.execute('call sp_eliminar_compra(%s)', (compra_id))
             connection.commit()
 
-            response = {
-                'status': 'success',
-            }
-
-            return response
+            return redirect(url_for('compras.getAll'))
 
     except Exception as ex:
             

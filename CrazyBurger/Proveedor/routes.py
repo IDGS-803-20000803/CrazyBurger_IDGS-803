@@ -31,7 +31,7 @@ def getAll():
 def insertar_proveedor():
 
     if request.method == 'GET':
-        return render_template('/proveedor/insertarProveedor.html')
+        return render_template('/proveedor/insertarProveedor.html', name = current_user.name, active = 'proveedor')
     
     if request.method == 'POST':
         
@@ -59,7 +59,7 @@ def insertar_proveedor():
 
         return redirect(url_for('proveedor.getAll'))
     
-    return render_template('/proveedor/insertarProveedor.html')
+    return render_template('/proveedor/insertarProveedor.html', name = current_user.name, active = 'proveedor')
 
 @proveedor.route('/verProveedor', methods=['GET','POST'])
 @login_required
@@ -77,7 +77,7 @@ def ver_proveedor():
                     resulset = cursor.fetchall()
                     connection.commit()
                     connection.close()
-                    return render_template('/proveedor/actualizarProveedor.html', resulset=resulset)
+                    return render_template('/proveedor/actualizarProveedor.html', resulset=resulset, name = current_user.name, active = 'proveedor')
             except Exception as ex:
                         
                         flash("No se pude consultar el registro: " + str(ex))

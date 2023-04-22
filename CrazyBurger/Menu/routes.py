@@ -72,7 +72,7 @@ def updateMenu():
             with connection.cursor() as cursor:
                 cursor.execute('call sp_buscar_menu_id(%s)', (int(id)))
                 resulset = cursor.fetchall()
-                return render_template('/menu/ActualizarMenu.html',  id = id,resulset = resulset)
+                return render_template('/menu/ActualizarMenu.html',  id = id,resulset = resulset, active='menu', name = current_user.name)
         except Exception as ex:
                 flash("No se encontro ningun registro en la BD: " + str(ex))
                 return redirect(url_for('menu.getAll'), name = current_user.name, active='menu')
@@ -104,7 +104,7 @@ def deleteMenu():
             with connection.cursor() as cursor:
                 cursor.execute('call sp_buscar_menu_id(%s)', (int(id)))
                 resulset = cursor.fetchall()
-                return render_template('/menu/EliminarMenu.html',  id = id,resulset = resulset)
+                return render_template('/menu/EliminarMenu.html',  id = id,resulset = resulset, active='menu', name = current_user.name)
         except Exception as ex:
                 flash("No se encontro ningun registro en la BD: " + str(ex))
                 return redirect(url_for('menu.getAll'))

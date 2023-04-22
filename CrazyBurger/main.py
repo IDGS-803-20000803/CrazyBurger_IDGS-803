@@ -10,19 +10,11 @@ main = Blueprint("main", __name__)
 # Definimos la ruta para la pagina principal
 @main.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", active="index")
 
-@main.route("/productos")
-@login_required
-@roles_required("cliente")
-def productos():
-    fecha_actual = datetime.now().strftime("%Y-%m-%d")
-    return render_template(
-        "index.html", name=current_user.name, fecha_actual=fecha_actual
-    )
 @main.route('/contact')
 def contact():
-    return render_template('contact.html')
+    return render_template('contact.html', active='contact')
 
 #Definimos la ruta para la pagina de perfil de usuario
 @main.route('/profile')

@@ -3,7 +3,7 @@
 <main>
     <form class="fromPuesto" method="POST" action="/clientes/insertarCliente">
         <h3 class="puesto_title">Cliente </h3>
-        <a href="{{url_for('proveedor.getAll')}}" class="btn btn-outline-success">
+        <a href="{{url_for('clientes.getAll')}}" class="btn btn-outline-success">
             <span class="material-symbols-sharp">assignment_return</span>
         </a>
         <h6 class="puesto_message">Registra un nuevo cliente. </h6>
@@ -31,7 +31,7 @@
         </div>
         <div class="flex">
         <label>
-            <input required="" placeholder="" type="text" name="codigo_postal" class="input_puesto">
+            <input required="" placeholder="" type="number" name="codigo_postal" class="input_puesto" minlength="5" maxlength="5" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
             <span>Codigo Postal</span>
         </label>
         <label>

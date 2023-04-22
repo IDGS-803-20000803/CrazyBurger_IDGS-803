@@ -29,7 +29,7 @@ def getAll():
 @login_required
 @roles_required('admin')
 def insert():
-    return render_template('/departamento/InsertarDepart.html')
+    return render_template('/departamento/InsertarDepart.html', name = current_user.name, active = 'departamento')
 
 @departamento.route('/insertDepartamento',methods=["GET","POST"])
 @login_required
@@ -62,7 +62,7 @@ def actualizar_depart():
             with connection.cursor() as cursor:
                 cursor.execute('call sp_buscar_depart(%s)', (int(id)))
                 resulset = cursor.fetchall()
-                return render_template('/departamento/ActualizarDepart.html',  id = id,resulset = resulset)
+                return render_template('/departamento/ActualizarDepart.html',  id = id,resulset = resulset, active = 'departamento', name = current_user.name)
         except Exception as ex:
                 flash("No se encontro ningun registro en la BD: " + str(ex))
         
@@ -80,7 +80,7 @@ def actualizar_depart():
         except Exception as ex:
             flash("No se pude actualizar el registro: " + str(ex))
         return redirect(url_for('departamento.getAll'))
-    return render_template('/departamento/ActualizarDepart.html')
+    return render_template('/departamento/ActualizarDepart.html', active = 'departamento', name = current_user.name)
 
 @departamento.route('/deleteDepart', methods=['GET','POST'])
 @login_required
@@ -93,7 +93,7 @@ def eliminar_depart():
             with connection.cursor() as cursor:
                 cursor.execute('call sp_buscar_depart(%s)', (int(id)))
                 resulset = cursor.fetchall()
-                return render_template('/departamento/EliminarDepart.html',  id = id,resulset = resulset)
+                return render_template('/departamento/EliminarDepart.html',  id = id,resulset = resulset, active = 'departamento', name = current_user.name)
         except Exception as ex:
                 flash("No se encontro ningun registro en la BD: " + str(ex))
         
@@ -109,5 +109,5 @@ def eliminar_depart():
         except Exception as ex:
             flash("No se pude eliminar el registro: " + str(ex))
         return redirect(url_for('departamento.getAll'))
-    return render_template('/departamento/EliminarDepart.html')
+    return render_template('/departamento/EliminarDepart.html', active = 'departamento', name = current_user.name)
 

@@ -32,7 +32,7 @@ def getAll():
 @login_required
 @roles_required('admin')
 def insert():
-    return render_template('/receta/InsertarReceta.html',name = current_user.name)
+    return render_template('/receta/InsertarReceta.html',name = current_user.name, active = 'receta')
 
 @receta.route('/detalle')
 @login_required
@@ -44,7 +44,7 @@ def detalle():
         resulset = cursor.fetchall()
         cursor.execute('call sp_consultar_ultima_receta()')
         tabla = cursor.fetchall()
-        return render_template('/receta/DetalleReceta.html',name = current_user.name, resulset=resulset, tabla=tabla)
+        return render_template('/receta/DetalleReceta.html',name = current_user.name, resulset=resulset, tabla=tabla, active = 'receta')
 
 @receta.route('/insertReceta',methods=["GET","POST"])
 @login_required
@@ -109,7 +109,7 @@ def detalleUpdate():
             connection.commit()
             print(tabla)
             connection.close()
-            return render_template('/receta/UpdateDetalle.html',id=id, resulset=resulset, tabla = tabla)
+            return render_template('/receta/UpdateDetalle.html',id=id, resulset=resulset, tabla = tabla, name = current_user.name, active = 'receta')
     if request.method == 'POST':
         id = request.form.get('id')
         ingrediente = request.form.get('ingrediente')
@@ -138,7 +138,7 @@ def updateReceta():
             with connection.cursor() as cursor:
                 cursor.execute('call sp_buscar_receta_id(%s)', (int(id)))
                 resulset = cursor.fetchall()
-                return render_template('/receta/ActualizarReceta.html',  id = id,resulset = resulset)
+                return render_template('/receta/ActualizarReceta.html',  id = id,resulset = resulset, name = current_user.name, active = 'receta')
         except Exception as ex:
                 flash("No se encontro ningun registro en la BD: " + str(ex))
 
@@ -159,10 +159,10 @@ def updateReceta():
             cursor.execute('call sp_actualizar_e_receta(%s,%s,%s,%s,%s,%s,%s)',(int(id),receta,descripcion,int(tiempo), calorias, img, int(usuario)))
             connection.commit()
             connection.close()
-            return redirect(url_for('receta.detalleUpdate', id=id))
+            return redirect(url_for('receta.detalleUpdate', id=id, name = current_user.name, active = 'receta'))
     except Exception as ex:
             flash("Ocurrio un error al actualizar el registro: " + str(ex))
-            return redirect(url_for('receta.getAll'))
+            return redirect(url_for('receta.getAll', name = current_user.name, active = 'receta'))
 
 @receta.route('/deleteDetalle',methods=["GET","POST"])
 @login_required
@@ -176,7 +176,7 @@ def deleteDetalle():
                 cursor.execute('call sp_delete_detalle_receta(%s)', (int(id)))
                 connection.commit()
                 connection.close()
-                return redirect(url_for('receta.getAll'))
+                return redirect(url_for('receta.getAll', name = current_user.name, active = 'receta'))
         except Exception as ex:
                 flash("No se pudo eliminar el registro corectamente: " + str(ex))
 
@@ -194,7 +194,7 @@ def deleteReceta():
                 cursor.execute('call sp_delete_receta(%s,%s)', (int(id), usuario))
                 connection.commit()
                 connection.close()
-                return redirect(url_for('receta.getAll'))
+                return redirect(url_for('receta.getAll, name = current_user.name, active = receta'))
         except Exception as ex:
                 flash("No se pudo eliminar el registro corectamente: " + str(ex))
 
@@ -212,7 +212,7 @@ def verDetalle():
                 tabla = cursor.fetchall()
                 connection.commit()
                 connection.close()
-                return render_template('/receta/Detalle.html',  tabla = tabla)
+                return render_template('/receta/Detalle.html',  tabla = tabla, name = current_user.name, active = 'receta')
         except Exception as ex:
                 flash("No se pudo obtner registro : " + str(ex))
 
