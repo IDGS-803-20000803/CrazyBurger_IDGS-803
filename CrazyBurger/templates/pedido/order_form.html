@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
-{% block title %}EDITAR COMPRA{% endblock %}
-{% block description %}PROCESO DE COMPRA{% endblock %}
 {% block content %}
 <div class="container__detail">
   <div class="detail">
     <div class="detail__img">
       <div>
-        <img src="../static/img/producto.png" alt="PRODUCTO">
+        {% for platillo in platillos %}
+        <img src="../../static/img/{{platillo[3]}}" alt="PRODUCTO">
+        {% endfor %}
       </div>
     </div>
     <div class="form__detail">
@@ -14,12 +14,13 @@
       <form action="/pedido/generarPedido" method="POST">
         {% for platillo in platillos %}
         <input type="number" name="id" id="id" placeholder="Id del producto" value="{{ platillo[0] }}" hidden>
-        <div class="inputs">
-          <input class="nombrePlatillo" type="text" name="name" id="name" value="{{ platillo[1] }}" disabled
+        <input class="nombrePlatillo" type="text" name="name" id="name" value="{{ platillo[1] }}" disabled
             style="border: none;">
-          <input type="number" name="precioUnitario" id="precio" value="{{ platillo[7] }}" class="precioPlatillo"
+            <br>
+        <span class="precioPlatillo">$</span>
+        <input type="number" name="precioUnitario" id="precio" value="{{ platillo[4] }}" class="precioPlatillo"
             disabled style="border: none;">
-        </div>
+            <br>
         <span>{{ platillo[2] }}</span>
         {% endfor %}
         <input type="hidden" name="csrf_token" value="{{csrf_token()}}" />
@@ -29,6 +30,8 @@
             <input type="text" name="unidades" id="unidades" value="1">
             <button style="border: none; border-radius: 0%;" class="suma" type="button">+</button>
           </div>
+        </div>
+        <div class="inputs">
           <input type="submit" value="Agregar">
         </div>
       </form>

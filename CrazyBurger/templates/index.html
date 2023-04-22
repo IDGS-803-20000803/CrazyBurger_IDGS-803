@@ -1,6 +1,6 @@
-{% extends "layout.html" %}
+﻿{% extends "layout.html" %}
 {% block title %}BIENVENIDO{% endblock %}
-{% block description %}BIENVENIDOACRAZY BURGER{% endblock %}
+{% block description %}BIENVENIDO A CRAZY BURGER{% endblock %}
 {% block content %}
 <div class="container__home">
   <div class="hero">
@@ -9,40 +9,120 @@
       a Crazy Burger</p>
     <button class="btn__hero"><a href="#conocenos">Conocenos</a></button>
   </div>
-  <div class="container__somos">
-    <div class="info__somos">
-      <h3 class="title__somos" id="conocenos">¿Quienes somos?</h3>
-      <p class="somos">
-        Crazy Burger era una idea que nació en la mente de dos amigos, Javier y Luis, quienes eran amantes de las
-        hamburguesas.
-        Un día, mientras disfrutaban de una hamburguesa en un local de comida rápida, se dieron cuenta de que en León,
-        Guanajuato, faltaba un lugar que ofreciera hamburguesas de calidad y con un toque innovador. Así, decidieron
-        unirse y
-        crear su propio negocio de comida rápida.
-        <br><br>
-        Una vez que tuvieron su menú listo, buscaron un local en una ubicación céntrica de León, Guanajuato, y abrieron
-        las
-        puertas de Crazy Burger. Desde el primer día, su concepto de hamburguesas únicas y deliciosas se volvió un
-        éxito. Los
-        clientes quedaron impresionados con la calidad de los ingredientes y el sabor excepcional de las hamburguesas de
-        Crazy Burger.
-        <br><br>
-        Hoy en día, Crazy Burger es una exitosa cadena de comida rápida, que pretende seguir creciendo a todo Guanajuato
-      </p>
-    </div>
-    <div class="logo__somos">
-      <img class="img__somos" src="../static/img/logo.png" alt="CRAZY BURGER">
-    </div>
+
+  <div class="about-section-box" id="conocenos">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-12">
+					<img src="../static/img/190cf04c-587f-47a1-8d5a-327074098d64.png" alt="" class="img-fluid">
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-12 text-center">
+					<div class="inner-column">
+						<h1>Bienvenido <span>Crazy Burger Restaurant</span></h1>
+						<h4>Little Story</h4>
+						<p>Crazy Burger era una idea que nació en la mente de dos amigos, Javier y Luis, quienes eran amantes de las
+              hamburguesas.
+              Un día, mientras disfrutaban de una hamburguesa en un local de comida rápida, se dieron cuenta de que en León,
+              Guanajuato, faltaba un lugar que ofreciera hamburguesas de calidad y con un toque innovador. Así, decidieron
+              unirse y crear su propio negocio de comida rápida.</p>
+						<p>Hoy en día, Crazy Burger es una exitosa cadena de comida rápida, que pretende seguir creciendo a todo Guanajuato</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>   
   </div>
-  <div class="container__filos">
-    <h3 class="title__filos">Filosofia</h3>
-    <p class="filosofia">
-      En Crazy Burguer, creemos que la comida rápida puede ser deliciosa, innovadora y de calidad. Nos apasiona ofrecer
-      hamburguesas únicas y sabrosas, utilizando ingredientes frescos y locales siempre que sea posible. Valoramos la
-      satisfacción de nuestros clientes y nos esforzamos por brindarles una experiencia excepcional en cada visita.
-    </p>
-    <button class="btn__filos"><a href="{{ url_for('platillos.productos') }}">Conoce nuestros productos</a></button>
-  </div>
+
+  <div class="qt-box qt-background">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 ml-auto mr-auto text-left">
+					<p class="lead ">
+						"Si no eres tú quien cocina, mantente fuera del camino y felicita al chef".
+					</p>
+					<span class="lead">Michael Strahan</span>
+				</div>
+			</div>
+		</div>
+	</div>
+  <div class="menu-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading-title text-center">
+						<h2>Menu</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row special-list">
+				<div class="col-lg-4 col-md-6 special-grid drinks">
+					<div class="gallery-single fix">
+            <img src="../static/img/5b4c4412-7f65-490d-8ab5-d62be6680611.png" class="img-fluid" alt="Image">
+						<div class="why-text">
+							<h4>Hamburguesa Green Day</h4>
+							<p>Jitomate, lechuga, cebolla y carne de res</p>
+							<h5> $300</h5>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-lg-4 col-md-6 special-grid drinks">
+					<div class="gallery-single fix">
+						<img src="../static/img/11bf9398-43ad-4b97-a8f7-72e11cc20726.png" class="img-fluid" alt="Image">
+						<div class="why-text">
+							<h4>Hamburguesa Con Papas</h4>
+							<p>Jitomate, papas, lechuga, cebolla y carne de res</p>
+							<h5> $350</h5>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-lg-4 col-md-6 special-grid drinks">
+					<div class="gallery-single fix">
+						<img src="../static/img/14359ff8-c458-488d-8ca1-a8ca258b8739.png" class="img-fluid" alt="Image">
+						<div class="why-text">
+							<h4>Hamburguesa Chickent</h4>
+							<p>Jitomate, lechuga, cebolla y tiras de pollo</p>
+							<h5> $150</h5>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-lg-4 col-md-6 special-grid lunch">
+					<div class="gallery-single fix">
+						<img src="../static/img/26ae7520-03dc-47aa-be75-b9d6094b61c0.png" class="img-fluid" alt="Image">
+						<div class="why-text">
+							<h4>Ensalada Crazy</h4>
+							<p>Jitomate, lechuga, cebolla y huevo</p>
+							<h5> $250</h5>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-lg-4 col-md-6 special-grid lunch">
+					<div class="gallery-single fix">
+						<img src="../static/img/3412902c-9930-4a5b-b563-fe1ef022846e.png" class="img-fluid" alt="Image">
+						<div class="why-text">
+							<h4>Papas a la Francesa</h4>
+							<p>Ricas Papas cubiertas de queso chedar</p>
+							<h5> $100</h5>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-lg-4 col-md-6 special-grid lunch">
+					<div class="gallery-single fix">
+            <img src="../static/img/7ecf30c4-eed6-4ac6-a89e-f4a79206d144.png" class="img-fluid" alt="Image">
+						<div class="why-text">
+							<h4>Hot Dogs</h4>
+							<p>Deliciosos perritos calientes con tocino</p>
+							<h5> $150</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
   <div class="container__cards">
     <div class="card">
       <h5 class="mision">Misión</h5>
@@ -79,40 +159,79 @@
       </ul>
     </div>
   </div>
-  <div class="container__contact">
-    <div class="img__contact">
-    </div>
-    <div class="form__contact">
-      <form action="/">
-        <h5 class="title__form">Contactanos</h5>
-        <input type="email" name="email" placeholder="Correo">
-        <textarea name="message" id="" cols="30" rows="10"></textarea>
-        <input type="submit" value="Mandar">
-      </form>
-    </div>
-  </div>
-</div>
-<footer>
-  <div class="container__footer">
-    <div class="datos__contacto">
-      <ul class="ul__contact">
-        <li><span>Dirección: Miguel Lara 321. Col León II, Guanajuato México</span></li>
-        <li><span>Teléfono: (+52) 4791458890</span></li>
-        <li><span>Horario de atención: Lunes a domingo 2:00pm - 12:00am</span></li>
-      </ul>
-      <ul class="ul__redes">
-        <li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a></li>
-        <li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
-        <li><a href="https://www.twitter.com/"><i class="fa-brands fa-twitter"></i></a></li>
-      </ul>
-      <span class="derechos">
-        ©2023 Crazy Burger. Todos los derechos reservados. Este mensaje es confidencial y está dirigido únicamente a
-        su
-        destinatario. Si usted ha recibido este mensaje por error, por favor notifíquenoslo de inmediato y elimine el
-        mensaje de
-        su sistema.
-      </span>
-    </div>
-  </div>
-</footer>
+
+  <div class="contact-imfo-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<i class="fa-solid fa-phone"></i>
+					<div class="overflow-hidden">
+						<h4>Phone</h4>
+						<p class="lead">
+							+52 45623587
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<i class="fa-solid fa-envelopes-bulk"></i>
+					<div class="overflow-hidden">
+						<h4>Email</h4>
+						<p class="lead">
+							CrazyBurger@gmail.com
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<i class="fa-solid fa-map-location-dot"></i>
+					<div class="overflow-hidden">
+						<h4>Location</h4>
+						<p class="lead">
+							#800, Blv. Mariano Escobedo, Leon,Guanajuato
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  
+  <!-- Start Footer -->
+	<footer class="footer-area bg-f">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-6">
+					<h3>Sobre Nosotros</h3>
+					<p>Un día, mientras disfrutaban de una hamburguesa en un local de comida rápida, se dieron cuenta de que en León,
+            Guanajuato, faltaba un lugar que ofreciera hamburguesas de calidad y con un toque innovador. Así, decidieron
+            unirse y crear su propio negocio de comida rápida.</p>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<h3>Horario Servicio</h3>
+					<p><span class="text-color">Lunes: </span>Closed</p>
+					<p><span class="text-color">Mar-Mier :</span> 9:Am - 10PM</p>
+					<p><span class="text-color">Jue-Vier :</span> 9:Am - 10PM</p>
+					<p><span class="text-color">Sab-Dom :</span> 5:PM - 10PM</p>
+				</div>
+				<div class="col-lg-6 col-md-6">
+					<h3>Información Contacto</h3>
+					<p class="lead">#800, Blv. Mariano Escobedo, Leon,Guanajuato</p>
+					<p class="lead"><a href="#">+52 45623587</a></p>
+					<p><a href="#"> CrazyBurger@gmail.com</a></p>
+				</div>
+				
+			</div>
+		</div>
+		
+		<div class="copyright">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<p class="company-name">All Rights Reserved. &copy; 2023 <a href="#">Crazy Burger Restaurant</a> Design By : IDGS-803
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</footer>
+
+
 {% endblock %}

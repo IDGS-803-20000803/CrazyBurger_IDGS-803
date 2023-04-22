@@ -35,10 +35,12 @@ def login_post():
         with connection.cursor() as cursor:
             cursor.execute('call sp_consultar_role(%s)',(email))
             resulset = cursor.fetchone()
-            if resulset[0] == 'admin':
-                return redirect(url_for('main.profile'))
-            else:
+            print(resulset[0])
+            if resulset[0] == 'cliente':
                 return redirect(url_for('main.productos'))
+            if resulset[0] == 'admin'or 'empleado':
+                return redirect(url_for('main.profile'))
+            
     except Exception as exception:
         flash("Ocurrio un error, no se encontro el usuario en la BD: " + str(exception), 'error')
     return redirect(url_for('auth.login'))

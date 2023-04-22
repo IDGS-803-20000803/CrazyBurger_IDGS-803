@@ -7,31 +7,33 @@
             <span class="material-symbols-sharp">assignment_return</span>
         </a>
         <h6 class="puesto_message">Registra un nuevo proveedor. </h6>
+        <div class="flex">
         <label>
             <input required placeholder type="text" name="razon_social" class="input_puesto">
             <span>Razon Social</span>
         </label>
-        
+    
+        <label>
+            <input required="" placeholder="" type="text" name="alias" class="input_puesto">
+            <span>Alias</span>
+        </label>
+     </div>
+     <div class="flex">
         <label>
             <input required="" placeholder="" type="text" name="rfc" class="input_puesto">
             <span>RFC</span>
         </label>
 
         <label>
-            <input required="" placeholder="" type="text" name="alias" class="input_puesto">
-            <span>Alias</span>
+            <input required="" placeholder="" type="text" name="celular" class="input_puesto">
+            <span>Celular</span>
         </label>
-
+    </div>
         <label>
             <input required="" placeholder="" type="text" name="correo" class="input_puesto">
             <span>Correo</span>
         </label>
-
-        <label>
-            <input required="" placeholder="" type="text" name="celular" class="input_puesto">
-            <span>Celular</span>
-        </label>
-
+        <div class="flex">
         <label>
             <input required="" placeholder="" type="text" name="ciudad" class="input_puesto">
             <span>Ciudad</span>
@@ -46,7 +48,8 @@
             <input required="" placeholder="" type="text" name="codigo_postal" class="input_puesto">
             <span>Codigo Postal</span>
         </label>
-
+    </div>
+        <div class="flex">
         <label>
             <input required="" placeholder="" type="text" name="calle" class="input_puesto">
             <span>Calle</span>
@@ -56,7 +59,7 @@
             <input required="" placeholder="" type="text" name="colonia" class="input_puesto">
             <span>Colonia</span>
         </label>
-
+    </div>
         <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
         <button class="submit">Agregar</button>
     

@@ -1,13 +1,15 @@
-from flask import Flask, Blueprint
+from flask import Blueprint
 from flask_security import login_required, current_user
+from flask_security.decorators import roles_required,roles_accepted
 from flask import render_template, url_for, flash, redirect, request
 from dbConfig import get_connection
-import json
+from werkzeug.security import generate_password_hash,check_password_hash
 
 empleados = Blueprint('empleados', __name__,url_prefix='/empleados')
 
 @empleados.route('/getAll')
 @login_required
+@roles_required('admin')
 def getAll():
     try:
         connection = get_connection()
@@ -25,6 +27,7 @@ def getAll():
 
 @empleados.route('/insertarEmpleado', methods=['GET','POST'])
 @login_required
+@roles_required('admin')
 def insertarEmpleado():
 
     if request.method == 'GET':
@@ -60,12 +63,14 @@ def insertarEmpleado():
         colonia = request.form['colonia']
         puesto_id = request.form['puesto_id']
         departamento_id = request.form['departamento_id']
-        usuario_id = request.form['usuario_id']
+        correo = request.form['correo']
+        password = request.form['password']
+        password = generate_password_hash(password, method = 'sha256')
 
         try:
             connection = get_connection()
             with connection.cursor() as cursor:
-                cursor.execute('call sp_insertar_empleado(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s, %s)',(nombres,ape_paterno,ape_materno,foto_perfil,rfc,curp,num_seguro_social,celular,alergias,observaciones,codigo_postal,calle,colonia,puesto_id,departamento_id, usuario_id))
+                cursor.execute('call sp_insertar_empleado(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(nombres,ape_paterno,ape_materno,foto_perfil,rfc,curp,num_seguro_social,celular,alergias,observaciones,codigo_postal,calle,colonia,puesto_id,departamento_id, correo, password))
                 connection.commit()
                 flash("Empleado insertado correctamente")
                 return redirect(url_for('empleados.getAll'))
@@ -76,6 +81,7 @@ def insertarEmpleado():
 
 @empleados.route('/obtenerEmpleado', methods=['GET'])
 @login_required
+@roles_required('admin')
 def obtenerEmpleado():
 
     if request.method == 'GET':
@@ -103,6 +109,7 @@ def obtenerEmpleado():
 
 @empleados.route('/actualizarEmpleado', methods=['POST'])
 @login_required
+@roles_required('admin')
 def actualizarEmpleado():
 
     if request.method == 'POST':
@@ -123,12 +130,14 @@ def actualizarEmpleado():
         colonia = request.form['coloniaEdit']
         puesto_id = request.form['puesto_idEdit']
         departamento_id = request.form['departamento_idEdit']
-        usuario_id = request.form['usuario_idEdit']
-
+        usuario = current_user.id
+        correo = request.form['correo']
+        password = request.form['password']
+        password = generate_password_hash(password, method = 'sha256')
         try:
             connection = get_connection()
             with connection.cursor() as cursor:
-                cursor.execute('call sp_actualizar_empleado(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s, %s)',(empleado_id, nombres,ape_paterno,ape_materno,foto_perfil,rfc,curp,num_seguro_social,celular,alergias,observaciones,codigo_postal,calle,colonia,puesto_id,departamento_id, usuario_id))
+                cursor.execute('call sp_actualizar_empleado(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s, %s,%s,%s)',(empleado_id, nombres,ape_paterno,ape_materno,foto_perfil,rfc,curp,num_seguro_social,celular,alergias,observaciones,codigo_postal,calle,colonia,puesto_id,departamento_id, usuario,correo,password ))
                 connection.commit()
                 connection.close()
                 flash("Empleado actualizado correctamente")
@@ -142,13 +151,15 @@ def actualizarEmpleado():
 
 @empleados.route('/eliminarEmpleado', methods=['GET'])
 @login_required
+@roles_required('admin')
 def eliminarEmpleado():
     
         if request.method == 'GET':
             empleado_id = request.args.get('id')
+            usuario = current_user.id
             connection = get_connection()
             with connection.cursor () as cursor:
-                    cursor.execute('call sp_eliminar_empleado(%s)', (empleado_id))
+                    cursor.execute('call sp_eliminar_empleado(%s,%s)', (empleado_id,usuario ))
                     connection.commit()
                     connection.close()
                     flash("Empleado eliminado correctamente")

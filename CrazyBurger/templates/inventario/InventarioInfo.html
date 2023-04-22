@@ -1,0 +1,41 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    <div class="recent-order">
+        <h2>Salidas</h2>
+        
+        <a href="{{url_for('inventario.getSalida')}}" class="btn primary" >
+            <span class="material-symbols-sharp">exit_to_app</span>
+            <h3>Regresar</h3>
+        </a>
+        
+        <table id="tblInventario">
+            <thead>
+                <tr>
+                <th>Ingrediente</th>
+                <th>Cantidad</th>
+                <th>Unidad Medida</th>
+                <th>Fecha Adquisición</th>
+                <th>Fecha Vencimiento</th>
+                <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for row in resulset %}
+                <tr>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    <td>{{row[4]}}</td>
+                    <td>{{row[5]}}</td>
+                    <td ><a class="warning" href="insertSalida?id={{ row[0] }}" class="btn">
+                        <span class="material-symbols-sharp">edit_document</span>
+                    </a></td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</main>
+<script src="../../static/js/inventario/info.js"></script>
+{% endblock %}

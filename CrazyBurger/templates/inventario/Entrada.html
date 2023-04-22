@@ -1,0 +1,39 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    <div class="recent-order">
+        <h2>Entradas</h2>
+        
+        <a href="{{url_for('inventario.insertarEntrada')}}" class="btn primary">
+            <span class="material-symbols-sharp">data_saver_on</span>
+            <h3>Nueva Entrada</h3>
+        </a>
+        
+        <table id="tblEntrada">
+            <thead>
+                <tr>
+                <th>Ingrediente</th>
+                <th>Cantidad</th>
+                <th>Unidad Medida</th>
+                <th>Fecha Entrada</th>
+                <th>Tipo Entrada</th>
+                <th>Fecha Vencimiento</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for row in resulset %}
+                <tr>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    <td>{{row[4]}}</td>
+                    <td>{{row[5]}}</td>
+                    <td>{{row[6]}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</main>
+<script src="../../static/js/inventario/entradas.js"></script>
+{% endblock %}

@@ -19,14 +19,13 @@ def historial_pedidos():
         id_cliente = current_user.id
         connection = get_connection()
         with connection.cursor() as cursor:
-            cursor.execute("call sp_consultar_orden(%s)", (id_cliente,))
+            cursor.execute('call sp_consultar_pedido_cliente(%s)',(id_cliente,))
             pedidos = cursor.fetchall()
-            return render_template(
-                "shoping_car.html", pedidos=pedidos, name=current_user.name
-            )
+            print(pedidos)
+            return render_template('/pedido/shoping_car.html', pedidos = pedidos, name = current_user.name)
     except Exception as exception:
-        flash("Ocurrio un error al consultar tus pedidos: " + str(exception), "error")
-    return render_template("shoping_car.html")
+        flash("Ocurrio un error al consultar tus pedidos: " + str(exception), 'error')
+    return render_template('/pedido/shoping_car.html')
 
 
 @pedidos.route("/generarPedido", methods=["GET", "POST"])
@@ -38,9 +37,9 @@ def generar_pedido():
             platillo_id = request.args.get("id")
             connection = get_connection()
             with connection.cursor() as cursor:
-                cursor.execute("call sp_buscar_producto_id(%s)", (platillo_id,))
+                cursor.execute('call sp_buscar_menu_id(%s)',(platillo_id,))
                 platillos = cursor.fetchall()
-                return render_template("order_form.html", platillos=platillos)
+                return render_template('/pedido/order_form.html', platillos = platillos)
         except Exception as exception:
             flash(
                 "Ocurrio un error al consultar los productos de la BD: "
@@ -51,23 +50,20 @@ def generar_pedido():
     if request.method == "POST":
         user_id = current_user.id
         fecha_pedido = datetime.now()
-        cantidad = request.form.get("unidades")
-        platillo_id = request.form.get("id")
-
+        cantidad = request.form.get('unidades')
+        platillo_id = request.form.get('id')
+    
         try:
             connection = get_connection()
             with connection.cursor() as cursor:
-                cursor.execute(
-                    "call sp_insertar_orden(%s, %s, %s, %s)",
-                    (fecha_pedido, user_id, cantidad, platillo_id),
-                )
+                cursor.execute('call sp_insertar_pedido(%s, %s, %s, %s)',(fecha_pedido, user_id, cantidad, platillo_id))
                 connection.commit()
                 connection.close()
                 flash("Pedido generado correctamente")
         except Exception as ex:
-            flash("No fue posible generar tu pedido" + str(ex))
-        return redirect(url_for("pedidos.historial_pedidos"))
-    return render_template("order_form.html")
+          flash('No fue posible generar tu pedido' + str(ex))
+        return redirect(url_for('pedidos.historial_pedidos'))
+    
 
 
 @pedidos.route("/modificarPedido", methods=["POST"])

@@ -92,7 +92,7 @@ class Proveedor(db.Model):
     fecha_creacion = db.Column(db.DateTime(), nullable=False)
     fecha_modificacion = db.Column(db.DateTime(), nullable=False)
     usuario_modificacion = db.Column(db.Integer, nullable=False)
-    empresa_id = db.Column(db.Integer, db.ForeignKey('empresa.id'), nullable=False)
+    
 
 class Empleados(db.Model):
     __tablename__ ='empleados'
@@ -110,7 +110,17 @@ class Empleados(db.Model):
     codigo_postal = db.Column(db.String(20))
     calle = db.Column(db.String(255))
     colonia = db.Column(db.String(255))
-    
+    baja = db.Column(db.Boolean())
+    fecha_creacion = db.Column(db.DateTime())
+    fecha_modificacion = db.Column(db.DateTime())
+    usuario_modificacion = db.Column(db.Integer)
+    puesto_id = db.Column(db.Integer, db.ForeignKey('puesto.id'))
+    departamento_id = db.Column(db.Integer, db.ForeignKey('departamento.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('empleados', lazy='dynamic'))
+    puesto = db.relationship('Puesto', backref=db.backref('empleados', lazy='dynamic'))
+    departamento = db.relationship('Departamento', backref=db.backref('empleados', lazy='dynamic'))
+
 class Ingrediente(db.Model):
     __tablename__='ingrediente'
     id = db.Column(db.Integer(), primary_key=True)
@@ -121,12 +131,7 @@ class Ingrediente(db.Model):
     fecha_creacion = db.Column(db.DateTime())
     fecha_modificacion = db.Column(db.DateTime())
     usuario_modificacion = db.Column(db.Integer)
-    puesto_id = db.Column(db.Integer, db.ForeignKey('puesto.id'))
-    puesto = db.relationship('Puesto', backref=db.backref('empleados', lazy='dynamic'))
-    departamento_id = db.Column(db.Integer, db.ForeignKey('departamento.id'))
-    departamento = db.relationship('Departamento', backref=db.backref('empleados', lazy='dynamic'))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', backref=db.backref('empleados', lazy='dynamic'))
+   
 
 class Receta(db.Model):
     __tablename__ = 'receta'
@@ -159,9 +164,18 @@ class DetalleReceta(db.Model):
     ingrediente_id = db.Column(db.Integer, db.ForeignKey('ingrediente.id'))
     receta = db.relationship('Receta', backref='detalles')
     ingrediente = db.relationship('Ingrediente', backref='detalles')
-    costo = db.Column(db.Float)
+
+class Menu(db.Model):
+    __tablename__='menu'
+    id = db.Column(db.Integer(), primary_key=True)
+    costo = db.Column(db.DECIMAL(10,3))
+    baja = db.Column(db.Boolean())
+    fecha_creacion = db.Column(db.DateTime())
+    fecha_modificacion = db.Column(db.DateTime())
+    usuario_modificacion = db.Column(db.Integer)
     receta_id = db.Column(db.Integer, db.ForeignKey('receta.id'))
-    receta = db.relationship('Receta', backref = db.backref('platillos', lazy = 'dynamic'))
+    receta = db.relationship('Receta', backref='menu')
+    
 
 class Pedido(db.Model):
     __tablename__ = 'pedido'
@@ -177,33 +191,56 @@ class Detalle_Pedido(db.Model):
     cantidad = db.Column(db.Integer)
     baja = db.Column(db.Boolean())
     pedido_id = db.Column(db.Integer, db.ForeignKey('pedido.id'))
-    platillo_id = db.Column(db.Integer, db.ForeignKey('platillo.id'))
+    menu_id = db.Column(db.Integer, db.ForeignKey('menu.id'))
     pedido = db.relationship('Pedido', backref = db.backref('detalle_pedidos', lazy = 'dynamic'))
-    platillo = db.relationship('Platillo', backref = db.backref('detalle_platilllos', lazy = 'dynamic'))
+    menu = db.relationship('Menu', backref = db.backref('detalle_pedidos', lazy = 'dynamic'))
 
-class Compras(db.Model):
-    __tablename__ = 'compras'
-    id = db.Column(db.Integer, primary_key = True, autoincrement = True, nullable = False)
-    tipo_compra = db.Column(db.String(255))
-    nombre = db.Column(db.String(255))
-    cantidad = db.Column(db.Float, nullable = False)
+class Inventario(db.Model):
+    __tablename__='inventario'
+    id = db.Column(db.Integer, primary_key = True)  
+    cantidad_disponible = db.Column(db.DECIMAL(10,3))
     unidad_medida = db.Column(db.String(100))
-    fecha_compra = db.Column(db.DateTime())
-    total = db.Column(db.Float, nullable = False)
-    observaciones = db.Column(db.String(255))
-    estatus = db.Column(db.String(50), nullable = False, default = 'En Revision')
-    proveedor_id = db.Column(db.Integer, db.ForeignKey('proveedor.id'))
-    proveedor = db.relationship('Proveedor', backref = db.backref('compras', lazy = 'dynamic'))
-    empleado_id = db.Column(db.Integer, db.ForeignKey('empleados.id'))
-    empleado = db.relationship('Empleados', backref = db.backref('compras', lazy = 'dynamic'))
-
-class Menu(db.Model):
-    __tablename__='menu'
-    id = db.Column(db.Integer(), primary_key=True)
-    costo = db.Column(db.DECIMAL(10,3))
-    baja = db.Column(db.Boolean())
-    fecha_creacion = db.Column(db.DateTime())
+    fecha_alta = db.Column(db.DateTime())
+    fecha_vencimiento = db.Column(db.DateTime())
     fecha_modificacion = db.Column(db.DateTime())
-    usuario_modificacion = db.Column(db.Integer)
-    receta_id = db.Column(db.Integer, db.ForeignKey('receta.id'))
-    receta = db.relationship('Receta', backref='menu')
+    ingrediente_id = db.Column(db.Integer, db.ForeignKey('ingrediente.id'))
+    ingrediente = db.relationship('Ingrediente', backref='inventario')
+
+class Tipo_salida(db.Model):
+    __tablename__='tipo_salida'
+    id = db.Column(db.Integer, primary_key = True)  
+    tipo_salida = db.Column(db.String(250))
+
+class Tipo_entrada(db.Model):
+    __tablename__='tipo_entrada'
+    id = db.Column(db.Integer, primary_key = True)  
+    tipo_entrada = db.Column(db.String(250))
+
+class Salida(db.Model):
+    __tablename__='salida'
+    id = db.Column(db.Integer, primary_key = True)  
+    fecha_salida = db.Column(db.DateTime())
+    cantidad = db.Column(db.DECIMAL(10,3))
+    unidad_medida = db.Column(db.String(100))
+    empleado_id = db.Column(db.Integer, db.ForeignKey('empleados.id'))
+    ingrediente_id = db.Column(db.Integer, db.ForeignKey('ingrediente.id'))
+    tipo_salida_id = db.Column(db.Integer, db.ForeignKey('tipo_salida.id'))
+    ingrediente = db.relationship('Ingrediente', backref='salida')
+    empleado = db.relationship('Empleados', backref='salida')
+    tipo_salida = db.relationship('Tipo_salida', backref='salida')
+
+class Entrada(db.Model):
+    __tablename__='entrada'
+    id = db.Column(db.Integer, primary_key = True)  
+    fecha_entrada = db.Column(db.DateTime())
+    fecha_vencimiento = db.Column(db.DateTime())
+    cantidad = db.Column(db.DECIMAL(10,3))
+    unidad_medida = db.Column(db.String(100))
+    empleado_id = db.Column(db.Integer, db.ForeignKey('empleados.id'))
+    proveedor_id = db.Column(db.Integer, db.ForeignKey('proveedor.id'))
+    ingrediente_id = db.Column(db.Integer, db.ForeignKey('ingrediente.id'))
+    tipo_entrada_id = db.Column(db.Integer, db.ForeignKey('tipo_entrada.id'))
+    ingrediente = db.relationship('Ingrediente', backref='entrada')
+    empleado = db.relationship('Empleados', backref='entrada')
+    tipo_entrada = db.relationship('Tipo_entrada', backref='entrada')
+    proveedor = db.relationship('Proveedor', backref='entrada')

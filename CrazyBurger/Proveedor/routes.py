@@ -1,13 +1,15 @@
 from flask import Blueprint
 from flask_security import login_required, current_user
+from flask_security.decorators import roles_required,roles_accepted
 from flask import render_template, url_for, flash, redirect, request
 from dbConfig import get_connection
-import json
+from werkzeug.security import generate_password_hash,check_password_hash
 
 proveedor = Blueprint('proveedor', __name__,url_prefix='/proveedor')
 
 @proveedor.route('/getAll')
 @login_required
+@roles_required('admin')
 def getAll():
     try:
         connection = get_connection()
@@ -25,6 +27,7 @@ def getAll():
     
 @proveedor.route('/insertarProveedor', methods=['GET','POST'])
 @login_required
+@roles_required('admin')
 def insertar_proveedor():
 
     if request.method == 'GET':
@@ -60,6 +63,7 @@ def insertar_proveedor():
 
 @proveedor.route('/verProveedor', methods=['GET','POST'])
 @login_required
+@roles_required('admin')
 def ver_proveedor():
     
         if request.method == 'GET':
@@ -82,6 +86,7 @@ def ver_proveedor():
 
 @proveedor.route('/actualizarProveedor', methods=['POST'])
 @login_required
+@roles_required('admin')
 def actualizar_proveedor():
 
     if request.method == 'POST':
@@ -97,11 +102,11 @@ def actualizar_proveedor():
         codigo_postal = request.form['codigo_postalEdit']
         calle = request.form['calleEdit']
         colonia = request.form['coloniaEdit']
-
+        usuario = current_user.id
         try:
             connection = get_connection()
             with connection.cursor () as cursor:
-                cursor.execute('call sp_actualizar_proveedor(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', (id_proveedor, razon_social, rfc, alias, correo, celular, ciudad, estado, codigo_postal, calle, colonia))
+                cursor.execute('call sp_actualizar_proveedor(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', (id_proveedor, razon_social, rfc, alias, correo, celular, ciudad, estado, codigo_postal, calle, colonia,usuario))
                 connection.commit()
                 connection.close()
                 flash("Registro actualizado correctamente")
@@ -114,16 +119,17 @@ def actualizar_proveedor():
     
 @proveedor.route('/eliminarProveedor', methods=['GET','POST'])
 @login_required
+@roles_required('admin')
 def eliminar_proveedor():
         
             if request.method == 'GET':
     
                 id_proveedor = request.args.get('id')
-    
+                usuario = current_user.id
                 try:
                     connection = get_connection()
                     with connection.cursor () as cursor:
-                        cursor.execute('call sp_eliminar_proveedor(%s)', (id_proveedor))
+                        cursor.execute('call sp_eliminar_proveedor(%s,%s)', (id_proveedor,usuario))
                         connection.commit()
                         connection.close()
                         flash("Registro eliminado correctamente")

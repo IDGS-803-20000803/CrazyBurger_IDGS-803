@@ -1,0 +1,53 @@
+{% extends "panel.html" %}
+{% block content %}
+<main>
+    <form class="fromPuesto" method="POST" action="/inventario/insertSalida">
+        <h3 class="puesto_title">Salidas </h3>
+        <a href="{{url_for('inventario.InventarioInfo')}}" class="btn btn-outline-success">
+            <span class="material-symbols-sharp">assignment_return</span>
+        </a>
+        <h6 class="puesto_message">Registra salida de mercancia. </h6>
+        <label style="display: none;">
+            <input readonly required="" type="text" name="id" value="{{id}}" class="input_puesto">
+            <span>Id</span>
+        </label>
+        {% for row in resulset %}
+        <label>
+            <input readonly required="" type="text" value="{{row[6]}}" class="input_puesto">
+            <span>Fecha Vencimiento</span>
+        </label>
+        <label >
+            <input readonly required="" type="text" name="id_ingrediente"  value="{{row[1]}}" class="input_puesto">
+            <span>Id Ingrediente</span>
+        </label>
+        <label>
+            <input readonly required="" type="text"  value="{{row[2]}}" class="input_puesto">
+            <span>Ingrediente</span>
+        </label>
+        <div class="flex">
+        <label>
+            <input  required="" name="cantidad" type="text"  class="input_puesto">
+            <span>Cantidad</span>
+        </label>
+        <label>
+            <input readonly required=""  type="text" name="unidad" value="{{row[4]}}" class="input_puesto">
+            <span>Unidad Medida</span>
+        </label>
+        </div>
+        {% endfor %}
+        <!-- Tipos de Salidas -->
+        <label>
+            <select name="tipo_salida_id" class="input_puesto">
+                <option value="0" disabled>Selecciona un tipo de salida</option>
+                {% for row in tipoSalida %}
+                    <option value="{{row[0]}}">{{row[1]}}</option>
+                {% endfor %}
+            </select>
+            <span>Tipo Salida</span>
+        </label>
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+        <button class="submit">Registrar</button>
+    
+    </form>
+</main>
+{% endblock %}

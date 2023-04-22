@@ -7,6 +7,7 @@
             <span class="material-symbols-sharp">assignment_return</span>
         </a>
         <h6 class="puesto_message">Registra un nuevo cliente. </h6>
+        <div class="flex">
         <label>
             <input required placeholder type="text" name="nombres" class="input_puesto">
             <span>Nombres</span>
@@ -16,12 +17,8 @@
             <input required="" placeholder="" type="text" name="apellidos" class="input_puesto">
             <span>Apellidos</span>
         </label>
-
-        <label>
-            <input required="" placeholder="" type="text" name="celular" class="input_puesto">
-            <span>Celular</span>
-        </label>
-
+        </div>
+        <div class="flex">
         <label>
             <input required="" placeholder="" type="text" name="calle" class="input_puesto">
             <span>Calle</span>
@@ -31,12 +28,25 @@
             <input required="" placeholder="" type="text" name="colonia" class="input_puesto">
             <span>Colonia</span>
         </label>
-
+        </div>
+        <div class="flex">
         <label>
             <input required="" placeholder="" type="text" name="codigo_postal" class="input_puesto">
             <span>Codigo Postal</span>
         </label>
-
+        <label>
+            <input required="" placeholder="" type="text" name="celular" class="input_puesto">
+            <span>Celular</span>
+        </label>
+        </div>
+        <label>
+            <input required=""  type="email" name="correo" class="input_puesto">
+            <span>Email</span>
+        </label>
+        <label>
+            <input required="" type="password" name="password" class="input_puesto">
+            <span>Contraseña</span>
+        </label>
         <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
         <button class="submit">Agregar</button>
     
