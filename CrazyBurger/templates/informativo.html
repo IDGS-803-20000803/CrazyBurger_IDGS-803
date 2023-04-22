@@ -11,16 +11,10 @@
             <div class="middle">
                 <div class="left">
                     <h3>Total Ventas</h3>
-                    <h1>$25,098</h1>
-                </div>
-                <div class="progress">
-                    <svg>
-                        <circle cx='38' cy='38' r='36'></circle>
-                    </svg>
-                    <div class="number">
-                        <p>81%</p>
-                    </div>
-                </div>
+                    {%for row in totalV %}
+                    <h1><label >$</label>{{row[0]}}</h1>
+                    {%endfor%}
+                </div> 
             </div>
             <small class="text-muted">Ultimas 24 horas</small>
         </div>
@@ -32,14 +26,7 @@
                     <h3>Total Egresos</h3>
                     <h1>$25,098</h1>
                 </div>
-                <div class="progress">
-                    <svg>
-                        <circle cx='38' cy='38' r='36'></circle>
-                    </svg>
-                    <div class="number">
-                        <p>61%</p>
-                    </div>
-                </div>
+                
             </div>
             <small class="text-muted">Ultimas 24 horas</small>
         </div>
@@ -50,25 +37,24 @@
                 <thead>
                     <tr>
                     <th>Producto</th>
-                    <th>Cliente</th>
                     <th>Cantidad</th>
+                    <th>Total</th>
                     <th>Fecha Pedido</th>
                     <th>Estatus</th>
-                    <th></th>
                     </tr>
                 </thead>
                 <tbody>
+                    {%for row in pedidos %}
                     <tr>
-                        <td>Hamburguesa</td>
-                        <td>Karla</td>
-                        <td>4</td>
-                        <td>08/04/2023</td>
-                        <td class="warning">Pendiente</td>
-                        <td class="primary">Detalle</td>
+                        <td>{{row[1]}}</td>
+                        <td>{{row[3]}}</td>
+                        <td>{{row[7]}}</td>
+                        <td>{{row[6]}}</td>
+                        <td class="warning">Finalizados</td>
                     </tr>
+                    {%endfor%}
                 </tbody>
             </table>
-            <a href="#">Mostrar Todo</a>
         </div>
     
 </main>

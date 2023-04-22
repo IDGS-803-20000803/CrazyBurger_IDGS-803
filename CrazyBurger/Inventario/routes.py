@@ -13,7 +13,7 @@ inventario = Blueprint('inventario', __name__,url_prefix='/inventario')
 
 @inventario.route('/getAll')
 @login_required
-@roles_required('admin')
+@roles_accepted('admin','empleado')
 def getAll():
     fecha_actual = datetime.now().strftime('%Y-%m-%d')
     usuario = current_user.id
@@ -32,7 +32,7 @@ def getAll():
 
 @inventario.route('/getEntrada')
 @login_required
-@roles_required('admin')
+@roles_accepted('admin','empleado')
 def getEntrada():
     fecha_actual = datetime.now().strftime('%Y-%m-%d')
     try:
@@ -47,7 +47,7 @@ def getEntrada():
 
 @inventario.route('/insertarEntrada', methods=['GET','POST'])
 @login_required
-@roles_required('admin')
+@roles_accepted('admin','empleado')
 def insertarEntrada():
 
     if request.method == 'GET':
@@ -95,7 +95,7 @@ def insertarEntrada():
     
 @inventario.route('/getSalida')
 @login_required
-@roles_required('admin')
+@roles_accepted('admin','empleado')
 def getSalida():
     fecha_actual = datetime.now().strftime('%Y-%m-%d')
     try:
@@ -111,7 +111,7 @@ def getSalida():
 
 @inventario.route('/InventarioInfo', methods=['GET','POST'])
 @login_required
-@roles_required('admin')
+@roles_accepted('admin','empleado')
 def InventarioInfo():
 
     if request.method == 'GET':
@@ -131,7 +131,7 @@ def InventarioInfo():
 
 @inventario.route('/insertSalida', methods=['GET','POST'])
 @login_required
-@roles_required('admin')
+@roles_accepted('admin','empleado')
 def insertSalida():
     if request.method == 'GET':
         id = request.args.get('id')

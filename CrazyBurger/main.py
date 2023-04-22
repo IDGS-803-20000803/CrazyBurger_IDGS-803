@@ -3,6 +3,7 @@ from flask_security import login_required, current_user
 from flask_security.decorators import roles_required,roles_accepted
 from models import db
 from datetime import datetime
+from dbConfig import get_connection
 
 main = Blueprint('main',__name__)
 
@@ -21,8 +22,18 @@ def contact():
 @login_required
 @roles_accepted('admin','empleado')
 def profile():
+    connection = get_connection()
+    with connection.cursor() as cursor:
+        cursor.execute('call sp_total_ventas()')
+        totalV = cursor.fetchall()
+    
+    connection = get_connection()
+    with connection.cursor() as cursor:
+        cursor.execute('call sp_pedidos_terminados()')
+        pedidos = cursor.fetchall()
+
     fecha_actual = datetime.now().strftime('%Y-%m-%d')
-    return render_template('informativo.html', name = current_user.name,fecha_actual=fecha_actual, active='profile')
+    return render_template('informativo.html',pedidos=pedidos,totalV=totalV, name = current_user.name,fecha_actual=fecha_actual, active='profile')
 
 #Definimos la ruta para la pagina de perfil de usuario
 @main.route('/productos')

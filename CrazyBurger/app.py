@@ -45,6 +45,16 @@ app.register_blueprint(inventario)
 
 from Compras.routes import compras
 app.register_blueprint(compras)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    print("Error 404: Page not found")
+    return render_template("404.html"), 404
+
+@app.errorhandler(500)
+def page_not_found(e):
+    print("Error 500: Por el momento no nos encontramos disponibles")
+    return render_template("500.html"), 500
 #Definimos el LoginManger
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
