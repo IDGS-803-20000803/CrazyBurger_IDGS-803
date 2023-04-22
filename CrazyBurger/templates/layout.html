@@ -9,6 +9,8 @@
   <meta name="description" content="{% block description%}BIENVENIDO A CRAZY BURGER{% endblock %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
   <link rel="stylesheet" href="../static/css/style_final.css">
+  <link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
    <!-- Bootstrap CSS -->
    <link rel="stylesheet" href="../static/bootstrap/bcss/bootstrap.min.css">    
    <!-- Site CSS -->
@@ -26,16 +28,21 @@
 				<a class="navbar-brand" href="{{ url_for('main.index') }}">
 					<img src="../static/img/logoNombre.png" width="180px" alt="" />
 				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-				  <span class="navbar-toggler-icon"></span>
-				</button>
 				<div class="collapse navbar-collapse" id="navbars-rs-food">
 					<ul class="navbar-nav ml-auto">
-            
+            {% if not current_user.is_authenticated %}
 						<li class="nav-item active"><a class="nav-link" href="{{ url_for('main.index') }}">Home</a></li>
 						<li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">Iniciar Sesión</a></li>
 						<li class="nav-item"><a class="nav-link" href="{{ url_for('auth.register') }}">Registrarse</a></li>
 						<li class="nav-item"><a class="nav-link" href="{{ url_for('main.contact') }}">Contacto</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('main.productos') }}">Productos</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{ url_for('pedidos.historial_pedidos') }}"><span class="material-symbols-sharp">shopping_cart</span></a></li>
+						<li class="nav-item"><a class="nav-link" href="{{ url_for('pedidos.historial_pedidos') }}"><span class="material-symbols-sharp">shopping_bag</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('main.contact') }}"><span class="material-symbols-sharp">account_circle</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}"><span class="material-symbols-sharp">account_circle</span></a></li>
+            {% endif %}
 					</ul>
 				</div>
 			</div>
@@ -44,7 +51,7 @@
 
  
 
-  <div class="container_alerts" style="font-weight: bold; text-align: center;">
+  <div class="container_alerts" style="font-weight: bold; text-align: center; ">
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}

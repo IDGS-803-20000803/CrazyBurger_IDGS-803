@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint,render_template,redirect,url_for,request,flash
 from flask_security import login_required, current_user
 from flask_security.decorators import roles_required,roles_accepted
 from models import db
@@ -19,18 +19,18 @@ def contact():
 #Definimos la ruta para la pagina de perfil de usuario
 @main.route('/profile')
 @login_required
-@roles_required('admin')
+@roles_accepted('admin','empleado')
 def profile():
     fecha_actual = datetime.now().strftime('%Y-%m-%d')
-    # Agregar la clase active al menu
     return render_template('informativo.html', name = current_user.name,fecha_actual=fecha_actual, active='profile')
 
+#Definimos la ruta para la pagina de perfil de usuario
 @main.route('/productos')
 @login_required
-@roles_required('cliente')
+@roles_accepted('cliente')
 def productos():
-    fecha_actual = datetime.now().strftime('%Y-%m-%d')
-    return render_template('index.html', name = current_user.name, fecha_actual = fecha_actual)
+    return redirect(url_for('platillos.getAll'))
+
 
 
 

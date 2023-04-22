@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1 class="title_car">Carrito de compras: <span style="color: #010b06;">{{ name }}</span></h1>
+<div class="container__products">
+  {% for pedido in pedidos %}
+  <div class="card_products">
+    <div class="card-body">
+      <h6 class="title-product">{{ pedido[1] }}</h6>
+    </div>
+    <div class="inputs">
+      <input class="input_label" type="text" value="FECHA DEL PEDIDO" disabled>
+    </div>
+      <input class="input_label" type="text"  value="{{ pedido[6] }}" disabled>
+      
+      <div class="inputs">
+      <input class="input_label" type="text"  value="PRECIO UNITARIO"  disabled>
+      </div>
+      <input class="input_label" type="text"  value="{{ pedido[4] }}">
+      
+      <div class="inputs">
+        <input class="input_label" type="text"  value="Sub Total"  disabled>
+        </div>
+      <input class="input_label" type="text"  value="{{ pedido[5] }}">
+      <div class="inputs">
+        <input class="input_label" type="text"  value="Total"  disabled>
+      </div>
+      <input class="input_label" type="text"  value="{{ pedido[8] }}">
+      <div class="inputs">
+        <input class="input_label" type="text"  value="Cantidad"  disabled>
+      </div>
+      <div class="input_unidades">
+        <button style="border: none; border-radius: 0%;" class="resta" type="button">-</button>
+        <input class="input_label" type="number" name="unidades" id="unidades{{ pedido[0] }}" value="{{ pedido[3] }}">
+        <button style="border: none; border-radius: 0%;" class="suma" type="button">+</button>
+      </div>
+  </div>
+  {% endfor %}
+</div>
+
+<script>
+  var pedidos = document.querySelectorAll('.card_products');
+
+  pedidos.forEach(function (pedido) {
+    var unidadesInput = pedido.querySelector('input[name="unidades"]');
+    var restaButton = pedido.querySelector('.resta');
+    var sumaButton = pedido.querySelector('.suma');
+
+    restaButton.addEventListener('click', function () {
+      var unidades = parseInt(unidadesInput.value);
+      unidadesInput.value = unidades - 1;
+    });
+
+    sumaButton.addEventListener('click', function () {
+      var unidades = parseInt(unidadesInput.value);
+      unidadesInput.value = unidades + 1;
+    });
+  });
+</script>
+{% endblock %}

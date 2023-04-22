@@ -191,9 +191,9 @@ class Detalle_Pedido(db.Model):
     cantidad = db.Column(db.Integer)
     baja = db.Column(db.Boolean())
     pedido_id = db.Column(db.Integer, db.ForeignKey('pedido.id'))
-    platillo_id = db.Column(db.Integer, db.ForeignKey('platillo.id'))
+    menu_id = db.Column(db.Integer, db.ForeignKey('menu.id'))
     pedido = db.relationship('Pedido', backref = db.backref('detalle_pedidos', lazy = 'dynamic'))
-    platillo = db.relationship('Platillo', backref = db.backref('detalle_platilllos', lazy = 'dynamic'))
+    menu = db.relationship('Menu', backref = db.backref('detalle_pedidos', lazy = 'dynamic'))
 
 class Inventario(db.Model):
     __tablename__='inventario'
