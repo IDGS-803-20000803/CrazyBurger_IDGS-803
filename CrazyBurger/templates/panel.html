@@ -9,6 +9,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../static/css/dash.css">
+    <link rel="stylesheet" href="../static/css/style_final.css">
     <!-- Cargar Librerias de Jquery -->
     <script src="https://code.jquery.com/jquery-3.6.4.js"
         integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
@@ -23,6 +24,20 @@
 </head>
 
 <body>
+
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            {% if 'error' in message %}
+            <div class="alert-error"><i class="fa-solid fa-xmark"></i> {{ message }}</div>
+            {% elif 'warning' in message %}
+            <div class="alert-warning"><i class="fa-solid fa-triangle-exclamation"></i> {{ message }}</div>
+            {% else %}
+            <div class="alert-success"><i class="fa-solid fa-circle-check"></i> {{ message }}</div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
     <div class="container">
         <aside>
             <div class="top">
@@ -137,10 +152,7 @@
                             <span class="material-symbols-sharp">point_of_sale</span>
                             <h3>Ventas</h3>
                         </a>
-                        <a href="#">
-                            <span class="material-symbols-sharp">store</span>
-                            <h3>Compras</h3>
-                        </a>
+                        
                         <a href="{{url_for('menu.getAll')}}">
                             <span class="material-symbols-sharp">menu_book</span>
                             <h3>Menu</h3>
@@ -208,6 +220,9 @@
                         </a>
             </div>
         </aside>
+        
+            
+          
         {% block content %}
 
         {% endblock %}
